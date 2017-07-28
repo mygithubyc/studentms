@@ -14,6 +14,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="userType" property="userType" jdbcType="VARCHAR" />
 	</resultMap>
 	<!-- 配置接口IUsersDao里面的方法 -->
+	
+	<!-- 根据用户名和类型取得用户 -->
+	<select id="getUserByUsername" result="com.kingsoft.studentms.model.Users">
+		SELECT * from users where username = #{username,jdbcType=VARCHAR} and ROWNUM < 2 and usertype = #{userType,jdbcType=VARCHAR}
+		
+	</select>
+	
+	
+	
+	
+	<!-- 杨超 -->
 	<!-- 登录方法 -->
 	<select id="login" resultType="com.kingsoft.studentms.model.Users">
 		select * from users where username=#{username,jdbcType=VARCHAR} and 

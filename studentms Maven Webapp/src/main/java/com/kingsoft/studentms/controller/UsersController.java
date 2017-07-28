@@ -1,6 +1,8 @@
 package com.kingsoft.studentms.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,7 +24,10 @@ public class UsersController {
 	@Resource
 	private IUsersService usersService; // 注入service
 
-	
+	@RequestMapping("/doLogin")
+	public void doLogin(HttpServletRequest request,HttpServletResponse response){
+		
+	}
 	
 	@RequestMapping("/goMain")
 	public String goMain(){

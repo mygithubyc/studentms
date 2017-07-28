@@ -41,8 +41,8 @@
 					</div>
 					<div class="container__fitem rad">
 						<label for="teacher">教师:<input type="radio" name="type"
-							value="teacher" id="teacher"></label> <label for="student">学生:<input
-							type="radio" name="type" value="student" id="student"></label>
+							value="2" id="teacher"></label> <label for="student">学生:<input
+							type="radio" name="type" value="1" id="student"></label>
 					</div>
 					<div class="container__fitem">
 						<label for=""></label>
