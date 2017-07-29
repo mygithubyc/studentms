@@ -40,8 +40,8 @@ $(document).ready(function(){
     });
     // 登录
     login_button.click(function(event) {
-        login_form.submit(function(event) {
-            event.preventDefault();
+        login_form.submit(function(event2) {
+        	event2.preventDefault();
             var usernameVal = $(this).find('#username').val(),
                 passwordVal = $(this).find('#password').val(),
                 typeVal = $(this).find('[type=radio]:checked').val();
@@ -86,8 +86,8 @@ $(document).ready(function(){
     });
      // 注册
     register_button.click(function(event) {
-        register_form.submit(function(event) {
-            event.preventDefault();
+        register_form.submit(function(event2) {
+        	event2.preventDefault();
             var usernameVal = $(this).find('#username').val(),
                 passwordVal = $(this).find('#password').val(),
                 passwordAgainVal = $(this).find('#password_again').val();
