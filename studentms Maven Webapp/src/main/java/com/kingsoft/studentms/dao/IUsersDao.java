@@ -5,6 +5,11 @@ import org.apache.ibatis.annotations.Param;
 import com.kingsoft.studentms.model.Users;
 
 public interface IUsersDao {
+	
+	
+	public Users getUserByUsername(String username,String userType);
+	
+	
 	/**
 	 * @登录
 	 * @param username
