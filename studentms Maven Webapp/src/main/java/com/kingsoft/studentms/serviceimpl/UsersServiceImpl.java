@@ -21,12 +21,12 @@ public class UsersServiceImpl implements IUsersService {
 	@Resource
 	private IUsersDao userDao;
 
-	/**
-	 * @登录方法
-	 * @param username
-	 * @param password
-	 * @return user
-	 */
+	public String doLogin(String username,String usertype) {
+		return null;
+	}
+	
+	
+	//杨超
 	public Users login(String username, String password) {
 		// TODO Auto-generated method stub
 		// 密码采用MD5加密在进行数据查找
@@ -34,11 +34,6 @@ public class UsersServiceImpl implements IUsersService {
 		return user;
 	}
 
-	/**
-	 * @登录检查
-	 * @param username
-	 * @return boolean
-	 */
 	public boolean cheackRegister(String username) {
 		// TODO Auto-generated method stub
 		Users user = this.userDao.cheackRegister(username);
@@ -47,12 +42,6 @@ public class UsersServiceImpl implements IUsersService {
 		return false;
 	}
 
-	/**
-	 * @注册方法
-	 * @param username
-	 * @param password
-	 * @return string
-	 */
 	public String register(String username, String password) {
 		// TODO Auto-generated method stub
 		int userType;
@@ -87,11 +76,6 @@ public class UsersServiceImpl implements IUsersService {
 		return "error";
 	}
 
-	/**
-	 * @检查密码账号是否包含中文
-	 * @param str
-	 * @return boolean
-	 */
 	public boolean isChinese(String str) {
 		Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
 		Matcher m = p.matcher(str);

@@ -14,11 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="userType" property="userType" jdbcType="VARCHAR" />
 	</resultMap>
 	<!-- 配置接口IUsersDao里面的方法 -->
+
 	<!-- my登录方法 -->
 	<select id="getUserByUsername" resultMap="users" parameterType="java.lang.String">
 		SELECT * from(SELECT * from users where username=#{username,jdbcType=VARCHAR} and
 		userType=#{userType,jdbcType=VARCHAR}) where ROWNUM BETWEEN 0 and 1
 	</select>
+
 	<!-- 登录方法 -->
 	<select id="login" resultType="com.kingsoft.studentms.model.Users">
 		select * from users where username=#{username,jdbcType=VARCHAR} and 
