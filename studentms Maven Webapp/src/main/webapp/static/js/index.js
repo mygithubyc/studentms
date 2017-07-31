@@ -104,7 +104,9 @@ $(document).ready(function(){
                         // 返回结果类型为json "{\"success\":true}"
                         // 失败则在message中写上错误信息
                          if (result.success) {
-                        	 window.location.href = ctx+'/users/goMain';
+                        	 login_switcher.click()
+                        	 arr.push("注册成功,请登录!");
+                             show_validate(arr);
                          }else{
                              arr.push(result.message);
                              show_validate(arr);

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,7 +97,25 @@ public class UsersController {
 	}
 	
 	@RequestMapping("/goMain")
-	public String goMain(){
-		return "main/main";
+	public String goMain(HttpServletRequest request,Model model){
+		if(checkLogin(request)){
+			return "main/main";
+		}else {
+			return "";
+		}
+		
+	}
+	
+	/*
+	 * @param 用于获取session
+	 * @return bool false表示非法访问
+	 */
+	public boolean checkLogin(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user")!=null) {
+			return true;
+		}
+		return false;
+		
 	}
 }
