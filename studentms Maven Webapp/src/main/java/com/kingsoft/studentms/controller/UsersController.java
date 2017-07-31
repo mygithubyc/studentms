@@ -69,10 +69,27 @@ public class UsersController {
 		pw.write(json);
 	}
 	@RequestMapping("/doRegister")
-	public void doRegister(HttpServletRequest request,HttpServletResponse response){
+	public void doRegister(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String username = (String)request.getParameter("username");
 		String password = (String)request.getParameter("password");
-		String type = (String)request.getParameter("password_again");
+		
+		
+//		该方法只能学生注册
+		Users user = new Users(username,password,"1");
+		String json = "";
+		
+		if (usersService.doRegister(user)) {
+			json = "{\"success\":true}";
+		}else {
+			json = "{\"message\":\"请重试(不允许中文!)\"}";
+		}
+		
+		
+		PrintWriter pw = response.getWriter();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json;charset=UTF-8");
+		pw.write(json);
+		
 		
 		
 	}

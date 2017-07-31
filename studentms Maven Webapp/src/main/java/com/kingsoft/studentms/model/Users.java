@@ -60,18 +60,19 @@ public class Users {
 	}
 	
 	/**
-	 * @Éú³É¹¹Ôì·½·¨
+	 * @ï¿½ï¿½É¹ï¿½ï¿½ì·½ï¿½ï¿½
 	 */
 	public Users(){
 		
 	}
 	/**
-	 * @Éú³É¹¹·½·¨
-	 * @param username ÓÃ»§Ãû
-	 * @param password ÃÜÂë
+	 * @ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param username ï¿½Ã»ï¿½ï¿½ï¿½
+	 * @param password ï¿½ï¿½ï¿½ï¿½
 	 */
-	public Users(String username, String password) {
+	public Users(String username, String password,String userType) {
 		this.username = username;
 		this.password = password;
+		this.userType = userType;
 	}
 }

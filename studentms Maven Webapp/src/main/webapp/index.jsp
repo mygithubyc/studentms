@@ -53,15 +53,15 @@
 					style="display:hidden;">
 					<div class="container__fitem">
 						<label for="username">账号:</label> <input type="text" name="username"
-							id="username" placeholder="请移出输入框以测试账号可用">
+							id="username" placeholder="请移出输入框以测试账号可用" maxlength="16" >
 					</div>
 					<div class="container__fitem">
 						<label for="password">密码:</label> <input type="password" name="password"
-							id="password">
+							id="password" maxlength="32" >
 					</div>
 					<div class="container__fitem">
 						<label for="password_again">确认密码:</label> <input type="password"
-							name="password_again" id="password_again">
+							name="password_again" id="password_again" maxlength="32" >
 					</div>
 					<div class="container__fitem">
 						<label for=""></label>

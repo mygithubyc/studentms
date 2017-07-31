@@ -29,7 +29,15 @@ public class UsersServiceImpl implements IUsersService {
 	
 	
 	public boolean doRegister(Users users){
-		return false;
+		if (isChinese(users.getUsername())) {
+			return false;
+		}else {
+			if (userDao.register(users)>0) {
+				return true;
+			}else {
+				return false;
+			}
+		}
 	}
 	
 	
