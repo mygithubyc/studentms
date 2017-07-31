@@ -5,6 +5,9 @@
 * @Last Modified time: 2017-07-25 09:06:40
 */
 
+
+
+
 $(document).ready(function(){
     var register_form = $('#register_form'),
         login_form = $('#login_form'),
@@ -40,8 +43,8 @@ $(document).ready(function(){
     });
     // 登录
     login_button.click(function(event) {
-        login_form.submit(function(event) {
-            event.preventDefault();
+        login_form.submit(function(event2) {
+        	event2.preventDefault();
             var usernameVal = $(this).find('#username').val(),
                 passwordVal = $(this).find('#password').val(),
                 typeVal = $(this).find('[type=radio]:checked').val();
@@ -52,20 +55,18 @@ $(document).ready(function(){
             if (usernameVal && passwordVal && typeVal) {
                 // alert(login_form.serialize());
                 $.ajax({
-                    url: '',
+                    url: ctx+'/users/doLogin',
                     type: 'post',
                     dataType: 'json',
                     data: login_form.serialize(),
                     success: function (result) {
-                        var result = JSON.parse(result);
-                        // 返回结果类型为json "{\"success\":\"true\"}"
-                        // 失败则在message中写上错误信息
-                        // if (result) {
-                        // window.location.href = "";
-                        // }else{
-                        //     arr.push(result.message);
-                        //     show_validate(arr);
-                        // }
+                    	
+	                     if (result.success) {
+	                    	 window.location.href = ctx+"/users/goMain";
+	                     }else{
+	                         arr.push(result.message);
+	                         show_validate(arr);
+	                     }
                     }
                 });
                 
@@ -76,7 +77,7 @@ $(document).ready(function(){
                 if (!usernameVal) {arr.push('请输入用户名')}
                 if (!passwordVal) {arr.push('请输入密码')}
                 if (!typeVal) {arr.push('请选择老师或学生')}
-                   
+                
                 show_validate(arr);
             }
             
@@ -86,50 +87,45 @@ $(document).ready(function(){
     });
      // 注册
     register_button.click(function(event) {
-        register_form.submit(function(event) {
-            event.preventDefault();
-            var usernameVal = $(this).find('#username').val(),
-                passwordVal = $(this).find('#password').val(),
-                passwordAgainVal = $(this).find('#password_again').val();
+    		event.preventDefault();
+            var usernameVal = register_form.find('#username').val(),
+                passwordVal = register_form.find('#password').val(),
+                passwordAgainVal = register_form.find('#password_again').val();
               
 
             
             var arr = [];
-            // 确认填写
-            if (usernameVal && passwordVal && passwordAgainVal) {
-                // alert(login_form.serialize());
+            // 确认填写 
+            if (usernameVal && passwordVal && passwordAgainVal  && CHECK) {                
                 $.ajax({
-                    url: '',
+                    url: ctx+'/users/doRegister',
                     type: 'post',
                     dataType: 'json',
-                    data: login_form.serialize(),
+                    data: register_form.serialize(),
                     success: function (result) {
-                        var result = JSON.parse(result);
-                        // 返回结果类型为json "{\"success\":\"true\"}"
+                        // 返回结果类型为json "{\"success\":true}" success为bool值
                         // 失败则在message中写上错误信息
-                        // if (result) {
-                        // window.location.href = "";
-                        // }else{
-                        //     arr.push(result.message);
-                        //     show_validate(arr);
-                        // }
+                         if (result.success) {
+                        	 window.location.href = ctx+'/users/goMain';
+                         }else{
+                             arr.push(result.message);
+                             show_validate(arr);
+                         }
                     }
                 });
-                
-                
-                
+                      
             }else{
                 
                 if (!usernameVal) {arr.push('请输入用户名')}
                 if (!passwordVal || !passwordAgainVal) {arr.push('请输入密码或确认密码')}
                 if (passwordVal !== passwordAgainVal) {arr.push('俩次密码不一致')}
-                   
+                if(!CHECK){arr.push('还未通过检测账号是否可用')}   
                 show_validate(arr);
             }
             
             
 
-        });
+        
     });
 
     // show_validate(['错','再错']);
@@ -140,36 +136,32 @@ $(document).ready(function(){
             $('.container__validate>ol').append('<li>'+arr[i]+'</li>')
         }
     }
-    // 查询账号是否已存在    返回 bool
-    function username_isexist(username){
-        
-        return false;
-        // $.ajax({
-        //     url: '',
-        //     type: 'post',
-        //     dataType: 'json',
-        //     data: {username: usernameVal},
-        //     success: function(result){
-        //         if (result.success) {
-        //             return true;
-        //         }else{
-        //             return false;
-        //         }
-        //     }
-        // });
-        
-    }
+	//check用于检查重复用   初始化为false  判断时修改  还解决在注册时跳过这个检查的bug
+    var CHECK = false;
     register_form.find('#username').blur(function(event) {
         var username = $(this).val();
         // console.log(username === '');
+		
         if (username !== '') {
-            if (username_isexist(username)) {
-                show_validate(['账号('+$(this).val()+')已存在!']);
-            }else{
-               show_validate(['该账号可用!']);
-            }
+        	console.log(username);
+            $.ajax({
+				// 返回结果类型为json "{\"success\":true}" success为bool值  否则"{\"success\":false}"
+            	url: ctx+"/users/testUsername",
+	            type: 'post',
+	            dataType: 'json',
+	            data:{username: username},
+	            success: function(result){
+	            	if(result.success){
+	            		CHECK = false;
+	            		show_validate(['用户名'+username+'已存在']);
+	            	}else{
+	            		CHECK = true;
+	            		show_validate(['该用户名可用']);
+	            	}
+	            }
+            });
         }
-        
-        
     });
+    //测试用  自动切换到注册
+//    register_switcher.click();
 });
