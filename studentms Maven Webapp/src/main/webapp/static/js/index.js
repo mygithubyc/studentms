@@ -157,5 +157,5 @@ $(document).ready(function(){
         }
     });
     //测试用  自动切换到注册
-    register_switcher.click();
+//    register_switcher.click();
 });

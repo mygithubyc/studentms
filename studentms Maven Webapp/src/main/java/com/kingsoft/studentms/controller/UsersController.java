@@ -44,7 +44,7 @@ public class UsersController {
 		if (user != null && user.getPassword().equals(password)&&user.getUsertType().equals(type)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-			json = "{\"success\":\"true\"}";
+			json = "{\"success\":true}";
 		}else{
 			json = "{\"message\":\"请重试!\"}";
 		}
@@ -62,9 +62,9 @@ public class UsersController {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=UTF-8");
 		if (user != null){
-			json = "{\"success\":\"true\"}";
+			json = "{\"success\":true}";
 		}else{
-			json = "{\"success\":\"false\"}";
+			json = "{\"success\":false}";
 		}
 		pw.write(json);
 	}
