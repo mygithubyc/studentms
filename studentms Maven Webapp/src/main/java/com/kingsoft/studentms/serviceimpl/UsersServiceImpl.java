@@ -20,10 +20,30 @@ public class UsersServiceImpl implements IUsersService {
 
 	@Resource
 	private IUsersDao userDao;
-
-	public String doLogin(String username,String usertype) {
-		return null;
+	
+	
+	public Users getUserByUsername(String username){
+		System.out.println(username);
+		return userDao.getUserByUsername(username);
 	}
+	
+	
+	public boolean doRegister(Users users){
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//杨超

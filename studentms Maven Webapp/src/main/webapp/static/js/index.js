@@ -52,20 +52,18 @@ $(document).ready(function(){
             if (usernameVal && passwordVal && typeVal) {
                 // alert(login_form.serialize());
                 $.ajax({
-                    url: '',
+                    url: ctx+'/users/doLogin',
                     type: 'post',
                     dataType: 'json',
                     data: login_form.serialize(),
                     success: function (result) {
-                        var result = JSON.parse(result);
-                        // 返回结果类型为json "{\"success\":\"true\"}"
-                        // 失败则在message中写上错误信息
-                        // if (result) {
-                        // window.location.href = "";
-                        // }else{
-                        //     arr.push(result.message);
-                        //     show_validate(arr);
-                        // }
+                    	
+	                     if (result.success) {
+	                    	 window.location.href = ctx+"/users/goMain";
+	                     }else{
+	                         arr.push(result.message);
+	                         show_validate(arr);
+	                     }
                     }
                 });
                 
@@ -140,36 +138,27 @@ $(document).ready(function(){
             $('.container__validate>ol').append('<li>'+arr[i]+'</li>')
         }
     }
-    // 查询账号是否已存在    返回 bool
-    function username_isexist(username){
-        
-        return false;
-        // $.ajax({
-        //     url: '',
-        //     type: 'post',
-        //     dataType: 'json',
-        //     data: {username: usernameVal},
-        //     success: function(result){
-        //         if (result.success) {
-        //             return true;
-        //         }else{
-        //             return false;
-        //         }
-        //     }
-        // });
-        
-    }
+    
     register_form.find('#username').blur(function(event) {
         var username = $(this).val();
         // console.log(username === '');
         if (username !== '') {
-            if (username_isexist(username)) {
-                show_validate(['账号('+$(this).val()+')已存在!']);
-            }else{
-               show_validate(['该账号可用!']);
-            }
+        	console.log(username);
+            $.ajax({
+            	url: ctx+"/users/testUsername",
+	            type: 'post',
+	            dataType: 'json',
+	            data:{username: username},
+	            success: function(result){
+	            	if(result.success === "true"){
+	            		show_validate(['用户名'+username+'已存在']);
+	            	}else{
+	            		show_validate(['该用户名可用']);
+	            	}
+	            }
+            });
         }
-        
-        
     });
+    //测试用  自动切换到注册
+    register_switcher.click();
 });

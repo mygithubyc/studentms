@@ -5,8 +5,8 @@ import com.kingsoft.studentms.model.Users;
 public interface IUsersService {
 
 	
-	public String doLogin(String username,String usertype);
-	
+	public Users getUserByUsername(String username);
+	public boolean doRegister(Users user);
 	
 	
 	

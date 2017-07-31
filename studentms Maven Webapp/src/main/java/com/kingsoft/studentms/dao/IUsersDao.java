@@ -6,8 +6,8 @@ import com.kingsoft.studentms.model.Users;
 
 public interface IUsersDao {
 	
-
-	public Users getUserByUsername(String username,String userType);
+ 
+	public Users getUserByUsername(@Param("username") String username);
 	
 	
 
