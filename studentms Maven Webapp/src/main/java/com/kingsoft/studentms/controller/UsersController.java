@@ -96,19 +96,30 @@ public class UsersController {
 		
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request,Model model){
+		HttpSession session = request.getSession();
+		session.invalidate();
+		model.addAttribute("error","成功登出");
+		return "main/error";
+	}
+	
 	
 	@RequestMapping("/error")
-	public String error(){
-		
+	public String error(Model model){
+		model.addAttribute("error","请重新登录");
 		return "main/error";
 	}
 	
 	@RequestMapping("/goMain")
 	public String goMain(HttpServletRequest request,Model model){
-		if(checkLogin(request)){
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("user")!=null){
 			return "main/main";
 		}else {
-			return "";
+			model.addAttribute("error","非法登录");
+			return "main/error";
 		}
 		
 	}

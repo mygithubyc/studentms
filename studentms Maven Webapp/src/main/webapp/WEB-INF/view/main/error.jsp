@@ -7,7 +7,7 @@
 <head>  
 
 <script type="text/javascript">   
-	setTimeout("javascript:location.href='ctx'", 3000);   
+	setTimeout("javascript:location.href=${ctx}", 3000);   
 </script>  
   
 </head>  
@@ -17,7 +17,7 @@
     <br/>  
     <br/>  
     <h4>${error}</h4>  
-    <h4><a href="ctx" >立即跳转</a></h4>  
+    <h4><a href=${ ctx} >立即跳转</a></h4>  
 </div>  
    
 </body>  

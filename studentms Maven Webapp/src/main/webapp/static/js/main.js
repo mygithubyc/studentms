@@ -13,6 +13,7 @@ $(document).ready(function(title, url){
             if (r) {
                 // console.log('登出');
                 // 登出操作
+            	location.href = ctx+"/users/error";
             }
         })
     });

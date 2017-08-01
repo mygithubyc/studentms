@@ -14,10 +14,10 @@
     <div class="header">
             <div class="header__wrap">
                 <div class="header__logo">
-                    学生管理平台 欢迎你,xxx 同学/老师
+                    	学生管理平台 欢迎你,${sessionScope.user.username } 
                 </div>
                 <div class="header__logout">
-                    登出
+                   	 登出
                 </div>
             </div>
             
