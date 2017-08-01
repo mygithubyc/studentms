@@ -148,7 +148,8 @@ $(document).ready(function(){
 	            dataType: 'json',
 	            data:{username: username},
 	            success: function(result){
-	            	if(result.success === "true"){
+	            	
+	            	if(result.success){
 	            		CHECK = false;
 	            		show_validate(['用户名'+username+'已存在']);
 	            	}else{

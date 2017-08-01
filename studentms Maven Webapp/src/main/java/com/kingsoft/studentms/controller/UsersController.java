@@ -96,6 +96,13 @@ public class UsersController {
 		
 	}
 	
+	
+	@RequestMapping("/error")
+	public String error(){
+		
+		return "main/error";
+	}
+	
 	@RequestMapping("/goMain")
 	public String goMain(HttpServletRequest request,Model model){
 		if(checkLogin(request)){
