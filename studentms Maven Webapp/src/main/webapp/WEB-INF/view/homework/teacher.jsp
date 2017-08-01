@@ -11,7 +11,7 @@
 <body>
 	<!-- 数据网格 这是某老师布置的 所以只能看到自己布置的 -->
 	<table id="dg" title="布置作业" class="easyui-datagrid"
-		style="width:100%;height:800px;margin-left:0;" url="" toolbar="#toolbar"
+		style="width:100%;height:800px;margin-left:0;" url="${ctx }/job/getJobs" toolbar="#toolbar"
 		pagination="true" rownumbers="true" fitColumns="true"
 		singleSelect="true" striped="true">
 		<thead>

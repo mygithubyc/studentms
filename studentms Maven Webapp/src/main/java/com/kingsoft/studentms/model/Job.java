@@ -8,7 +8,7 @@ public class Job {
 	private String title;
 	private String content;
 	private Date sendTime;
-	private String username;	//老师用户名
+	private String username;	
 	private String path;
 	private Date deadTime;
 	public int getJid() {
@@ -55,8 +55,9 @@ public class Job {
 		this.deadTime = deadTime;
 	}
 	public Job(){}
-	public Job(String content, Date sendTime, String username, String path, Date deadTime) {
+	public Job(String content,String title, Date sendTime, String username, String path, Date deadTime) {
 		this.content = content;
+		this.title = title;
 		this.sendTime = sendTime;
 		this.username = username;
 		this.path = path;

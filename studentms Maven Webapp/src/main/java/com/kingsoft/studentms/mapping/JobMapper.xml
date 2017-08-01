@@ -12,8 +12,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="path" property="path" jdbcType="VARCHAR" />
 			<result column="deadTime" property="deadTime" jdbcType="DATE" />
 		</resultMap>
+		
+		<!-- my -->
+		<select id="selectJobCount" resultType="java.lang.Integer">
+			select count(*) from job
+		</select>
+		
+		<select id="selectJobByUsername" resultMap="job">
+			select * from job where username = #{username, jdbcType=VARCHAR}
+		</select>
+		
+		
+		
 		<!-- 配置发布作业方法 -->
-		<insert id="publishJob">
+		<insert id="publishJob" >
 			insert into
 			job(content,sendtime,username,deadtime,title) values(
 			#{job.content,jdbcType=VARCHAR},#{job.sendTime,jdbcType=DATE},

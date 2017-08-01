@@ -3,27 +3,31 @@ package com.kingsoft.studentms.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import com.kingsoft.studentms.model.Job;
-
+@Repository
 public interface IJobDao {
-
+	
+	public int selectJobCount();
+	
+	public List<Job> selectJobByUsername(@Param("username") String username) ;
 	/**
-	 * @ÀÏÊ¦·¢²¼×÷Òµ
+	 * @ï¿½ï¿½Ê¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµ
 	 * @param job
 	 * @return
 	 */
 	public int publishJob(@Param("job") Job job);
 	/**
-	 * @°´±êÌâ²éÑ¯×÷Òµ
+	 * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½Òµ
 	 * @param title
 	 * @return
 	 */
 	public Job queryJob(@Param("title") String title);
 	/**
-	 * @²éÑ¯ËùÓÐ×÷Òµ
+	 * @ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµ
 	 * @return
 	 */
-	public List<?> queryJobList(@Param("title") String title);
+	public List<Job> queryJobList(@Param("title") String title);
 	
 }

@@ -6,6 +6,22 @@ import com.kingsoft.studentms.model.Job;
 
 public interface IJobService {
 
+	
+	public int getJobCount(String username);
+	
+	public List<Job> selectJobByUsername(String username);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * @
 	 * @param job
