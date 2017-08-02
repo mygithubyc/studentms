@@ -27,6 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			DELETE FROM job WHERE JID = #{jid}
 		</delete>
 		
+		<select id="selectAllJobCount" resultType="java.lang.Integer">
+			select count(*) from job
+		</select>
 		
 		<!-- 配置发布作业方法 -->
 		<insert id="publishJob" >

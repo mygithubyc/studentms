@@ -153,7 +153,40 @@ public class JobController {
 		pw.write(json);
 	}
 	
-	
+	@RequestMapping("stuGetJob")
+	public void stuGetJob(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String rows = request.getParameter("rows") != null ? (String) request.getParameter("rows") : "10";
+		String page = request.getParameter("page") != null ? (String) request.getParameter("page") : "1";
+		String sort = request.getParameter("sort") != null ? (String)request.getParameter("sort") : "jid";
+		String order = request.getParameter("order") != null ? (String)request.getParameter("order") : "asc";
+		
+		
+		int offset = Integer.parseInt(rows)*(Integer.parseInt(page)-1);
+		int limit =  offset+Integer.parseInt(rows);
+		String json = "";
+		PrintWriter pw = response.getWriter();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json;charset=UTF-8");
+		
+		
+		int total = jobService.getAllJobCount();
+		java.util.Map<String, Object> selectMap = new HashMap<String, Object>();
+		selectMap.put("offset", offset);
+		selectMap.put("limit", limit);
+		selectMap.put("order", order);
+		selectMap.put("sort", sort);
+		
+		
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total", total);
+//		map.put("rows", jobs);
+		json = JSON.toJSONString(map);
+		
+		pw.write(json);
+		
+	}
 	
 	
 	

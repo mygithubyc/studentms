@@ -22,7 +22,7 @@ begin
 select users_seq.nextval into:new.usid from dual;
 end;
 
-
+SELECT * from (select A.*,ROWNUM RN from(select * from job WHERE USERNAME LIKE '%ad%' AND SENDTIME BETWEEN TO_DATE('2017-01-01', 'yyyy-mm-dd') and TO_DATE('2017-08-15', 'yyyy-mm-dd') ORDER BY JID ASC)A where ROWNUM <=2)WHERE RN >0;
 
 create table job(
 jid number(8) primary key,
