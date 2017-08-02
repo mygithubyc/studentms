@@ -13,9 +13,9 @@ public interface IJobService {
 	
 	public List<Job> selectJobByUsername(Map<String, Object> map);
 	
-
+	public String addJob(Map<String, Object> map);
 	
-	
+	public int deleteByPrimaryKey(String jid);
 	
 	
 	

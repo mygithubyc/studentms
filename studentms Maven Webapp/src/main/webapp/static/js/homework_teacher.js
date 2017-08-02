@@ -11,6 +11,14 @@ var myformater = function(value,row,index){
         return '';
     }
 }
+var fileFormater = function(value,row,index){
+	 if (value){
+		var index = value.lastIndexOf("\\");
+        return value.substring(index+1);
+    }else{
+        return '';
+    }
+}
 var url = '';
 function newJob(){
     // 打开对话框 并 设置标题
@@ -34,8 +42,8 @@ function removeJob(){
         $.messager.confirm('Confirm','你确定要删除这行数据?',function(r){
             if (r) {
 
-                $.post('', {id: row.jid}, function(result) {
-                        var result = JSON.parse(result);
+                $.post(ctx+'/job/deleteJob', {jid: row.jid}, function(result) {
+                       
                         if (result.success) {
                             $('#dlg').dialog('close');
                             $('#dg').datagrid('reload');

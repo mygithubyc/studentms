@@ -20,7 +20,7 @@
 				<th field="content" width="50px">内容</th>
 				<th field="sendTime" width="50px" sortable="true" data-options={formatter:myformater} >发布日期</th>
 				<th field="deadTime" width="50px" sortable="true"  data-options={formatter:myformater}  >截止日期</th>
-				<th field="path" width="50px" >文件名</th>
+				<th field="path" width="50px" data-options={formatter:fileFormater}>文件名</th>
 			</tr>
 		</thead>
 	</table>
@@ -37,7 +37,7 @@
 		style="width:500px;height:600px;padding:10px 20px" closed="true"
 		buttons="#dlg-buttons">
 		<div class="ftitle">作业信息</div>
-		<form id="fm" method="post" novalidate enctype="multipart/form-data">
+		<form id="fm" method="post" enctype="multipart/form-data">
 			<div class="fitem">
 				<label>标题:</label> <input name="title" class="easyui-validatebox"
 					required="true">

@@ -23,16 +23,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(select * from job where USERNAME = #{username} ORDER BY ${sort} ${order})A 
 			where <![CDATA[ ROWNUM <=#{limit})WHERE RN >#{offset}]]>  
 		</select>
-		
+		<delete id="deleteByPrimaryKey">
+			DELETE FROM job WHERE JID = #{jid}
+		</delete>
 		
 		
 		<!-- 配置发布作业方法 -->
 		<insert id="publishJob" >
 			insert into
-			job(content,sendtime,username,deadtime,title) values(
+			job(content,sendtime,username,deadtime,title,path) values(
 			#{job.content,jdbcType=VARCHAR},#{job.sendTime,jdbcType=DATE},
 			#{job.username,jdbcType=VARCHAR},#{job.deadTime,jdbcType=DATE},
-			#{job.title,jdbcType=VARCHAR})
+			#{job.title,jdbcType=VARCHAR},#{job.path})
 		</insert>
 		<!-- 模糊查询作业 -->
 		<select id="queryJob" resultType="com.kingsoft.studentms.model.Job">

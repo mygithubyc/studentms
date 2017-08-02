@@ -14,7 +14,7 @@ public interface IJobDao {
 	
 	public List<Job> selectJobByUsername(Map<String, Object> map);
 	
-	
+	public int deleteByPrimaryKey(String jid);
 	
 	
 	

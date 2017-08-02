@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,11 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.kingsoft.studentms.model.Job;
@@ -34,7 +41,7 @@ public class JobController {
 	@Resource
 	private IJobService jobService;
 	
-	private static final String UPLAOD_DIRCTORY = "WEB-INF/download";
+	private static final String UPLAOD_DIRCTORY = "WEB-INF/tecUpload";
 	//上传配置
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 *3;
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40;
@@ -83,61 +90,75 @@ public class JobController {
 	}
 
 	@RequestMapping("/addJob")
-	public void addJob(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	public void addJob(String title,String content,String deadtime,HttpServletRequest request,HttpServletResponse response,@RequestParam MultipartFile path) throws IOException, ParseException{
 		
 		
 		PrintWriter pw = response.getWriter();
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=UTF-8");
 		
-
 		if (!ServletFileUpload.isMultipartContent(request)) {			
 			pw.println("{\"msg\": \"表单必须包含 多媒体上传\"}");
 			pw.flush();
 			return ;
+		}else{
+			System.out.println("多媒体上传");
 		}
+
 		
 		HttpSession session = request.getSession();
-		
-		//配置上传参数
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		// 设置内存临界值
-		factory.setSizeThreshold(MEMORY_THRESHOLD);
-		// 临时存储目录
-		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-		
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		
-		// 设置最大文件上传值
-		upload.setFileSizeMax(MAX_FILE_SIZE);
-		
-		// 设置最大请求值(包含文件和表单)
-		upload.setSizeMax(MAX_REQUEST_SIZE);
-		
-		//中文处理
-		upload.setHeaderEncoding("utf-8");
-		
-		// 构造临时路径来存储上传的文件
 		// 这个路径相对当前应用的目录
 		String uploadPath = session.getServletContext().getRealPath("") + File.separator + UPLAOD_DIRCTORY;
+		Users users = (Users) session.getAttribute("user");
+		//建立存放的目录
+		File uploadFile = new File(uploadPath);
+		if (!uploadFile.exists()) {
+			uploadFile.mkdir();
+		}
+		Date date = null;
+		date = new SimpleDateFormat("MM/dd/yyyy").parse(deadtime);
 		
-		//如果不存在则创建
-		File uploadDir = new File(uploadPath);
-		if (!uploadDir.exists()) {
-			System.out.println("创建download文件夹"+uploadPath);
-			uploadDir.mkdir();
+		
+		Job job = new Job();
+		job.setTitle(title);
+		job.setContent(content);
+		job.setDeadTime(date);
+		job.setUsername(users.getUsername());
+		java.util.Map<String, Object> map = new HashMap<String, Object>();
+		map.put("job", job);
+		map.put("path", uploadPath);
+		map.put("file", path);
+
+		
+		String json = jobService.addJob(map);
+		
+		System.out.println(json);
+		pw.write(json);
+	}
+	
+	@RequestMapping("deleteJob")
+	public void deleteJob(String jid,HttpServletResponse response) throws IOException{
+		PrintWriter pw = response.getWriter();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json;charset=UTF-8");
+		String json = "";
+		if (jid != null) {
+			System.out.println(jid);
+			jobService.deleteByPrimaryKey(jid);
+			json = "{\"success\":\"true\"}";
+		}else {
+			json = "{\"msg\":\"发生错误\"}";
 		}
 		
-		
-		
-		
-//		String title = (String) request.getParameter("title");
-//		String content = (String) request.getParameter("content");
-//		String deadtime = (String) request.getParameter("deadtime");
-//		String path = (String) request.getParameter("path");
-		
-		System.out.println(uploadPath);
+		pw.write(json);
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/student")
 	public String student(){
