@@ -4,8 +4,13 @@
 * @Last Modified by:   anchen
 * @Last Modified time: 2017-07-25 15:57:45
 */
-
-
+var myformater = function(value,row,index){
+    if (value){
+        return new Date(parseInt(value)).toLocaleString();
+    }else{
+        return '';
+    }
+}
 var url = '';
 function newJob(){
     // 打开对话框 并 设置标题

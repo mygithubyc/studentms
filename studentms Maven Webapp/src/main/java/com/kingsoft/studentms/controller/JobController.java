@@ -3,6 +3,7 @@ package com.kingsoft.studentms.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class JobController {
 	@Resource
 	private IJobService jobService;
 	
-	private static final String UPLAOD_DIRCTORY = "download";
+	private static final String UPLAOD_DIRCTORY = "WEB-INF/download";
 	//上传配置
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 *3;
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40;
@@ -49,30 +50,31 @@ public class JobController {
 		String page = request.getParameter("page") != null ? (String) request.getParameter("page") : "1";
 		String sort = request.getParameter("sort") != null ? (String)request.getParameter("sort") : "jid";
 		String order = request.getParameter("order") != null ? (String)request.getParameter("order") : "asc";
-//		HttpSession session = request.getSession();
-//		Users users = (Users) session.getAttribute("user");
+		HttpSession session = request.getSession();
+		Users users = (Users) session.getAttribute("user");
 		
-		
-		
+		int offset = Integer.parseInt(rows)*(Integer.parseInt(page)-1);
+		int limit =  offset+Integer.parseInt(rows);
 		String json = "";
 		PrintWriter pw = response.getWriter();
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=UTF-8");
+
 		
-		
-		
-		int total = jobService.getJobCount("admin1");
-//		int total = 11;
-//		ArrayList<Job> jobs = new ArrayList<Job>();
-//		Job job = new Job("test","test",new Date(),"admin1","xxx.path",new Date());
-//		job.setJid(1);
-//		jobs.add(job);
-//		List<Job> jobs = jobService.selectJobByUsername("test");
+		int total = jobService.getJobCount(users.getUsername());
+
+		java.util.Map<String, Object> selectMap = new HashMap<String, Object>();
+		selectMap.put("offset", offset);
+		selectMap.put("limit", limit);
+		selectMap.put("order", order);
+		selectMap.put("sort", sort);
+		selectMap.put("username", users.getUsername());
+		List<Job> jobs = jobService.selectJobByUsername(selectMap);
 		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("total", total);
-//		map.put("rows", jobs);
+		map.put("rows", jobs);
 		json  = JSON.toJSONString(map);
 
 //		json =JSON.toJSONString(rows+"/"+page+"/"+sort+"/"+order);

@@ -1,6 +1,8 @@
 package com.kingsoft.studentms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.kingsoft.studentms.model.Job;
 
@@ -9,10 +11,9 @@ public interface IJobService {
 	
 	public int getJobCount(String username);
 	
-	public List<Job> selectJobByUsername(String username);
+	public List<Job> selectJobByUsername(Map<String, Object> map);
 	
-	
-	
+
 	
 	
 	

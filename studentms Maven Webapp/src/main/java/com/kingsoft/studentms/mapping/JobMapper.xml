@@ -1,121 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kingsoft.studentms.dao.IJobDao" >
-  <resultMap id="BaseResultMap" type="com.kingsoft.studentms.model.Job" >
-    <id column="JID" property="jid" jdbcType="DECIMAL" />
-    <result column="TITLE" property="title" jdbcType="VARCHAR" />
-    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
-    <result column="SENDTIME" property="sendtime" jdbcType="TIMESTAMP" />
-    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
-    <result column="PATH" property="path" jdbcType="VARCHAR" />
-    <result column="DEADTIME" property="deadtime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  
-  <sql id="Base_Column_List" >
-    JID, TITLE, CONTENT, SENDTIME, USERNAME, PATH, DEADTIME
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
-    select 
-    <include refid="Base_Column_List" />
-    from JOB
-    where JID = #{jid,jdbcType=DECIMAL}
-  </select>
-  <select id="selectJobCount" resultType="java.lang.Integer" parameterType="java.lang.String">
-  	select COALESCE(count(*),0) as count from job where username = #{username}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
-    delete from JOB
-    where JID = #{jid,jdbcType=DECIMAL}
-  </delete>
-  <insert id="insert" parameterType="com.kingsoft.studentms.model.Job" >
-    insert into JOB (JID, TITLE, CONTENT, 
-      SENDTIME, USERNAME, PATH, 
-      DEADTIME)
-    values (#{jid,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{sendtime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
-      #{deadtime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.kingsoft.studentms.model.Job" >
-    insert into JOB
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="jid != null" >
-        JID,
-      </if>
-      <if test="title != null" >
-        TITLE,
-      </if>
-      <if test="content != null" >
-        CONTENT,
-      </if>
-      <if test="sendtime != null" >
-        SENDTIME,
-      </if>
-      <if test="username != null" >
-        USERNAME,
-      </if>
-      <if test="path != null" >
-        PATH,
-      </if>
-      <if test="deadtime != null" >
-        DEADTIME,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="jid != null" >
-        #{jid,jdbcType=DECIMAL},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="sendtime != null" >
-        #{sendtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null" >
-        #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="deadtime != null" >
-        #{deadtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kingsoft.studentms.model.Job" >
-    update JOB
-    <set >
-      <if test="title != null" >
-        TITLE = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        CONTENT = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="sendtime != null" >
-        SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="username != null" >
-        USERNAME = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null" >
-        PATH = #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="deadtime != null" >
-        DEADTIME = #{deadtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where JID = #{jid,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.kingsoft.studentms.model.Job" >
-    update JOB
-    set TITLE = #{title,jdbcType=VARCHAR},
-      CONTENT = #{content,jdbcType=VARCHAR},
-      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
-      USERNAME = #{username,jdbcType=VARCHAR},
-      PATH = #{path,jdbcType=VARCHAR},
-      DEADTIME = #{deadtime,jdbcType=TIMESTAMP}
-    where JID = #{jid,jdbcType=DECIMAL}
-  </update>
-</mapper>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.kingsoft.studentms.dao.IJobDao">
+		<resultMap type="com.kingsoft.studentms.model.Job" id="job">
+			<result column="jid" property="jid" jdbcType="INTEGER" />
+			<result column="title" property="title" jdbcType="VARCHAR" />
+			<result column="content" property="content" jdbcType="VARCHAR" />
+			<result column="sendTime" property="sendTime" jdbcType="DATE" />
+			<result column="username" property="username" jdbcType="VARCHAR" />
+			<result column="path" property="path" jdbcType="VARCHAR" />
+			<result column="deadTime" property="deadTime" jdbcType="DATE" />
+		</resultMap>
+		
+		<!-- my -->
+		<select id="selectJobCount" resultType="java.lang.Integer">
+			select count(*) from job where username = #{username}
+		</select>
+		
+		<select id="selectJobByUsername" resultType="com.kingsoft.studentms.model.Job" >
+			SELECT * from (select A.*,ROWNUM RN from
+			(select * from job where USERNAME = #{username} ORDER BY ${sort} ${order})A 
+			where <![CDATA[ ROWNUM <=#{limit})WHERE RN >#{offset}]]>  
+		</select>
+		
+		
+		
+		<!-- 配置发布作业方法 -->
+		<insert id="publishJob" >
+			insert into
+			job(content,sendtime,username,deadtime,title) values(
+			#{job.content,jdbcType=VARCHAR},#{job.sendTime,jdbcType=DATE},
+			#{job.username,jdbcType=VARCHAR},#{job.deadTime,jdbcType=DATE},
+			#{job.title,jdbcType=VARCHAR})
+		</insert>
+		<!-- 模糊查询作业 -->
+		<select id="queryJob" resultType="com.kingsoft.studentms.model.Job">
+			select * from job where title=#{title,jdbcType=VARCHAR}
+		</select>
+		<!-- 查询所有的作业 -->
+		<select id="queryJobList" resultType="com.kingsoft.studentms.model.Job">
+			select * from job where title like '$%{title,jdbcType=VARCHAR}%'
+		</select>
+	</mapper>

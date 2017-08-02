@@ -1,24 +1,46 @@
 package com.kingsoft.studentms.dao;
 
-import com.kingsoft.studentms.model.Job;
-
-import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+import com.kingsoft.studentms.model.Job;
+@Repository
 public interface IJobDao {
-    int deleteByPrimaryKey(BigDecimal jid);
-
-    int insert(Job record);
-
-    int insertSelective(Job record);
-
-    Job selectByPrimaryKey(BigDecimal jid);
-
-    int updateByPrimaryKeySelective(Job record);
-
-    int updateByPrimaryKey(Job record);
-
-    Integer selectJobCount(String username);
+	
+	public int selectJobCount(String username);
+	
+	public List<Job> selectJobByUsername(Map<String, Object> map);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * @��ʦ������ҵ
+	 * @param job
+	 * @return
+	 */
+	public int publishJob(@Param("job") Job job);
+	/**
+	 * @�������ѯ��ҵ
+	 * @param title
+	 * @return
+	 */
+	public Job queryJob(@Param("title") String title);
+	/**
+	 * @��ѯ������ҵ
+	 * @return
+	 */
+	public List<Job> queryJobList(@Param("title") String title);
+	
 }
