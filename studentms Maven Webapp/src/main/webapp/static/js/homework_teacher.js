@@ -12,7 +12,7 @@ function newJob(){
     $('#dlg').dialog('open').dialog('setTitle','新建作业');
     // 清空表单数据
     $('#fm').form('clear');
-    url = '';
+    url = ctx+'/job/addJob';
 }
 function editJob(){
     var row = $('#dg').datagrid('getSelected');
@@ -49,6 +49,7 @@ function removeJob(){
 function saveJob(){
     $('#fm').form('submit',{
         url: url,
+        data: $('#fm').serialize(),
         onSubmit: function(){
             return $(this).form('validate');
         },

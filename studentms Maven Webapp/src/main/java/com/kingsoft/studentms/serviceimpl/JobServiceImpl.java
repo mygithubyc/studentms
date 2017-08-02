@@ -16,14 +16,14 @@ public class JobServiceImpl implements IJobService {
 	public int getJobCount(String username) {
 		// TODO Auto-generated method stub
 		System.out.println(username);
-		return jobDao.selectJobCount();
+		return jobDao.selectJobCount(username);
 	}
 
 
 	public List<Job> selectJobByUsername(String username) {
 		// TODO Auto-generated method stub
 		System.out.println(username);
-		return  jobDao.selectJobByUsername(username);
+		return  null;
 	}
 
 	

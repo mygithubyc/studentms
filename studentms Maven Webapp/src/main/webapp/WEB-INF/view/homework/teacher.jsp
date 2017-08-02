@@ -37,7 +37,7 @@
 		style="width:500px;height:600px;padding:10px 20px" closed="true"
 		buttons="#dlg-buttons">
 		<div class="ftitle">作业信息</div>
-		<form id="fm" method="post" novalidate>
+		<form id="fm" method="post" novalidate enctype="multipart/form-data">
 			<div class="fitem">
 				<label>标题:</label> <input name="title" class="easyui-validatebox"
 					required="true">
@@ -51,7 +51,7 @@
 					class="easyui-datebox" required="true">
 			</div>
 			<div class="fitem">
-				<label>文件:</label> <input name="path" class="easyui-filebox"
+				<label>文件:</label> <input name="path" class="easyui-filebox" 
 					data-options="prompt: '选择作业文件'" required="true">
 			</div>
 		</form>
