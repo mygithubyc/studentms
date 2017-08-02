@@ -33,6 +33,7 @@ import com.kingsoft.studentms.model.Job;
 import com.kingsoft.studentms.model.Users;
 import com.kingsoft.studentms.service.IJobService;
 import com.sun.javafx.collections.MappingChange.Map;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
 @RequestMapping("/job")
@@ -153,6 +154,7 @@ public class JobController {
 		pw.write(json);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping("stuGetJob")
 	public void stuGetJob(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String rows = request.getParameter("rows") != null ? (String) request.getParameter("rows") : "10";
@@ -168,8 +170,12 @@ public class JobController {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=UTF-8");
 		
+		java.util.Map<String, Object> countMap = new HashMap<String, Object>();
+		countMap.put("username", "ad");
+		countMap.put("formDate", new Date(117, 1, 1));
+		countMap.put("toDate",  new Date(117, 12, 1));
+		int total = jobService.getAllJobCount(countMap);
 		
-		int total = jobService.getAllJobCount();
 		java.util.Map<String, Object> selectMap = new HashMap<String, Object>();
 		selectMap.put("offset", offset);
 		selectMap.put("limit", limit);

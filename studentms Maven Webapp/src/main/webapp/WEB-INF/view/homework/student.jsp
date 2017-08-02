@@ -33,9 +33,7 @@
 				id="teacherName" name="" value="" placeholder=""> 发布日期: <input
 				class="easyui-datebox" style="width:100px" id="formDate">
 			To: <input class="easyui-datebox" style="width:100px" id="toDate">
-			是否已提交: <input class="easyui-combobox" style="width:100px"
-				url="${ctx }/static/data/combox_data.json" valueField="id" textField="text"
-				id="status"> <a href="#" class="easyui-linkbutton"
+			 <a href="#" class="easyui-linkbutton"
 				iconCls="icon-search" onclick="doSearch()">Search</a>
 		</div>
 		<a href="#" onclick="uploadForm()" class="easyui-linkbutton"

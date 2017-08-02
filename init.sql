@@ -76,6 +76,51 @@ INSERT into comjob(username,uploadtime,path,jid,struts) VALUES('xiaoming',TO_DAT
 
 
 
+SELECT
+	*
+FROM
+	(
+		SELECT
+			J.*, ROWNUM RN,
+			(SELECT CASE WHEN C.CID>0 THEN 1 ELSE 2 END  FROM COMJOB C WHERE C.JID = J.jid)status
+			FROM
+				(
+					SELECT
+						*
+					FROM
+						JOB
+					WHERE
+						USERNAME LIKE '%ad%'
+					AND SENDTIME BETWEEN TO_DATE ('2017-01-01', 'yyyy-mm-dd')
+					AND TO_DATE ('2017-08-15', 'yyyy-mm-dd')
+					ORDER BY
+						JID ASC
+				) J
+			WHERE
+				ROWNUM <= 2
+	)
+WHERE
+	RN > 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

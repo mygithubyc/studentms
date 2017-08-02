@@ -66,9 +66,9 @@ public class JobServiceImpl extends BasicServiceImpl implements IJobService {
 		return jobDao.deleteByPrimaryKey(jid);
 	}
 	
-	public int getAllJobCount() {
+	public int getAllJobCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return jobDao.selectAllJobCount();
+		return jobDao.selectAllJobCount(map);
 	}
 	
 	
@@ -86,6 +86,9 @@ public class JobServiceImpl extends BasicServiceImpl implements IJobService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	
 
 
 	

@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</delete>
 		
 		<select id="selectAllJobCount" resultType="java.lang.Integer">
-			select count(*) from job
+			select count(*) from job WHERE USERNAME LIKE '%${username}%' and SENDTIME between #{formDate} and #{toDate}
 		</select>
 		
 		<!-- 配置发布作业方法 -->

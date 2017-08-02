@@ -17,7 +17,7 @@ public interface IJobDao {
 	public int deleteByPrimaryKey(String jid);
 	
 	
-	public int selectAllJobCount();
+	public int selectAllJobCount(Map<String, Object> map);
 	
 	
 	

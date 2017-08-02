@@ -17,7 +17,7 @@ public interface IJobService {
 	
 	public int deleteByPrimaryKey(String jid);
 	
-	public int getAllJobCount();
+	public int getAllJobCount(Map<String, Object> map);
 	
 	
 	
