@@ -4,8 +4,16 @@ import com.kingsoft.studentms.model.ComJob;
 
 public interface IComJobService {
 
+	
+	public int selectComjobCount(String username);
+	
+	
+	
+	
+	
+	
 	/**
-	 * @提交作业
+	 * @锟结交锟斤拷业
 	 * @param comJob
 	 * @return string
 	 */

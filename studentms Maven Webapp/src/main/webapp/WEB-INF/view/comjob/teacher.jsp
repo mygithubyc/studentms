@@ -9,7 +9,7 @@
   </head>
   
   <body>
-    <table id="dg_submit" title="提交作业" class="easyui-datagrid" style="width:100%;height:800px;margin-left:0;"  url="" toolbar="#toolbar_submit" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" striped="true">
+    <table id="dg_submit" title="提交作业" class="easyui-datagrid" style="width:100%;height:800px;margin-left:0;"  url="${ctx }/comJob/getComJob" toolbar="#toolbar_submit" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" striped="true">
             <thead>
                 <tr>
                     <th field="title" width="50px">标题</th>

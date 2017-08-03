@@ -1,13 +1,23 @@
 package com.kingsoft.studentms.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import com.kingsoft.studentms.model.ComJob;
-
+@Repository
 public interface IComJobDao {
 
+	public int selectComjobCount(String username);
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
-	 * @提交作业
+	 * @锟结交锟斤拷业
 	 * @param comJob
 	 * @return
 	 */

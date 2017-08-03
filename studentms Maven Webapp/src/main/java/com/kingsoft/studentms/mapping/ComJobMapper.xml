@@ -11,6 +11,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="jid" property="jid" jdbcType="INTEGER" />
 			<result column="struts" property="struts" jdbcType="VARCHAR" />
 		</resultMap>
+		
+		<!-- my -->
+		<select id="selectComjobCount" resultType="java.lang.Integer">
+			SELECT COUNT(*) from COMJOB C,JOB J WHERE C.jid = J.jid and J.username = #{username}
+		</select>
+		
+		
+		
+		
+		
+		
+		
 		<!-- 提交作业方法 -->
 		<insert id="comJob">
 			insert into comjob(username,uploadtime,path,jid,struts) values(
