@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import sun.security.util.Debug;
 
+import com.alibaba.fastjson.JSON;
 import com.kingsoft.studentms.dao.IJobDao;
 import com.kingsoft.studentms.model.Job;
 import com.kingsoft.studentms.service.IJobService;
@@ -72,6 +73,27 @@ public class JobServiceImpl extends BasicServiceImpl implements IJobService {
 	}
 	
 	
+	public List<Job> stuGetAllJob(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		System.out.println(JSON.toJSONString(map));
+		return jobDao.stuGetAllJob(map);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String publishJob(Job job) {
 		// TODO Auto-generated method stub
 		return null;
@@ -87,6 +109,8 @@ public class JobServiceImpl extends BasicServiceImpl implements IJobService {
 		return null;
 	}
 
+
+	
 
 	
 

@@ -19,7 +19,7 @@ public interface IJobService {
 	
 	public int getAllJobCount(Map<String, Object> map);
 	
-	
+	public List<Job> stuGetAllJob(Map<String, Object> map);
 	
 	
 	

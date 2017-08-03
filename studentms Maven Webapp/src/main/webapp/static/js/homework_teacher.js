@@ -5,6 +5,7 @@
 * @Last Modified time: 2017-07-25 15:57:45
 */
 var myformater = function(value,row,index){
+	console.log('myformater');
     if (value){
         return new Date(parseInt(value)).toLocaleString();
     }else{

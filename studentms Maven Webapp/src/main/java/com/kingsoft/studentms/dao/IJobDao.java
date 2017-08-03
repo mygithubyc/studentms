@@ -19,7 +19,7 @@ public interface IJobDao {
 	
 	public int selectAllJobCount(Map<String, Object> map);
 	
-	
+	public List<Job> stuGetAllJob(Map<String, Object> map);
 	
 	
 	

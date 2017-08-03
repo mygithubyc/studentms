@@ -162,8 +162,8 @@ public class JobController {
 		String sort = request.getParameter("sort") != null ? (String)request.getParameter("sort") : "jid";
 		String order = request.getParameter("order") != null ? (String)request.getParameter("order") : "asc";
 		String username = request.getParameter("username") != null ? (String)request.getParameter("username") : "";
-		String formDateString = request.getParameter("formDate") != null ? (String)request.getParameter("order") : "01/01/1900";
-		String toDateString = request.getParameter("toDate") != null ? (String)request.getParameter("toDate") : "12/01/2050";
+		String formDateString = request.getParameter("formDate") != null ? (String)request.getParameter("formDate") : "01/01/1990";
+		String toDateString = request.getParameter("toDate") != null ? (String)request.getParameter("toDate") : "12/01/2080";
 		HttpSession session = request.getSession();
 		String cUsername = ((Users) session.getAttribute("user")).getUsername();
 		
@@ -191,11 +191,11 @@ public class JobController {
 		selectMap.put("formDate",formDate);
 		selectMap.put("toDate",  toDate);
 		selectMap.put("cUsername", cUsername);
-		
+		List<Job> jobs = jobService.stuGetAllJob(selectMap);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("total", total);
-//		map.put("rows", jobs);
+		map.put("rows", jobs);
 		json = JSON.toJSONString(map);
 		
 		pw.write(json);

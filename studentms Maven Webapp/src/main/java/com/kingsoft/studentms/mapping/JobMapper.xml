@@ -32,6 +32,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select count(*) from job WHERE USERNAME LIKE '%${username}%' and SENDTIME between #{formDate} and #{toDate}
 		</select>
 		
+		<select id="stuGetAllJob" resultType="com.kingsoft.studentms.model.Job">
+			SELECT
+				*
+			FROM
+				(
+					SELECT
+						J.*, ROWNUM RN,
+						(SELECT CASE WHEN C.CID>0 THEN 1 ELSE 2 END  FROM COMJOB C WHERE C.JID = J.jid and C.username = #{cUsername})status
+						FROM
+							(
+								SELECT
+									*
+								FROM
+									JOB
+								WHERE
+									USERNAME LIKE '%${username}%'
+								AND SENDTIME BETWEEN #{formDate}
+								AND #{toDate}
+								ORDER BY
+									${sort} ${order}
+							)J
+						WHERE
+						<![CDATA[	ROWNUM <= #{limit}
+				)
+			WHERE
+				RN > #{offset}]]>
+		</select>
 		
 		<!-- 配置发布作业方法 -->
 		<insert id="publishJob" >
