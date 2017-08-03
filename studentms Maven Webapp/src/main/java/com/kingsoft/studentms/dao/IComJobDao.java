@@ -15,15 +15,7 @@ public interface IComJobDao {
 	
 	public List<Submit> selectComjob(Map<String, Object> map);
 	
+	public int selectComJobForCheck(Map<String, Object> map);
 	
-	
-	
-	
-	
-	/**
-	 * @�ύ��ҵ
-	 * @param comJob
-	 * @return
-	 */
 	public int comJob(@Param("comJob") ComJob comJob);
 }

@@ -61,12 +61,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				RN > #{offset} ]]>
 		</select>
 		
-		
+		<select id="selectComJobForCheck" resultType="java.lang.Integer">
+			SELECT COUNT(*) from COMJOB WHERE USERNAME = #{username} and JID = #{jid}
+		</select>
 		
 		
 		
 		<!-- 提交作业方法 -->
-		<insert id="comJob">
+		<insert id="comJob" >
 			insert into comjob(username,uploadtime,path,jid,struts) values(
 			#{comJob.username,jdbcType=VARCHAR},#{comJob.uploadTime,jdbcType=DATE},
 			#{comJob.path,jdbcType=VARCHAR},#{comJob.jid,jdbcType=INTEGER},#{comJob.struts})

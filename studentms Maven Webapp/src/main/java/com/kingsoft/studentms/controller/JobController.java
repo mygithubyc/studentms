@@ -43,12 +43,11 @@ public class JobController {
 	private IJobService jobService;
 	
 	private static final String UPLAOD_DIRCTORY = "WEB-INF/tecUpload";
-	//上传配置
+	
+	//上传配置	闲置
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 *3;
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40;
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50;
-	
-	
 	
 	
 	
@@ -154,7 +153,6 @@ public class JobController {
 		pw.write(json);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@RequestMapping("stuGetJob")
 	public void stuGetJob(HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException{
 		String rows = request.getParameter("rows") != null ? (String) request.getParameter("rows") : "10";
@@ -162,8 +160,10 @@ public class JobController {
 		String sort = request.getParameter("sort") != null ? (String)request.getParameter("sort") : "jid";
 		String order = request.getParameter("order") != null ? (String)request.getParameter("order") : "asc";
 		String username = request.getParameter("username") != null ? (String)request.getParameter("username") : "";
-		String formDateString = request.getParameter("formDate") != null ? (String)request.getParameter("formDate") : "01/01/1990";
-		String toDateString = request.getParameter("toDate") != null ? (String)request.getParameter("toDate") : "12/01/2080";
+		String formDateString = request.getParameter("formDate") != null  ? (String)request.getParameter("formDate") : "01/01/1990";
+		formDateString = formDateString.trim().equals("invaild") ? "01/01/1990" : formDateString;
+		String toDateString = request.getParameter("toDate") != null  ? (String)request.getParameter("toDate") : "12/01/2080";
+		toDateString = toDateString.trim().equals("invaild") ? "12/01/2080" : toDateString;
 		HttpSession session = request.getSession();
 		String cUsername = ((Users) session.getAttribute("user")).getUsername();
 		
@@ -196,6 +196,9 @@ public class JobController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("total", total);
 		map.put("rows", jobs);
+//		map.put("formDateString", formDateString);
+//		map.put("toDateString", toDateString);
+
 		json = JSON.toJSONString(map);
 		
 		pw.write(json);

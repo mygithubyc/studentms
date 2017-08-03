@@ -44,7 +44,8 @@
 		style="width:500px;height:600px;padding:10px 20px;margin-left:0;" closed="true"
 		buttons="#dlg-buttons_student">
 		<div class="ftitle">作业信息</div>
-		<form id="fm_student" method="post" novalidate>
+		<form id="fm_student" method="post" novalidate enctype="multipart/form-data">
+			<input type="hidden" name="jid"> 
 			<div class="fitem">
 				<label>标题:</label> <input class="easyui-validatebox" name="title"
 					readonly="readonly">
@@ -59,7 +60,7 @@
 					readonly="readonly"></textarea>
 			</div>
 			<div class="fitem">
-				<label>文件:</label> <input name="cpath" class="easyui-filebox"
+				<label>文件:</label> <input name="file" class="easyui-filebox"
 					data-options="prompt: '选择作业文件'" required="true">
 			</div>
 		</form>
@@ -68,7 +69,7 @@
 	<div id="dlg-buttons_student">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok"
 			onclick="upload()">提交/上传作业</a> <a href="#" class="easyui-linkbutton"
-			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+			iconCls="icon-cancel" onclick="javascript:$('#dlg_student').dialog('close')">取消</a>
 	</div>
 </body>
 <jsp:include page="/WEB-INF/view/common/include_js.jsp"></jsp:include>

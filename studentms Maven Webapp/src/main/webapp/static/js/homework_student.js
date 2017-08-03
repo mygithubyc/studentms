@@ -5,14 +5,42 @@
 * @Last Modified time: 2017-07-25 15:59:55
 */
 
-function upload(){
+function uploadForm(){
 
-    var row = $('#dg').datagrid('getSelected');
+    var row = $('#dg_student').datagrid('getSelected');
     if (row) {
-        $('#dlg').dialog('open').dialog('setTitle','提交作业');
-        $('#fm').form('load',row);
-        url = ''+row.jid;
+        $('#dlg_student').dialog('open').dialog('setTitle','提交作业');
+        $('#fm_student').form('load',row);
+        url = ctx+'/comJob/submitJob';
     }
+}
+// upload中的url 来自 uploadForm的url
+function upload(){
+    console.log('upload');
+    $('#fm_student').form('submit',{
+        url: url,
+        onSubmit: function(){
+            return $(this).form('validate');
+        },
+        success: function(result){
+        	var result = JSON.parse(result);
+            if (result.success) {
+                
+                $('#dg_student').datagrid('reload');
+                $.messager.show({
+                	title: 'Success',
+                    msg: '作业提交成功!'
+                	
+                });
+            }else{
+            	$('#dlg_student').dialog('close');
+                $.messager.show({
+                    title: 'Error',
+                    msg: result.msg
+                });
+            }
+        }
+    });
 }
 
 
@@ -22,8 +50,10 @@ function doSearch(){
     var teacherName = $('#teacherName').val();
         formDate = $('#formDate').val();
         toDate = $('#toDate').val();
-    if(!checkDateTime(formDate))	formDate = null;
-    if(!checkDateTime(toDate))	toDate = null;   
+//        验证日期的合法性    不符合时传empty
+    if(!checkDateTime(formDate))	formDate = 'invaild';
+    if(!checkDateTime(toDate))	toDate = 'invaild';   
+    
 //    console.log(teacherName+'/'+formDate+'/'+toDate);
     //  表格的load函数会去访问其属性url status 未提交: 1 已提交:2
     $('#dg_student').datagrid('load',{

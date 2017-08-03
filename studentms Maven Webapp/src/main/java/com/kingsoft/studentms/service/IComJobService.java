@@ -3,7 +3,6 @@ package com.kingsoft.studentms.service;
 import java.util.List;
 import java.util.Map;
 
-import com.kingsoft.studentms.model.ComJob;
 import com.kingsoft.studentms.model.Submit;
 
 public interface IComJobService {
@@ -13,15 +12,10 @@ public interface IComJobService {
 	
 	public List<Submit> selectComjob(Map<String, Object> map);
 
+	public String submitJob(Map<String, Object> map);
+	
+	public boolean checkResubmit(Map<String, Object> map);
 	
 	
-	
-	
-	/**
-	 * @�ύ��ҵ
-	 * @param comJob
-	 * @return string
-	 */
-	public String comJob(ComJob comJob);
 	
 }
