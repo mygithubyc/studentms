@@ -15,7 +15,7 @@
                     <th field="title" width="50px">标题</th>
                     <th field="content" width="50px">内容</th>
                     <th field="username" width="50px">学生</th>
-                    <th field="sendtime" width="50px" sortable="true">提交日期</th>
+                    <th field="uploadTime" width="50px" sortable="true" data-options={formatter:myformater}>提交日期</th>
                     
                     <th field="path" width="50px">文件名</th>
                     

@@ -116,6 +116,8 @@ public class UsersController {
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("user")!=null){
+			Users user = (Users)session.getAttribute("user");
+			model.addAttribute("userType", user.getUsertType());
 			return "main/main";
 		}else {
 			model.addAttribute("error","非法登录");

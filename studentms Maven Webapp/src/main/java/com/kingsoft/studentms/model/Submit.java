@@ -2,20 +2,38 @@ package com.kingsoft.studentms.model;
 
 import java.util.Date;
 
-public class ComJob {
-
-	private int cid;
+public class Submit {
+	private int cid;	
+	private int jid;
+	private String title;
+	private String content;
 	private String username;
 	private Date uploadTime;
-	private String path;		//�ύ��ҵ·��
-	private int jid;
-	private String struts;
+	private String path;
 	
 	public int getCid() {
 		return cid;
 	}
 	public void setCid(int cid) {
 		this.cid = cid;
+	}
+	public int getJid() {
+		return jid;
+	}
+	public void setJid(int jid) {
+		this.jid = jid;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getUsername() {
 		return username;
@@ -34,26 +52,6 @@ public class ComJob {
 	}
 	public void setPath(String path) {
 		this.path = path;
-	}
-	public int getJid() {
-		return jid;
-	}
-	public void setJid(int jid) {
-		this.jid = jid;
-	}
-	public String getStruts() {
-		return struts;
-	}
-	public void setStruts(String struts) {
-		this.struts = struts;
-	}
-	public ComJob(){}
-	public ComJob(String username, Date uploadTime, String path, int jid, String struts) {
-		this.username = username;
-		this.uploadTime = uploadTime;
-		this.path = path;
-		this.jid = jid;
-		this.struts = struts;
 	}
 	
 }

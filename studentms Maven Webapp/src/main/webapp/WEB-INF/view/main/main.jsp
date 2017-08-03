@@ -14,7 +14,12 @@
     <div class="header">
             <div class="header__wrap">
                 <div class="header__logo">
-                    	学生管理平台 欢迎你,${sessionScope.user.username } 
+                    	学生管理平台 欢迎你,${sessionScope.user.username }  
+                    	<c:choose>
+                    		<c:when test="${userType == 1 }">学生</c:when>
+                    		<c:when test="${userType == 2 }">老师</c:when>
+                    		<c:otherwise>?</c:otherwise>
+                    	</c:choose>
                 </div>
                 <div class="header__logout">
                    	 登出
@@ -26,9 +31,18 @@
         <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-edit">作业模块</a>
         <a href="#" class="easyui-menubutton" menu="#mm2" iconCls="icon-man">个人信息</a>
         <div id="mm1" style="width:150px;">
-            <div url="${ctx }/job/teacher" title="布置作业">布置作业</div>
-            <div url="${ctx }/comJob/teacher" title="查看提交">查看提交</div>
-            <div url="${ctx }/job/student" title="提交作业">提交作业</div>
+        	<c:choose>
+           		<c:when test="${userType == 1 }">
+					<div url="${ctx }/job/student" title="提交作业">提交作业</div>
+				</c:when>
+           		<c:when test="${userType == 2 }">
+					<div url="${ctx }/job/teacher" title="布置作业">布置作业</div>
+            		<div url="${ctx }/comJob/teacher" title="查看提交">查看提交</div>
+				</c:when>
+           		<c:otherwise>?</c:otherwise>
+           	</c:choose>
+            
+            
         </div>
         <div id="mm2" style="width:100px;">
             <div url="http://www.baidu.com" title="布置作业4">完善个人信息</div>
