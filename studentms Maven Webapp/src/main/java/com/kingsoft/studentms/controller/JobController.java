@@ -156,13 +156,19 @@ public class JobController {
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping("stuGetJob")
-	public void stuGetJob(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	public void stuGetJob(HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException{
 		String rows = request.getParameter("rows") != null ? (String) request.getParameter("rows") : "10";
 		String page = request.getParameter("page") != null ? (String) request.getParameter("page") : "1";
 		String sort = request.getParameter("sort") != null ? (String)request.getParameter("sort") : "jid";
 		String order = request.getParameter("order") != null ? (String)request.getParameter("order") : "asc";
+		String username = request.getParameter("username") != null ? (String)request.getParameter("username") : "";
+		String formDateString = request.getParameter("formDate") != null ? (String)request.getParameter("order") : "01/01/1900";
+		String toDateString = request.getParameter("toDate") != null ? (String)request.getParameter("toDate") : "12/01/2050";
+		HttpSession session = request.getSession();
+		String cUsername = ((Users) session.getAttribute("user")).getUsername();
 		
-		
+		Date formDate = new SimpleDateFormat("MM/dd/yyyy").parse(formDateString);
+		Date toDate = new SimpleDateFormat("MM/dd/yyyy").parse(toDateString);
 		int offset = Integer.parseInt(rows)*(Integer.parseInt(page)-1);
 		int limit =  offset+Integer.parseInt(rows);
 		String json = "";
@@ -171,9 +177,9 @@ public class JobController {
 		response.setContentType("application/json;charset=UTF-8");
 		
 		java.util.Map<String, Object> countMap = new HashMap<String, Object>();
-		countMap.put("username", "ad");
-		countMap.put("formDate", new Date(117, 1, 1));
-		countMap.put("toDate",  new Date(117, 12, 1));
+		countMap.put("username", username);
+		countMap.put("formDate",formDate);
+		countMap.put("toDate",  toDate);
 		int total = jobService.getAllJobCount(countMap);
 		
 		java.util.Map<String, Object> selectMap = new HashMap<String, Object>();
@@ -181,8 +187,10 @@ public class JobController {
 		selectMap.put("limit", limit);
 		selectMap.put("order", order);
 		selectMap.put("sort", sort);
-		
-		
+		selectMap.put("username", username);
+		selectMap.put("formDate",formDate);
+		selectMap.put("toDate",  toDate);
+		selectMap.put("cUsername", cUsername);
 		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();

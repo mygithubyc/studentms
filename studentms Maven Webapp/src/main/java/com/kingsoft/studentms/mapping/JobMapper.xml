@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="username" property="username" jdbcType="VARCHAR" />
 			<result column="path" property="path" jdbcType="VARCHAR" />
 			<result column="deadTime" property="deadTime" jdbcType="DATE" />
+			<result column="status" property="status" jdbcType="VARCHAR" />
 		</resultMap>
 		
 		<!-- my -->
@@ -30,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="selectAllJobCount" resultType="java.lang.Integer">
 			select count(*) from job WHERE USERNAME LIKE '%${username}%' and SENDTIME between #{formDate} and #{toDate}
 		</select>
+		
 		
 		<!-- 配置发布作业方法 -->
 		<insert id="publishJob" >

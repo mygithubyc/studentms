@@ -11,6 +11,7 @@ public class Job {
 	private String username;	
 	private String path;
 	private Date deadTime;
+	private String status;
 	public int getJid() {
 		return jid;
 	}
@@ -53,6 +54,12 @@ public class Job {
 	}
 	public void setDeadTime(Date deadTime) {
 		this.deadTime = deadTime;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getStatus() {
+		return status;
 	}
 	public Job(){}
 	public Job(String content,String title, Date sendTime, String username, String path, Date deadTime) {
