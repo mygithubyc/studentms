@@ -47,8 +47,8 @@
 				<textarea name="content" class="easyui-validatebox"></textarea>
 			</div>
 			<div class="fitem">
-				<label>截止日期:</label> <input name="deadtime" type="text"
-					class="easyui-datebox" required="true">
+				<label>截止日期:</label> <input name="deadTime" type="text"
+					class="easyui-datebox" required="true" editable="false">
 			</div>
 			<div class="fitem">
 				<label>文件:</label> <input name="path" class="easyui-filebox" 

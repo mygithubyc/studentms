@@ -22,7 +22,7 @@ public class BasicServiceImpl implements BasicService{
 			System.out.println("文件类型"+fileType);
 			if (fileType.equals(".zip") || fileType.equals(".rar")) {
 				Date date = new Date();
-				fileName = String.valueOf(date.getTime())+"\\"+fileName;
+				fileName = String.valueOf(date.getTime())+"_"+fileName;
 				System.out.println("保存的文件名"+fileName);
 				try {
 					FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path, fileName));

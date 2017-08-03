@@ -21,7 +21,7 @@ public interface IJobDao {
 	
 	public List<Job> stuGetAllJob(Map<String, Object> map);
 	
-	
+	public int updateJob(Job job);
 	
 	
 	

@@ -59,7 +59,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE
 				RN > #{offset}]]>
 		</select>
-		
+		<update id="updateJob">
+			UPDATE JOB
+			SET TITLE = #{title,jdbcType=VARCHAR},
+			 CONTENT = #{content,jdbcType=VARCHAR},
+			 PATH = #{path,jdbcType=VARCHAR},
+			 DEADTIME = #{deadTime,jdbcType=DATE}
+			WHERE
+				jid = #{jid}
+			AND USERNAME = #{username}
+		</update>
 		<!-- 配置发布作业方法 -->
 		<insert id="publishJob" >
 			insert into

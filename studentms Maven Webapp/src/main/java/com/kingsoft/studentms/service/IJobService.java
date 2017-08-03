@@ -20,24 +20,7 @@ public interface IJobService {
 	
 	public List<Job> stuGetAllJob(Map<String, Object> map);
 	
+	public String updateJob(Map<String, Object> map);
 	
 	
-	/**
-	 * @
-	 * @param job
-	 * @return
-	 */
-	public String publishJob(Job job);
-	/**
-	 * @
-	 * @param title
-	 * @return
-	 */
-	public Job queryJob(String title);
-	/**
-	 * @
-	 * @param title
-	 * @return list
-	 */
-	public List<?> queryJobList(String title);
 }

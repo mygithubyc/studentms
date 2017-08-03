@@ -90,7 +90,7 @@ public class JobController {
 	}
 
 	@RequestMapping("/addJob")
-	public void addJob(String title,String content,String deadtime,HttpServletRequest request,HttpServletResponse response,@RequestParam MultipartFile path) throws IOException, ParseException{
+	public void addJob(String title,String content,String deadTime,HttpServletRequest request,HttpServletResponse response,@RequestParam MultipartFile path) throws IOException, ParseException{
 		
 		
 		PrintWriter pw = response.getWriter();
@@ -116,7 +116,7 @@ public class JobController {
 			uploadFile.mkdir();
 		}
 		Date date = null;
-		date = new SimpleDateFormat("MM/dd/yyyy").parse(deadtime);
+		date = new SimpleDateFormat("MM/dd/yyyy").parse(deadTime);
 		
 		
 		Job job = new Job();
@@ -205,7 +205,48 @@ public class JobController {
 		
 	}
 	
-	
+	@RequestMapping("updateJob")
+	public void updateJob(String jid,String title,String content,String deadTime,HttpServletRequest request,HttpServletResponse response,@RequestParam MultipartFile path) throws IOException, ParseException{
+		PrintWriter pw = response.getWriter();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json;charset=UTF-8");
+		
+		if (!ServletFileUpload.isMultipartContent(request)) {			
+			pw.println("{\"msg\": \"表单必须包含 多媒体上传\"}");
+			pw.flush();
+			return ;
+		}else{
+			System.out.println("多媒体上传");
+		}
+		
+		HttpSession session = request.getSession();
+		// 这个路径相对当前应用的目录
+		String uploadPath = session.getServletContext().getRealPath("") + File.separator + UPLAOD_DIRCTORY;
+		Users users = (Users) session.getAttribute("user");
+		//建立存放的目录
+		File uploadFile = new File(uploadPath);
+		if (!uploadFile.exists()) {
+			uploadFile.mkdir();
+		}
+		Date date = null;
+		date = new SimpleDateFormat("MM/dd/yyyy").parse(deadTime);
+		
+		
+		Job job = new Job();
+		job.setJid(Integer.parseInt(jid));
+		job.setTitle(title);
+		job.setContent(content);
+		job.setDeadTime(date);
+		job.setUsername(users.getUsername());
+		java.util.Map<String, Object> map = new HashMap<String, Object>();
+		map.put("job", job);
+		map.put("path", uploadPath);
+		map.put("file", path);
+		
+		
+		String json = jobService.updateJob(map);
+		pw.write(json);
+	}
 	
 	
 	

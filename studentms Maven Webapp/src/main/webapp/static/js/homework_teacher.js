@@ -5,7 +5,7 @@
 * @Last Modified time: 2017-07-25 15:57:45
 */
 var myformater = function(value,row,index){
-	console.log('myformater');
+	
     if (value){
         return new Date(parseInt(value)).toLocaleString();
     }else{
@@ -30,11 +30,12 @@ function newJob(){
 }
 function editJob(){
     var row = $('#dg').datagrid('getSelected');
-
+    url = ctx+'/job/updateJob?jid='+row.jid;
+   
     if (row) {
         $('#dlg').dialog('open').dialog('setTitle','编辑作业');
         $('#fm').form('load',row);
-        url = ''+row.jid;
+        
     }
 }
 function removeJob(){
