@@ -1,0 +1,42 @@
+/* 
+* @Author: anchen
+* @Date:   2017-07-25 14:02:01
+* @Last Modified by:   anchen
+* @Last Modified time: 2017-07-25 14:30:30
+*/
+#fm{
+    margin: 0;
+    padding: 10px 30px;
+}    
+.ftitle{
+    font-size: 28px;
+    font-weight: bold;
+    color: #666;
+    padding: 5px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.fitem{
+    margin-bottom: 10px;
+}
+.fitem label{
+    display: inline-block;
+    width: 100px;
+    font-size: 20px;
+}
+.fitem input{
+    border: 1px solid #ccc; 
+    padding: 7px 0px;
+    border-radius: 3px; /*css3属性IE不支持*/
+    padding-left:5px; 
+}
+.fitem textarea{
+    width: 252px;
+    height: 120px;
+    resize:none;
+    font-size: 18px;
+    padding: 7px 0px;
+    border-radius: 3px; /*css3属性IE不支持*/
+    padding-left:5px; 
+
+}
