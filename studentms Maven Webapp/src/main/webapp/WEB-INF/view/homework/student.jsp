@@ -11,7 +11,7 @@
 <body>
 	<!-- 数据网格 学生可以看到所有老师布置的作业 搜索和排序的操作都将在该tabel指向的url操作中执行 -->
 	<table id="dg_student" title="提交作业" class="easyui-datagrid"
-		style="width:100%;height:800px;" url="${ctx }/job/stuGetJob" toolbar="#toolbar_student"
+		style="width:100%;height:700px;" url="${ctx }/job/stuGetJob" toolbar="#toolbar_student"
 		pagination="true" rownumbers="true" fitColumns="true"
 		singleSelect="true" striped="true">
 		<thead>
@@ -21,7 +21,7 @@
 				<th field="username" width="50px">老师</th>
 				<th field="sendTime" width="50px" sortable="true" data-options={formatter:myformater}>发布日期</th>
 				<th field="deadTime" width="50px" sortable="true" data-options={formatter:myformater}>截止日期</th>
-				<th field="path" width="50px">文件名</th>
+				<th field="path" width="50px" data-options={formatter:fileFormater}>文件名</th>
 				<th field="status" width="50px" data-options={formatter:statusFormater}>是否已交</th>
 			</tr>
 		</thead>

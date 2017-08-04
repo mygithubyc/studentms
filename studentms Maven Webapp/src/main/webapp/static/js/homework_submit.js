@@ -22,3 +22,13 @@ function doSearch(){
 	        return '';
 	    }
 	}
+	var fileFormater = function(value,row,index){
+		 if (value){
+			var index = value.lastIndexOf("\\");
+			var filename = value.substring(index+1)
+			rst = '<a href="'+ctx+'/job/download?type='+1+'&fileName='+filename+'">'+filename+'</a>';
+	        return rst;
+	    }else{
+	        return '';
+	    }
+	}

@@ -3,6 +3,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +13,13 @@ import com.kingsoft.studentms.service.BasicService;;
 
 public class BasicServiceImpl implements BasicService{
 
+	
+	
+	
+	
+	
+	
+	
 	public String uploadMutiFile(MultipartFile file,String path){
 		System.out.println("上传的文件"+file);
 		if (file.isEmpty()) {

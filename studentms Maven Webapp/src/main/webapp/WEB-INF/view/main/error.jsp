@@ -7,7 +7,7 @@
 <head>  
 
 <script type="text/javascript">   
-	setTimeout("javascript:location.href=${ctx}", 3000);   
+	setTimeout("javascript:location.href='${ctx}'", 3000);   
 </script>  
   
 </head>  

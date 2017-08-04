@@ -24,6 +24,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -32,6 +33,7 @@ import com.alibaba.fastjson.JSON;
 import com.kingsoft.studentms.model.Job;
 import com.kingsoft.studentms.model.Users;
 import com.kingsoft.studentms.service.IJobService;
+import com.kingsoft.studentms.serviceimpl.DownloadServiceImpl;
 import com.sun.javafx.collections.MappingChange.Map;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -43,7 +45,7 @@ public class JobController {
 	private IJobService jobService;
 	
 	private static final String UPLAOD_DIRCTORY = "WEB-INF/tecUpload";
-	
+	private static final String STU_UPLAOD_DIRCTORY = "WEB-INF/stuUpload";
 	//上传配置	闲置
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 *3;
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40;
@@ -248,8 +250,25 @@ public class JobController {
 		pw.write(json);
 	}
 	
-	
-	
+	@RequestMapping(value="/download",method=RequestMethod.GET)
+	public void download(String fileName,String type,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		System.out.println(fileName+"/"+type);
+		if (fileName.equals("") || type.equals("")) {
+			System.out.println("step1");
+			return;
+		}
+		String filePath = request.getSession().getServletContext().getRealPath("")+File.separator;
+		if (type.trim().equals("2")) {
+			
+			filePath = filePath+UPLAOD_DIRCTORY;
+		}else if (type.trim().equals("1")) {
+			filePath = filePath + STU_UPLAOD_DIRCTORY;
+		}else{
+			System.out.println("step2");
+			return;
+		}
+		DownloadServiceImpl.download(fileName, filePath, request, response);
+	}
 	
 	@RequestMapping("/student")
 	public String student(){

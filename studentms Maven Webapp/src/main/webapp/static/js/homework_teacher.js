@@ -15,7 +15,9 @@ var myformater = function(value,row,index){
 var fileFormater = function(value,row,index){
 	 if (value){
 		var index = value.lastIndexOf("\\");
-        return value.substring(index+1);
+		var filename = value.substring(index+1)
+		rst = '<a href="'+ctx+'/job/download?type='+2+'&fileName='+filename+'">'+filename+'</a>';
+        return rst;
     }else{
         return '';
     }

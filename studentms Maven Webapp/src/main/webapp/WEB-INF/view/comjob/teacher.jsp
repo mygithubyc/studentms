@@ -9,7 +9,7 @@
   </head>
   
   <body>
-    <table id="dg_submit" title="提交作业" class="easyui-datagrid" style="width:100%;height:800px;margin-left:0;"  url="${ctx }/comJob/getComJob" toolbar="#toolbar_submit" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" striped="true">
+    <table id="dg_submit" title="提交作业" class="easyui-datagrid" style="width:100%;height:700px;margin-left:0;"  url="${ctx }/comJob/getComJob" toolbar="#toolbar_submit" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" striped="true">
             <thead>
                 <tr>
                     <th field="title" width="50px">标题</th>
@@ -17,7 +17,7 @@
                     <th field="username" width="50px">学生</th>
                     <th field="uploadTime" width="50px" sortable="true" data-options={formatter:myformater}>提交日期</th>
                     
-                    <th field="path" width="50px">文件名</th>
+                    <th field="path" width="50px" data-options={formatter:fileFormater}>文件名</th>
                     
                 </tr>
             </thead>
