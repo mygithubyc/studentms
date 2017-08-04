@@ -207,7 +207,7 @@ public class JobController {
 		
 	}
 	
-	@RequestMapping("updateJob")
+	@RequestMapping("/updateJob")
 	public void updateJob(String jid,String title,String content,String deadTime,HttpServletRequest request,HttpServletResponse response,@RequestParam MultipartFile path) throws IOException, ParseException{
 		PrintWriter pw = response.getWriter();
 		response.setCharacterEncoding("utf-8");
