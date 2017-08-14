@@ -85,7 +85,7 @@ public class JobController {
 		map.put("total", total);
 		map.put("rows", jobs);
 		json  = JSON.toJSONString(map);
-
+		
 //		json =JSON.toJSONString(rows+"/"+page+"/"+sort+"/"+order);
 		pw.write(json);
 		
