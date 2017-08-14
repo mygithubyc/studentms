@@ -39,7 +39,7 @@ $(document).ready(function(){
         switcher_tip.addClass('container__tip_status_switched');
     });
     // 登录
-    login_button.click(function(event) {
+   /* login_button.click(function(event) {
         login_form.submit(function(event) {
             event.preventDefault();
             var usernameVal = $(this).find('#username').val(),
@@ -83,9 +83,9 @@ $(document).ready(function(){
             
 
         });
-    });
+    });*/
      // 注册
-    register_button.click(function(event) {
+   /* register_button.click(function(event) {
         register_form.submit(function(event) {
             event.preventDefault();
             var usernameVal = $(this).find('#username').val(),
@@ -99,10 +99,10 @@ $(document).ready(function(){
             if (usernameVal && passwordVal && passwordAgainVal) {
                 // alert(login_form.serialize());
                 $.ajax({
-                    url: '',
+                    url: 'users/register',
                     type: 'post',
                     dataType: 'json',
-                    data: login_form.serialize(),
+                    data: {username:usernameVal,password:passwordVal},
                     success: function (result) {
                         var result = JSON.parse(result);
                         // 返回结果类型为json "{\"success\":\"true\"}"
@@ -130,6 +130,45 @@ $(document).ready(function(){
             
 
         });
+    });*/
+    
+    $("#register_button").click(function(){
+    	 var usernameVal = $("#reusername").val(),
+         passwordVal = $("#repassword").val(),
+         passwordAgainVal = $("#password_again").val();
+    	 
+    	// window.alert("用户名："+usernameVal);
+    	 if (usernameVal.trim()!="" && passwordVal.trim()!="" && passwordAgainVal.trim()!="") {
+             // alert(login_form.serialize());
+    		 window.alert("hello："+usernameVal);
+             $.ajax({
+                 url: "users/register",
+                 type: "POST",
+                 dataType: "json",
+                 data: {"username":usernameVal,"password":passwordVal},
+                 success: function (result) {
+                     var result = JSON.parse(result);
+                     // 返回结果类型为json "{\"success\":\"true\"}"
+                     // 失败则在message中写上错误信息
+                     // if (result) {
+                     // window.location.href = "";
+                     // }else{
+                     //     arr.push(result.message);
+                     //     show_validate(arr);
+                     // }
+                 }
+             });
+             
+             
+             
+         }else{
+             
+             if (usernameVal==null) {arr.push('请输入用户名')}
+             if (passwordVal==null || passwordAgainVal==null) {arr.push('请输入密码或确认密码')}
+             if (passwordVal !== passwordAgainVal) {arr.push('两次密码不一致')}
+                
+             show_validate(arr);
+         }
     });
 
     // show_validate(['错','再错']);
@@ -168,8 +207,6 @@ $(document).ready(function(){
             }else{
                show_validate(['该账号可用!']);
             }
-        }
-        
-        
+        }      
     });
 });

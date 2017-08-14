@@ -7,10 +7,9 @@ import com.kingsoft.studentms.service.IComJobService;
 
 @Service("comJobService")
 public class ComJobServiceImpl implements IComJobService {
-	
+	@Override
 	public String comJob(ComJob comJob) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

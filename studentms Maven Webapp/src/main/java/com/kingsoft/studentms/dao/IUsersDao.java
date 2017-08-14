@@ -1,5 +1,7 @@
 package com.kingsoft.studentms.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.kingsoft.studentms.model.Users;
@@ -27,4 +29,18 @@ public interface IUsersDao {
 	 * @return int
 	 */
 	public int register(@Param("user") Users user);
+
+	/**
+	 * 
+	 * @param userList
+	 * @return
+	 */
+	public int insertfoeach(@Param("userList") List<?> userList);
+
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public List<?> getUserList(@Param("userType") String userType);
 }

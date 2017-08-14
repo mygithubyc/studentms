@@ -20,6 +20,24 @@
 	<context:component-scan base-package="com.kingsoft.studentms.controller" />
 	<!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 
     <mvc:annotation-driven/>-->
+    
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<!-- 先拦截所有的路径再进行排除 -->
+    		<mvc:mapping path="/**"/>
+    		<!-- 静态资源不用拦截 -->
+    		<mvc:exclude-mapping path="/static/**"/>
+    		<!-- 登录界面不拦截 -->
+    		<mvc:exclude-mapping path="/users/login"/>
+    		<!-- 注册不拦截 -->
+    		<mvc:exclude-mapping path="/users/register"/>
+    		<!-- 初始界面不拦截 -->
+    		<mvc:exclude-mapping path="index"/>
+    		<bean id="loginInterceptor" class="com.kingsoft.studentms.interceptor.LoginInterceptor"></bean>
+    	</mvc:interceptor>
+    </mvc:interceptors>
+    
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

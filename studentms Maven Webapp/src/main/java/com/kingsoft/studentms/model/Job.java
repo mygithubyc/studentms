@@ -2,15 +2,18 @@ package com.kingsoft.studentms.model;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Job {
 
 	private int jid;
 	private String title;
 	private String content;
 	private Date sendTime;
-	private String username;	//ÀÏÊ¦ÓÃ»§Ãû
+	private String username;	//è€å¸ˆç”¨æˆ·å
 	private String path;
 	private Date deadTime;
+	private MultipartFile file;
 	public int getJid() {
 		return jid;
 	}
@@ -54,6 +57,14 @@ public class Job {
 	public void setDeadTime(Date deadTime) {
 		this.deadTime = deadTime;
 	}
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
 	public Job(){}
 	public Job(String content, Date sendTime, String username, String path, Date deadTime) {
 		this.content = content;

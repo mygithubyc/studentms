@@ -2,30 +2,37 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<mapper namespace="com.kingsoft.studentms.dao.IJobDao">
-		<resultMap type="com.kingsoft.studentms.model.Job" id="job">
-			<result column="jid" property="jid" jdbcType="INTEGER" />
-			<result column="title" property="title" jdbcType="VARCHAR" />
-			<result column="content" property="content" jdbcType="VARCHAR" />
-			<result column="sendTime" property="sendTime" jdbcType="DATE" />
-			<result column="username" property="username" jdbcType="VARCHAR" />
-			<result column="path" property="path" jdbcType="VARCHAR" />
-			<result column="deadTime" property="deadTime" jdbcType="DATE" />
-		</resultMap>
-		<!-- 配置发布作业方法 -->
-		<insert id="publishJob">
-			insert into
-			job(content,sendtime,username,deadtime,title) values(
-			#{job.content,jdbcType=VARCHAR},#{job.sendTime,jdbcType=DATE},
-			#{job.username,jdbcType=VARCHAR},#{job.deadTime,jdbcType=DATE},
-			#{job.title,jdbcType=VARCHAR})
-		</insert>
-		<!-- 模糊查询作业 -->
-		<select id="queryJob" resultType="com.kingsoft.studentms.model.Job">
-			select * from job where title=#{title,jdbcType=VARCHAR}
-		</select>
-		<!-- 查询所有的作业 -->
-		<select id="queryJobList" resultType="com.kingsoft.studentms.model.Job">
-			select * from job where title like '$%{title,jdbcType=VARCHAR}%'
-		</select>
-	</mapper>
+<mapper namespace="com.kingsoft.studentms.dao.IJobDao">
+	<resultMap type="com.kingsoft.studentms.model.Job" id="job">
+		<result column="jid" property="jid" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="sendTime" property="sendTime" jdbcType="DATE" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+		<result column="deadTime" property="deadTime" jdbcType="DATE" />
+	</resultMap>
+	<!-- 配置发布作业方法 -->
+	<insert id="publishJob">
+		insert into
+		job(content,sendtime,username,path,deadtime,title) values(
+		#{job.content,jdbcType=VARCHAR},#{job.sendTime,jdbcType=DATE},
+		#{job.username,jdbcType=VARCHAR},#{job.path,jdbcType=VARCHAR},#{job.deadTime,jdbcType=DATE},
+		#{job.title,jdbcType=VARCHAR})
+	</insert>
+	<!-- 模糊查询作业 -->
+	<select id="queryJob" resultType="com.kingsoft.studentms.model.Job">
+		select * from job where title=#{title,jdbcType=VARCHAR}
+	</select>
+	<!-- 查询所有的作业 -->
+	<select id="queryJobList" resultType="com.kingsoft.studentms.model.Job">
+		<if test="title!=null">
+			select * from job where title like '$%{title,jdbcType=VARCHAR}%' ORDER BY jid DESC
+		</if>
+		select * from job ORDER BY jid DESC
+	</select>
+	<!-- 查找文件路径 -->
+	<select id="getFilePath" resultType="java.lang.String">
+		select path from job where jid=#{jid,jdbcType=INTEGER}
+	</select>
+</mapper>

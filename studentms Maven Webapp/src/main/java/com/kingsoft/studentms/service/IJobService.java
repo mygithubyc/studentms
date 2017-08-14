@@ -1,7 +1,5 @@
 package com.kingsoft.studentms.service;
 
-import java.util.List;
-
 import com.kingsoft.studentms.model.Job;
 
 public interface IJobService {
@@ -23,5 +21,5 @@ public interface IJobService {
 	 * @param title
 	 * @return list
 	 */
-	public List<?> queryJobList(String title);
+	public String queryJobList(String title);
 }

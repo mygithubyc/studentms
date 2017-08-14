@@ -29,4 +29,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{user.username,jdbcType=VARCHAR},
 		#{user.password,jdbcType=VARCHAR},#{user.userType,jdbcType=VARCHAR})
 	</insert>
+	<!-- 批量插入 -->
+	<insert id="insertfoeach"  parameterType="java.util.List">
+		insert  all 
+		<foreach collection="userList"  item="u">
+			into users(username,password,usertype) values(
+			#{u.username,jdbcType=VARCHAR},
+			#{u.password,jdbcType=VARCHAR},
+			#{u.userType,jdbcType=VARCHAR})
+		</foreach>
+		select 1 from dual
+	</insert>
+	
+	<!-- 批量导出用户信息表 -->
+	<select id="getUserList" resultType="com.kingsoft.studentms.model.Users">
+		<if test="userType!=null">
+			select * from users where usertype=#{userType,jdbcType=VARCHAR}
+		</if>
+		<if test="userType==null">select * from users</if> 
+	</select>
 </mapper>

@@ -29,7 +29,7 @@
 				</ol>
 			</div>
 			<div class="container__form">
-				<form action="" id="login_form" method="post"
+				<form action="${pageContext.request.contextPath}/users/login" id="login_form" method="post"
 					style="display:hidden;">
 					<div class="container__fitem">
 						<label for="username">账号:</label> <input type="text"
@@ -46,33 +46,33 @@
 					</div>
 					<div class="container__fitem">
 						<label for=""></label>
-						<button type="" class="container__form_button" id="login_button">登录</button>
+						<button type="submit" class="container__form_button" id="login_button">登录</button>
 					</div>
 				</form>
-				<form action="" id="register_form" method="post"
+				<div  id="register_form" 
 					style="display:hidden;">
 					<div class="container__fitem">
-						<label for="username">账号:</label> <input type="text" name=""
-							id="username" placeholder="请移出输入框以测试账号可用">
+						<label for="username">账号:</label> <input type="text" name="username"
+							id="reusername" placeholder="请移出输入框以测试账号可用">
 					</div>
 					<div class="container__fitem">
-						<label for="password">密码:</label> <input type="password" name=""
-							id="password">
+						<label for="password">密码:</label> <input type="password" name="password"
+							id="repassword">
 					</div>
 					<div class="container__fitem">
 						<label for="password_again">确认密码:</label> <input type="password"
-							name="" id="password_again">
+							name="password_again" id="password_again" >
 					</div>
 					<div class="container__fitem">
 						<label for=""></label>
-						<button type="" class="container__form_button"
+						<button type="button" class="container__form_button"
 							id="register_button">注册</button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
   </body>
   <jsp:include page="/WEB-INF/view/common/include_js.jsp" />
-  <script type="text/javascript" src="${ctx}/static/js/index.js"></script>
+   <script type="text/javascript" src="${ctx}/static/js/index.js"></script>
 </html>

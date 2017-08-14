@@ -265,16 +265,17 @@
 			var y = date.getFullYear();
 			var m = date.getMonth()+1;
 			var d = date.getDate();
-			return (m<10?('0'+m):m)+'/'+(d<10?('0'+d):d)+'/'+y;
+			return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 		},
 		parser:function(s){
 			if (!s) return new Date();
-			var ss = s.split('/');
+			var ss = s.split('-');
 			var m = parseInt(ss[0],10);
 			var d = parseInt(ss[1],10);
 			var y = parseInt(ss[2],10);
 			if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
 				return new Date(y,m-1,d);
+				
 			} else {
 				return new Date();
 			}

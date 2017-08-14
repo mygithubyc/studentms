@@ -9,21 +9,29 @@ import com.kingsoft.studentms.model.Job;
 public interface IJobDao {
 
 	/**
-	 * @老师发布作业
+	 * @鑰佸笀鍙戝竷浣滀笟
 	 * @param job
 	 * @return
 	 */
 	public int publishJob(@Param("job") Job job);
+
 	/**
-	 * @按标题查询作业
+	 * @鏍规嵁鏍囬鏌ヨ
 	 * @param title
 	 * @return
 	 */
 	public Job queryJob(@Param("title") String title);
+
 	/**
-	 * @查询所有作业
+	 * @鏍囬妯＄硦鏌ヨ
 	 * @return
 	 */
 	public List<?> queryJobList(@Param("title") String title);
-	
+
+	/**
+	 * @寰楀埌鏂囦欢璺緞
+	 * @param jid
+	 * @return
+	 */
+	public String getFilePath(@Param("jid") int jid);
 }
