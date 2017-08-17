@@ -23,7 +23,7 @@
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
-	</filter>
+	</filter> 
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -56,7 +56,25 @@
 		<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+	<!-- 验证码操作的过滤 -->
+	<servlet>
+		<servlet-name>kaptcha</servlet-name>
+		<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+		<init-param>
+			<description>图片高度</description>
+			<param-name>kaptcha.image.height</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<description>图片高度</description>
+			<param-name>kaptcha.image.width</param-name>
+			<param-value>140</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>kaptcha</servlet-name>
+		<url-pattern>/randomcode.jpg</url-pattern>
+	</servlet-mapping>  
 	<!-- 添加引入js文件的过滤 -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>

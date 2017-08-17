@@ -66,7 +66,7 @@ public class JobController {
 		int limit =  offset+Integer.parseInt(rows);
 		String json = "";
 		PrintWriter pw = response.getWriter();
-		response.setCharacterEncoding("utf-8");
+		
 		response.setContentType("application/json;charset=UTF-8");
 
 		
