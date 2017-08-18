@@ -1,0 +1,19 @@
+/* 
+* @Author: anchen
+* @Date:   2017-08-15 15:20:53
+* @Last Modified by:   anchen
+* @Last Modified time: 2017-08-15 15:21:52
+*/
+.layout__center{
+    padding-top: 90px;
+    padding-left: 300px;
+}
+.content_div table{
+    width: 100%;
+    border: 1px solid #aaa;
+    font-size: 24px;
+}
+.content_div table td{
+    border: 1px solid #aaa;
+    text-align: center;
+}
