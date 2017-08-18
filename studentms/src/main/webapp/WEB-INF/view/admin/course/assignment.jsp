@@ -85,7 +85,7 @@
                 
                 <table id="dg"></table>
                 <div id="toolbar">
-                    系:<input type="text" id="search_depart">院:<input id="search_college"><a href="" id="search_do" onclick="doSearch()">查询</a>
+                    	系:<input type="text" id="search_depart"><a  id="search_do" onclick="doSearch()">查询</a>
                 </div>
             </div>
         </div>

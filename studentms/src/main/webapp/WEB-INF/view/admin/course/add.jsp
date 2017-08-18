@@ -86,13 +86,13 @@
                     <table class="mytable">
                         <tr>
                             <td class="title_td">课程名:</td>
-                            <td><input  id="fm_name"  /></td>
+                            <td><input name="course_name" id="fm_name"  /></td>
                         </tr>
                         
                         
                         <tr>
                             <td class="title_td">开课院系:</td>
-                            <td><input type="text" id="fm_depart_name"></td>
+                            <td><input type="text" name="college_id" id="fm_depart_name"></td>
                         </tr>
                         
                         <tr>

@@ -8,4 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
 		<result column="SCHOOL_STATUS" property="schoolStatus" jdbcType="VARCHAR" />
 	</resultMap>
+	<select id="dSchoolList" resultMap = "school">
+		select * from school where school_status = 1
+	</select>
 </mapper>
