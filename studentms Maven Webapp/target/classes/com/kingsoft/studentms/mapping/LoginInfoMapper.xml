@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.studentms.dao.ILoginInfoDao">
+	<resultMap type="com.kingsoft.studentms.model.LoginInfo" id="loginInfo">
+		<result column="LOGIN_ID" property="loginId" jdbcType="INTEGER" />
+		<result column="LOGIN_USERNAME" property="loginUsername"
+			jdbcType="VARCHAR" />
+		<result column="IP" property="ip" jdbcType="VARCHAR" />
+		<result column="LOGIN_TIME" property="loginTime" jdbcType="DATE" />
+		<result column="LOGOUT_TIME" property="logoutTime" jdbcType="DATE" />
+		<result column="MAC" property="mac" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 添加登录信息 -->
+	<insert id="addLoginInfo">
+		insert into
+		LOGIN_INFO(LOGIN_USERNAME,IP,LOGIN_TIME,MAC) 
+		VALUES(#{loginInfo.loginUsername,jdbcType=VARCHAR},
+		#{loginInfo.ip,jdbcType=VARCHAR},
+		#{loginInfo.loginTime,jdbcType=DATE},
+		#{loginInfo.mac,jdbcType=VARCHAR})
+	</insert>
+	<!-- 添加注销登录时间 -->
+	<update id="updLogoutTime">
+		update LOGIN_INFO set LOGOUT_TIME=#{logoutTime,jdbcType=DATE} 
+		WHERE LOGIN_USERNAME=#{loginUsername,jdbcType=VARCHAR}
+	</update>
+</mapper>

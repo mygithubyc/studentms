@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.studentms.dao.IManagerDao">
+	
+	<resultMap type="com.kingsoft.studentms.model.Manager" id="manager">
+		<result column="MAN_ID" property="manId" jdbcType="INTEGER" />
+		<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="PURVIEW" property="purview" jdbcType="INTEGER" />
+	</resultMap>
+</mapper>
