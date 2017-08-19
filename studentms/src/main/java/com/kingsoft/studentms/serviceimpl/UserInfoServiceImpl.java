@@ -30,6 +30,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	public UserInfo login(String username, String password) {
 		// TODO Auto-generated method stub
 		UserInfo userInfo = userInfoDao.login(username, EncodeMd5.enMD5U32(password));
+		
 		return userInfo;
 	}
 
