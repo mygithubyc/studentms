@@ -16,7 +16,7 @@
             </div>
             
             <div class="layout__north__right">
-                当前管理员:<span>admin</span><span id="logout_span">登出</span>
+                当前管理员:<span>admin</span>
             </div>
         </div>
         <div data-options="region: 'west', title: '管理菜单' ,split: true" class="layout__west" style="width: 180px;">
@@ -86,11 +86,11 @@
                     <table class="mytable">
                         <tr>
                             <td class="title_td">学院名称:</td>
-                            <td><input type="text" id="college_name"></td>
+                            <td><input name="school_id" type="text" id="college_name"></td>
                         </tr>
                         <tr>
                             <td class="title_td">系名称:</td>
-                            <td><input type="text" id="depart_name"></td>
+                            <td><input name="depart_name" type="text" id="depart_name"></td>
                         </tr>
                         <tr>
                             <td colspan="2">

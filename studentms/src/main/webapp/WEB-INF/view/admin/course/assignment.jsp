@@ -16,7 +16,7 @@
             </div>
             
             <div class="layout__north__right">
-                当前管理员:<span>admin</span><span id="logout_span">登出</span>
+                当前管理员:<span>admin</span>
             </div>
         </div>
         <div data-options="region: 'west', title: '管理菜单' ,split: true" class="layout__west" style="width: 180px;">
@@ -85,7 +85,7 @@
                 
                 <table id="dg"></table>
                 <div id="toolbar">
-                    系:<input type="text" id="search_depart">院:<input id="search_college"><a href="" id="search_do" onclick="doSearch()">查询</a>
+                    	系:<input type="text" id="search_depart"><a  id="search_do" onclick="doSearch()">查询</a>
                 </div>
             </div>
         </div>

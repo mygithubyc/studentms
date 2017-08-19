@@ -15,11 +15,12 @@ $(function(){
         title: '系信息',
         width: 500
     });
-    // 这里是学院下拉框的设置 返回格式 [{"id": 1,"text": "计算机系"}]  
     $('#college_name').combobox({
-        // url: '',
-        // textField: 'id',
-        // valueField: 'text'
+    	editable: false,
+        url: ctx+'/school/dCombobox',
+        valueField: 'schoolId',
+        textField: 'schoolName',
+        method: 'post'
     });
     $('#depart_name').validatebox({
         required: true
@@ -27,7 +28,7 @@ $(function(){
     // 定义表单提交的事件
     $('.fm').form({
         
-        url: 'xxx',
+        url: ctx+'/department/addDepartment',
         // 提交前事件定义  progress的进度条防止重复提交 + 表单中validbox的确认验证
         onSubmit: function(){
             $.messager.progress();
@@ -44,9 +45,9 @@ $(function(){
 
             $.messager.progress('close');
             if (result.success) {
-                // msg = '成功!';
+                msg = '成功!';
             }else{
-                // msg = result.msg;
+                msg = result.msg;
             }
             $.messager.show({
                 title: '执行结果',

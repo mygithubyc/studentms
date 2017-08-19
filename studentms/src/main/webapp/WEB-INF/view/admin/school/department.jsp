@@ -7,9 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="/WEB-INF/view/admin/common/include_css.jsp"></jsp:include>
+
 </head>
+
 <body>
-    <div class="easyui-layout">
+	<div class="easyui-layout">
         <div data-options="region:'north'" class="layout__north" style="height: 90px;">
             <div class="layout__north__left">
                 高校教学管理系统
@@ -80,34 +82,33 @@
                </li>
            </ul>
         </div>
-        <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px;">
-            <div class="content_div">
-                <form class="fm" method="post">
-                    <table class="mytable">
-                        <tr>
-                            <td class="title_td">课程名:</td>
-                            <td><input name="course_name" id="fm_name"  /></td>
-                        </tr>
-                        
-                        
-                        <tr>
-                            <td class="title_td">开课院系:</td>
-                            <td><input type="text" name="college_id" id="fm_depart_name"></td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan="2">
-                                <a href="#" class="fm_save">保存</a>
-                                <a href="#" class="fm_clear">清空</a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+        <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px; padding: 0;">
+            <tabel id="school_dg">
+            	
+            </tabel>
+            
         </div>
         
     </div>
 </body>
+
 <jsp:include page="/WEB-INF/view/admin/common/include_js.jsp"></jsp:include>
-<script src="${pageContext.request.contextPath}/static/js/admin/course_add.js"></script>
+<script src="${pageContext.request.contextPath}/static/js-modules/easyui/datagrid-detailview.js"></script>
+<script>
+$(function(){
+	$('#school_dg').datagrid({
+		url: ctx+'/school/dCombobox',
+		height: 800,
+		title: '学院',
+		singleSelect: true,
+		fitColumns: true,
+		method: 'post',
+		colums:[[
+			{field: 'schoolName', title: '学院名称', width: 100}
+		]],
+		data:[{"schoolId":1,"schoolName":"计算机学院","schoolStatus":"1"},{"schoolId":2,"schoolName":"工程学院","schoolStatus":"1"}]
+	})
+});
+	
+</script>
 </html>

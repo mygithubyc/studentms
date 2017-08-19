@@ -8,7 +8,11 @@
 <title>Insert title here</title>
 <jsp:include page="/WEB-INF/view/admin/common/include_css.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin/assign_course.css">
-
+<style type="text/css">
+	#asign_save, #asign_cancle{
+		cursor: pointer;
+	}
+</style>
 </head>
 <body>
     <div class="easyui-layout">
@@ -18,7 +22,7 @@
             </div>
             
             <div class="layout__north__right">
-                当前管理员:<span>admin</span><span id="logout_span">登出</span>
+                当前管理员:<span>admin</span>
             </div>
         </div>
         <div data-options="region: 'west', title: '管理菜单' ,split: true" class="layout__west" style="width: 180px;">
@@ -84,7 +88,8 @@
         </div>
         <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px;padding: 0;">
             <div class="top_div">
-                当前专业: <span style="color: red;">市场营销</span>
+                当前专业: <span style="color: red;"><%= request.getParameter("name") %></span>
+                <input type="hidden" id="depart_id" value="<%= request.getParameter("id") %>">
                 <select name="" id="semester">
                     <option value="1">第一学期</option>
                     <option value="2">第二学期</option>
@@ -109,6 +114,7 @@
             </div>
             <div class="left_div">
                 <table id="dg"></table>
+                <div id="toobar">课程名:<input id="course_name"/><button onclick="doSearch()">查询</button></div>
             </div>
             <div class="add_div">
                 <a  id="add_a">添加</a>

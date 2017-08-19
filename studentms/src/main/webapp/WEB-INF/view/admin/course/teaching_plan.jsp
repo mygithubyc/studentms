@@ -17,7 +17,7 @@
             </div>
             
             <div class="layout__north__right">
-                当前管理员:<span>admin</span><span id="logout_span">登出</span>
+                当前管理员:<span>admin</span>
             </div>
         </div>
         <div data-options="region: 'west', title: '管理菜单' ,split: true" class="layout__west" style="width: 180px;">
