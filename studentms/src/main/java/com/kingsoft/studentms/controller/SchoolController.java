@@ -29,10 +29,16 @@ public class SchoolController {
 	public String add(){
 		return "admin/school/add";
 	}
-//	生成学院combobox
+	//显示改良院系界面系界面
+	@RequestMapping(value = "/department", method = RequestMethod.GET)
+	public String department(){
+		return "admin/school/department";
+	}
+//	生成所有学院json
 	@RequestMapping(value = "/dCombobox", method = RequestMethod.POST)
 	public @ResponseBody List<School> dCombobox(){
 		return schoolService.dCombobox();
 	}
+	
 	
 }

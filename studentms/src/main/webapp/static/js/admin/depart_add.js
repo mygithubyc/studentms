@@ -28,7 +28,7 @@ $(function(){
     // 定义表单提交的事件
     $('.fm').form({
         
-        url: 'xxx',
+        url: ctx+'/department/addDepartment',
         // 提交前事件定义  progress的进度条防止重复提交 + 表单中validbox的确认验证
         onSubmit: function(){
             $.messager.progress();
@@ -45,9 +45,9 @@ $(function(){
 
             $.messager.progress('close');
             if (result.success) {
-                // msg = '成功!';
+                msg = '成功!';
             }else{
-                // msg = result.msg;
+                msg = result.msg;
             }
             $.messager.show({
                 title: '执行结果',
