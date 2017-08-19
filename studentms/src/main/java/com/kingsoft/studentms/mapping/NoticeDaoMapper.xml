@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.studentms.dao.INoticeDao">
+	<resultMap type="com.kingsoft.studentms.model.Notice" id="notice">
+		<result column="NOTICE_ID" property="noticeId" jdbcType="INTEGER" />
+		<result column="TEACHER_ID" property="teacherId" jdbcType="INTEGER" />
+		<result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+		<result column="PUBLISH_TIME" property="publishTime" jdbcType="DATE" />
+		<result column="EXPIRE_TIME" property="expireTime" jdbcType="DATE" />
+		<result column="GRADE" property="grade" jdbcType="VARCHAR" />
+		<result column="NOTICE_PATH" property="noticePath" jdbcType="VARCHAR" />
+	</resultMap>
+</mapper>

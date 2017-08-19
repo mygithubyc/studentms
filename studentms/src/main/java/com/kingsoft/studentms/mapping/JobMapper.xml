@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.studentms.dao.IJobDao">
+	<resultMap type="com.kingsoft.studentms.model.Job" id="job">
+		<result column="PUBLISH_ID" property="publishId" jdbcType="INTEGER"/>
+		<result column="TEACH_ID" property="teachId" jdbcType="INTEGER"/>
+		<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+		<result column="CONTENT" property="content" jdbcType="VARCHAR"/>
+		<result column="PATH" property="path" jdbcType="VARCHAR"/>
+		<result column="PUBLISH_TIME" property="publishTime" jdbcType="DATE"/>
+		<result column="DEAD_TIME" property="deadTime" jdbcType="DATE"/>
+	</resultMap>
+</mapper>
