@@ -14,4 +14,6 @@ public interface ISchoolDao {
 	 * @return
 	 */
 	public int addSchool(School school);
+	public int getSchoolRows();
+
 }

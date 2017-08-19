@@ -1,1 +1,11 @@
-/target/
+# Maven
+target/
+*.ser
+*.ec
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+.myeclipse/

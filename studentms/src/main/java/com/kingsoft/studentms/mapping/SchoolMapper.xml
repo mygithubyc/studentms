@@ -11,4 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="dSchoolList" resultMap = "school">
 		select * from school where school_status = 1
 	</select>
+	<select id="getSchoolRows" resultType="int">
+		select count(*) from school where school_status = 1
+	</select>
 </mapper>

@@ -14,4 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addDepartment">
 		INSERT into DEPARTMENT(SCHOOL_ID, DEPART_NAME, depart_status) VALUES(#{schoolId}, #{departName}, 1)
 	</insert>
+	<select id="selectBySchool" resultMap = "department">
+		SELECT * from DEPARTMENT where SCHOOL_ID = #{_schoolId}
+	</select>
+	<select id="selectBySchoolRows" resultType = "int">
+		SELECT count(*) from DEPARTMENT where SCHOOL_ID = #{_schoolId}
+	</select>
 </mapper>

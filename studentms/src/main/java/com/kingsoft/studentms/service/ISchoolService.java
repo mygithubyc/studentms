@@ -6,4 +6,6 @@ import com.kingsoft.studentms.model.School;
 
 public interface ISchoolService {
 	public List<School> dCombobox();
+	
+	public int getSchoolRows();
 }
