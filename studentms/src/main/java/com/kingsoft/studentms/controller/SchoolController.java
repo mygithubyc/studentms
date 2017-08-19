@@ -39,6 +39,15 @@ public class SchoolController {
 	public @ResponseBody List<School> dCombobox(){
 		return schoolService.dCombobox();
 	}
-	
+//	
+	@RequestMapping(value = "/schoolDg", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> schoolDg(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<School> schools = schoolService.dCombobox();
+		int total = schoolService.getSchoolRows();
+		map.put("rows", schools);
+		map.put("total", total);
+		return map;
+	}
 	
 }

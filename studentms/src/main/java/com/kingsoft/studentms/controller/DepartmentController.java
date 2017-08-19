@@ -44,4 +44,11 @@ public class DepartmentController {
 		
 		return map;
 	}
+//	管理员 改良学院操作 学院所属系 detailview
+	@RequestMapping(value = "/showDepartmentDg", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> showDepartmentDg(String schoolId){
+		
+		return departmentService.selectBySchoolDg(schoolId);
+	}
+
 }

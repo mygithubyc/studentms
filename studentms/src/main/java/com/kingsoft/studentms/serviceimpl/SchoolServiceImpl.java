@@ -20,5 +20,11 @@ public class SchoolServiceImpl implements ISchoolService{
 		// TODO 自动生成的方法存根
 		return schoolDao.dSchoolList();
 	}
+
+	@Override
+	public int getSchoolRows() {
+		// TODO 自动生成的方法存根
+		return schoolDao.getSchoolRows();
+	}
 	
 }
