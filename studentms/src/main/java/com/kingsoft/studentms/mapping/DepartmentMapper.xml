@@ -10,4 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="DEPART_NAME" property="departName" jdbcType="VARCHAR" />
 		<result column="DEPART_STATUS" property="departStatus" jdbcType="VARCHAR" />
 	</resultMap>
+	
+	<insert id="addDepartment">
+		INSERT into DEPARTMENT(SCHOOL_ID, DEPART_NAME, depart_status) VALUES(#{schoolId}, #{departName}, 1)
+	</insert>
 </mapper>

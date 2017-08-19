@@ -58,6 +58,5 @@ $(function(){
     $('.fm_clear').click(function(event) {
 
         $('.fm').form('clear');
-        $('.fm table input[type=radio]').get(0).checked = true;
     });
 });

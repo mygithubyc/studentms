@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kingsoft.studentms.dao.ICourseDao;
 import com.kingsoft.studentms.model.Course;
 import com.kingsoft.studentms.model.MyAssignment;
+import com.kingsoft.studentms.model.MyCourse;
 import com.kingsoft.studentms.service.ICourseService;
 @Service("courseService")
 public class CourseServiceImpl implements ICourseService{
@@ -39,6 +40,18 @@ public class CourseServiceImpl implements ICourseService{
 	public List<MyAssignment> courseAssignRows(Map<String, Object> map) {
 		// TODO 自动生成的方法存根
 		return courseDao.selectCourseAssignment(map);
+	}
+
+	@Override
+	public int courseSum(Map<String, Object> map) {
+		// TODO 自动生成的方法存根
+		return courseDao.courseSum(map);
+	}
+
+	@Override
+	public List<MyCourse> courseRows(Map<String, Object> map) {
+		// TODO 自动生成的方法存根
+		return courseDao.selectCourse(map);
 	}
 
 	

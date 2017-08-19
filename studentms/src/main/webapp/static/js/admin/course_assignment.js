@@ -54,7 +54,7 @@ function rowformatter(value, row, index){
 	if(row.isAssign===0){
 		return "<a href=# onclick='assign_course("+index+")'>配置课程</a>";
 	}else{
-		return "<a href=# >取消配置</a>";
+		return "<a href=# onclick='assignment_cancle("+index+")'>取消配置</a>";
 	}
 	
 }
@@ -62,19 +62,23 @@ function assign_course(index){
 	$('#dg').datagrid('selectRow', index);
 	var row = $('#dg').datagrid('getSelected');
 	if(row){
-		alert('去配置课程');
+		location.href=ctx+"/course/assignCourse?id="+row.departId+"&name="+row.departName;
 	}
 }
-function assignment_cancle(){
+function assignment_cancle(index){
+	$('#dg').datagrid('selectRow', index);
     var row = $('#dg').datagrid('getSelected');
     $.messager.confirm('提示','确认要重新配置该系的课程?',function(r){
         if(r){
             // 填写删除的url 参数1
-            $.post('', {id: row.id}, function(result) {
+            $.post(ctx+'/courseAssign/cancleAssignByDepart', {id: row.departId}, function(result) {
                 var result = JSON.parse(result);
                 if (result.success) {
-                    $('#dlg').dialog('close');
-                    $('#dg').datagrid('reload');
+                	$('#dg').datagrid('reload');
+                	$.messager.show({
+                        title: '提示',
+                        msg: '取消成功'
+                    });
                 }else{
                     $.messager.show({
                         title: 'Error',

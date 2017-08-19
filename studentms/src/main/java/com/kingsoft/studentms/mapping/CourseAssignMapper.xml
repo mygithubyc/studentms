@@ -10,4 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ASSIGN_STATUS" property="assignStatus" jdbcType="VARCHAR"/>
 		<result column="TERM" property="term" jdbcType="VARCHAR"/>
 	</resultMap>
+	<insert id= "addCourseAssign">
+		insert into COURSE_ASSIGN(depart_id,course_id,assign_status,term) VALUES(#{departId},#{courseId},1,#{term})
+	</insert>
+	<delete id="deleteCourseByDepary">
+		DELETE from COURSE_ASSIGN where DEPART_ID = #{id,jdbcType=VARCHAR}
+	</delete>
 </mapper>

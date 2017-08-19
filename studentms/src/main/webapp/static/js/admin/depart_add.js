@@ -15,11 +15,12 @@ $(function(){
         title: '系信息',
         width: 500
     });
-    // 这里是学院下拉框的设置 返回格式 [{"id": 1,"text": "计算机系"}]  
     $('#college_name').combobox({
-        // url: '',
-        // textField: 'id',
-        // valueField: 'text'
+    	editable: false,
+        url: ctx+'/school/dCombobox',
+        valueField: 'schoolId',
+        textField: 'schoolName',
+        method: 'post'
     });
     $('#depart_name').validatebox({
         required: true

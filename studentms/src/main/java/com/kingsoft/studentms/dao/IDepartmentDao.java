@@ -1,5 +1,7 @@
 package com.kingsoft.studentms.dao;
 
-public interface IDepartmentDao extends IBasicDao{
+import com.kingsoft.studentms.model.Department;
 
+public interface IDepartmentDao extends IBasicDao{
+	public int addDepartment(Department department);
 }

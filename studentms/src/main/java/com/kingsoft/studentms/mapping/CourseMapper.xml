@@ -11,9 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<resultMap type="com.kingsoft.studentms.model.MyAssignment" id="myAssignment">
 		<result column="DEPART_ID" property="departId" jdbcType="INTEGER" />
-		<result column="DEPART_NAME" property="departName" jdbcType="INTEGER" />
+		<result column="DEPART_NAME" property="departName" jdbcType="VARCHAR" />
 		<result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
 		<result column="ISASSIGN" property="isAssign" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap type="com.kingsoft.studentms.model.MyCourse" id="myCourse">
+		<result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+		<result column="COURSE_NAME" property="courseName" jdbcType="VARCHAR" />
+		<result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
 	</resultMap>
 	<insert id="addCourse">
 		INSERT into COURSE(SCHOOL_ID,COURSE_NAME,COURSE_STATUS) VALUES(#{schoolId},#{courseName},#{courseStatus})
@@ -48,5 +53,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						AND D .SCHOOL_ID = S.SCHOOL_ID  and D.DEPART_NAME like '%${departName}%'
 					) A
 			)where <![CDATA[RN <=#{limit} AND RN>#{offset}]]>
+	</select>
+	
+	<select id = "courseSum" resultType="int">
+		SELECT
+			COUNT (*)
+		FROM
+			COURSE C,
+			SCHOOL S
+		WHERE
+			C.SCHOOL_ID = S.SCHOOL_ID
+		AND C.course_status = 1
+		AND S.school_status = 1
+		AND C.COURSE_NAME LIKE '%${courseName}%'
+	</select>
+	<select id = "selectCourse" resultMap="myCourse">
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					A .*, ROWNUM RN
+				FROM
+					(
+						SELECT
+							C.COURSE_ID,
+							C.COURSE_NAME,
+							S.SCHOOL_NAME
+						FROM
+							COURSE C,
+							SCHOOL S
+						WHERE
+							C.SCHOOL_ID = S.SCHOOL_ID
+						AND C.course_status = 1
+						AND S.school_status = 1
+						AND C.COURSE_NAME LIKE '%${courseName}%'
+					) A
+			)
+		WHERE <![CDATA[RN <=#{limit} AND RN>#{offset}]]>
 	</select>
 </mapper>

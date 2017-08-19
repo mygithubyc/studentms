@@ -23,7 +23,7 @@ $(function(){
             var checkboxs = $('.right_div input:checkbox');
             if(checkboxs.length !== 0){
                 for(var i = 0; i < checkboxs.length; i ++){
-                    $(checkboxs.get(0)).parent('label.course_label').remove();
+                    $(checkboxs.get(i)).parent('label.course_label').remove();
                 }
             }
         }
@@ -41,18 +41,31 @@ $(function(){
     
     $('#asign_save').click(function(event) {
         var checkboxs = $('.right_div input:checkbox'),
-            arr = [],
-            josn = '',
-            semester = $('#semester').val();
+            
+            json = [],
+            semester = $('#semester').val(),
+            departId = $('#depart_id').val();
 
         for(var i = 0; i < checkboxs.length; i ++){
-            
-            arr.push(checkboxs.get(i).value);
+            var obj = {};
+        	obj.id = checkboxs.get(i).value;
+            json.push(obj);
         }
-        json = JSON.stringify(arr);
+        json = JSON.stringify(json);
         // arr便是选中课程的id数组  想办法把系的id也加上
-        $.post('/path/to/file', {ids: json, semester: semester}, function(data) {
-            /*optional stuff to do after success */
+        $.post(ctx+'/courseAssign/addCourseAssign', {ids: json, semester: semester, departId: departId}, function(data) {
+            var result = JSON.parse(data);
+            if(result.success){
+            	$.messager.show({
+            		title: '提示',
+            		msg: '保存成功'
+            	})
+            }else{
+            	$.messager.show({
+            		title: '提示',
+            		msg: '保存失败'
+            	})
+            }
         });
         
 
@@ -63,7 +76,7 @@ $(function(){
         // location.href="";                
     });
     $('#dg').datagrid({
-        url: '',
+        url: ctx+'/course/showAssignCourse',
         height: 500,
         method: 'post',
         fitColumns:true,
@@ -75,31 +88,34 @@ $(function(){
         checkOnSelect: true,
         columns: [[
             {field: 'ck', checkbox: true},
-            {field:'course_name', title: '课程名',width:100},
-            {field: 'college_name', title: '开课学院',width:100}
+            {field:'courseName', title: '课程名',width:100},
+            {field: 'schoolName', title: '开课学院',width:100}
         ]],
-        data: [{
-            id: 1,
-            course_name: 'C语言编程',
-            college_name: '计算机学院'
-        },{
-            id: 2,
-            course_name: 'C#语言编程',
-            college_name: '计算机学院'
-        },{
-            id: 3,
-            course_name: 'C++语言编程',
-            college_name: '计算机学院'
-        }]
+        toolbar: '#toobar'
+//        data: [{
+//            id: 1,
+//            course_name: 'C语言编程',
+//            college_name: '计算机学院'
+//        },{
+//            id: 2,
+//            course_name: 'C#语言编程',
+//            college_name: '计算机学院'
+//        },{
+//            id: 3,
+//            course_name: 'C++语言编程',
+//            college_name: '计算机学院'
+//        }]
+        
     });
     // 将左边的课程移动至右边
     $('#add_a').click(function(event) {
         var checkedItems = $('#dg').datagrid('getChecked'),
             html = '';
         $.each(checkedItems, function(index, item){
-            if(!map.get(item.id)){
-                map.set(item.id, item.course_name);
-                html += "<label class='course_label'><input type='checkbox' name='course' value="+item.id+">"+item.course_name+"</label>";   
+            if(!map.get(item.courseId)){
+                map.set(item.courseId, item.courseName);
+                console.log(map);
+                html += "<label class='course_label'><input type='checkbox' name='course' value="+item.courseId+">"+item.courseName+"</label>";   
             }                    
         });                
         $('.right_div span').append(html);
@@ -126,3 +142,9 @@ $(function(){
         
     });
 });  
+function doSearch(){
+	var course_name = $('#course_name').val();
+	$('#dg').datagrid('load',{
+		course_name: course_name
+	});
+}

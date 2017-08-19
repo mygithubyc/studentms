@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kingsoft.studentms.model.Course;
 import com.kingsoft.studentms.model.MyAssignment;
+import com.kingsoft.studentms.model.MyCourse;
 import com.kingsoft.studentms.service.ICourseService;
 
 @Controller
@@ -45,7 +46,7 @@ public class CourseController {
 	public String teachingPlan(){
 		return "admin/course/teaching_plan";
 	}
-	//进行课程录入操作
+	//管理员进行课程录入操作
 	@RequestMapping(value="/addCourse", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> addCourse(String course_name, String college_id){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -61,7 +62,7 @@ public class CourseController {
 		}
 		return map;
 	}
-	//课程分配表格json
+	//管理员课程配置表格 用到自定义model MyAssignment
 	@RequestMapping(value = "showCourseAssign",method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> showCourseAssign(HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -84,6 +85,33 @@ public class CourseController {
 		
 		map.put("total", total);
 		map.put("rows", myAssignments);
+		return map;
+	}
+	//显示所有课程 管理员给系分配课程左表格用 用到对象类型为自定义的
+	@RequestMapping(value="/showAssignCourse", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> showAssignCourse(HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String rows = request.getParameter("rows") != null ? (String) request.getParameter("rows") : "10";
+		String page = request.getParameter("page") != null ? (String) request.getParameter("page") : "1";
+		String courseName = request.getParameter("course_name") != null ? (String) request.getParameter("course_name") : "";
+		
+		int offset = Integer.parseInt(rows)*(Integer.parseInt(page)-1);
+		int limit =  offset+Integer.parseInt(rows);
+		
+		Map<String, Object> countMap = new HashMap<String, Object>();
+		countMap.put("courseName", courseName);
+		int total = courseService.courseSum(countMap);
+		
+		Map<String, Object> selectMap = new HashMap<String, Object>();
+		selectMap.put("courseName", courseName);
+		selectMap.put("offset", offset);
+		selectMap.put("limit", limit);
+		List<MyCourse> myCourses = courseService.courseRows(selectMap);
+		
+		
+		map.put("total", total);
+		map.put("rows", myCourses);
+		
 		return map;
 	}
 }

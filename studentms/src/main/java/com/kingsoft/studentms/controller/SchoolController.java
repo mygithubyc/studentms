@@ -34,4 +34,5 @@ public class SchoolController {
 	public @ResponseBody List<School> dCombobox(){
 		return schoolService.dCombobox();
 	}
+	
 }
