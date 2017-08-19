@@ -1,11 +1,9 @@
 package com.kingsoft.studentms.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.faces.flow.builder.ReturnBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.Constants;
 import com.kingsoft.studentms.model.UserInfo;
@@ -27,50 +23,46 @@ import com.kingsoft.studentms.service.IUserInfoService;
 @SessionAttributes("user")
 public class AdminController {
 
-	private ModelAndView modelView; // 返回一个model视图
 	private UserInfo userInfo;
 	@Resource
 	private IUserInfoService userInfoService;
-//	显示管理员登录界面
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String index(){
+
+	// 显示管理员登录界面
+	@RequestMapping()
+	public String index() {
 		System.out.println("admin()");
 		return "admin/login";
 	}
+
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(){
+	public String main() {
 		System.out.println("main()");
 		return "admin/main/main";
 	}
-//	@RequestMapping(value = "/testJson",method = RequestMethod.GET)
-//	public @ResponseBody Map<String, Object> testJson(){
-//		Map<String, Object> map =  new HashMap<String,Object>();
-//		map.put("key1", "value");
-//		return map;
-//	}
-//	点击登录按钮操作
+
+	// 点击登录按钮操作
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public  @ResponseBody Map<String, Object> login(String username, String password, String captcha, ModelMap modelMap,HttpServletRequest request ) {
-		Map<String, Object> map =  new HashMap<String,Object>();
+	@ResponseBody
+	public Map<String, Object> login(String username, String password, String captcha, ModelMap modelMap,
+			HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		HttpSession session = request.getSession();
-		String k = (String)session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
-		if (captcha.equals(k)){
+		String k = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		if (captcha.equals(k)) {
 			UserInfo userInfo = userInfoService.login(username, password);
-			if(userInfo != null){
-				session.setAttribute("user", userInfo);
+			if (userInfo != null) {
+				// 保存session
+				modelMap.addAttribute("user", userInfo);
 				map.put("success", true);
 				return map;
-			}else{
+			} else {
 				map.put("msg", "用户名密码错误");
 				return map;
 			}
-		}else{
+		} else {
 			map.put("msg", "验证码有误");
 			return map;
 		}
-		
-		
-		
 	}
 
 	@RequestMapping(value = "/addSingle", method = RequestMethod.POST)
@@ -106,5 +98,4 @@ public class AdminController {
 			return JSON.toJSONString(map);
 		}
 	}
-
 }
