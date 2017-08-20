@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.studentms.dao.IDepartmentDao">
+	
+	<resultMap type="com.kingsoft.studentms.model.Department" id="department">
+		<result column="DEPART_ID" property="departId" jdbcType="INTEGER" />
+		<result column="SCHOOL_ID" property="schoolId" jdbcType="INTEGER" />
+		<result column="DEPART_NAME" property="departName" jdbcType="VARCHAR" />
+		<result column="DEPART_STATUS" property="departStatus" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="addDepartment">
+		INSERT into DEPARTMENT(SCHOOL_ID, DEPART_NAME, depart_status) VALUES(#{schoolId}, #{departName}, 1)
+	</insert>
+	<select id="selectBySchool" resultMap = "department">
+		SELECT * from DEPARTMENT where SCHOOL_ID = #{_schoolId}
+	</select>
+	<select id="selectBySchoolRows" resultType = "int">
+		SELECT count(*) from DEPARTMENT where SCHOOL_ID = #{_schoolId}
+	</select>
+</mapper>

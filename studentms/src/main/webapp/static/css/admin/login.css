@@ -1,0 +1,33 @@
+/* 
+* @Author: anchen
+* @Date:   2017-08-17 21:07:35
+* @Last Modified by:   anchen
+* @Last Modified time: 2017-08-17 21:07:47
+*/
+.container{
+    width: 500px;
+    margin: 200px auto 0 auto;
+
+}
+.container__header{
+    text-align: center;
+}
+.container__panel{
+    width: 500px;
+    padding: 30px 70px 20px 70px;
+}
+.container__item{
+    margin-bottom: 10px;
+}
+.container__item input{
+    width: 300px;
+    height: 30px;
+    padding: 10px;
+}
+.container__code{
+    margin-left: 20px;
+
+    width: 140px;
+    height: 60px;
+    
+}
