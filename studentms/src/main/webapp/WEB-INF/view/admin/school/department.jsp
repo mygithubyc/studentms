@@ -7,7 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="/WEB-INF/view/admin/common/include_css.jsp"></jsp:include>
-
+<style type="text/css">
+	#school_dlg{
+		padding-top: 20px;
+	}
+</style>
 </head>
 
 <body>
@@ -102,33 +106,44 @@
 var url = '';
 $(function(){
 	$('#add_school_a').linkbutton({
-		iconCls: 'icon-add'
+		iconCls: 'icon-add',
+		onClick: function(){
+			$('#school_dlg').dialog('open');
+		}
 	});
 	$('#add_depart_a').linkbutton({
 		iconCls: 'icon-add'
 	});
 	$('#school_dlg').dialog({
 		width: 300,
-		height: 200
+		height: 200,
+		modal: true,
+		closed: true,
+		buttons: [{
+			text: '确定',
+			iconCls: 'icon-ok',
+			handler: function(){
+				var schoolName = $('#school_dlg').find('.dlg_input').val().trim();
+				if(schoolName !== ""){
+					$.post('xxx', {schoolName: schoolName}, function(result) {
+						
+					});
+				}
+				
+			}
+		},{
+			text: '取消',
+			iconCls: 'icon-cancel',
+			handler: function(){
+				$('#school_dlg').dialog('close');
+			}
+		}]
 	});
 	$('#school_dlg .dlg_input').textbox({
 		width: 250,
 		label: '学院名称:',
-		labelPosition: 'top',
-		buttonIcon: 'icon-search',
-		toolbar: [{
-			text: '确定',
-			iconCls: 'icon-ok',
-			handler: function(){
-				alert('确定');
-			}
-		},{
-			text: '取消',
-			iconCls: 'icon-cancle',
-			handler: function(){
-				alert('取消');
-			}
-		}]
+		labelPosition: 'left',
+		buttonIcon: 'icon-search'
 	});
 	$('#school_dg').datagrid({
 	   
