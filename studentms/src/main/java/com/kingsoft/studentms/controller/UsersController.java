@@ -44,9 +44,14 @@ public class UsersController {
 	 */
 	// 配置分路由支路
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String username, String password, ModelMap modelMap) {
+	public ModelAndView login(String username, String password, String userType, ModelMap modelMap) {
 		System.out.println("login username:  " + username);
-		UserInfo user = this.userInfoService.login(username, password);
+
+		if (userType.equals("老师"))
+			userType = "2";
+		else
+			userType = "3";	//学生
+		UserInfo user = this.userInfoService.login(username, password, userType);
 		if (user != null) { // 验证通过
 			modelMap.addAttribute("user", user); // 将用户信息保存到session里面
 			// 视图配置

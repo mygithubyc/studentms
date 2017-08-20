@@ -22,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 登录检查 -->
 	<select id="login" resultType="com.kingsoft.studentms.model.UserInfo">
 		select * from USERINFO where USERNAME=#{username,jdbcType=VARCHAR} AND
-		PASSWORD=#{password,jdbcType=VARCHAR} AND VALID=1
+		PASSWORD=#{password,jdbcType=VARCHAR} AND USERTYPE=#{userType,jdbcType=VARCHAR} 
+		AND VALID=1
 	</select>
 	
 	<!-- 添加查重校验 -->

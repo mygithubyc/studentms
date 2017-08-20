@@ -14,7 +14,7 @@ public interface IUserInfoService {
 	 * @param password
 	 * @return
 	 */
-	public UserInfo login(String username, String password);
+	public UserInfo login(String username, String password, String userType);
 
 	/**
 	 * @单用户加入
@@ -29,4 +29,5 @@ public interface IUserInfoService {
 	 * @param multipartFile
 	 */
 	public String importExcel(InputStream inputStream, MultipartFile multipartFile);
+
 }

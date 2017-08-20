@@ -27,10 +27,9 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	 * @登录查询用户
 	 */
 	@Override
-	public UserInfo login(String username, String password) {
+	public UserInfo login(String username, String password, String userType) {
 		// TODO Auto-generated method stub
-		UserInfo userInfo = userInfoDao.login(username, EncodeMd5.enMD5U32(password));
-		
+		UserInfo userInfo = userInfoDao.login(username, EncodeMd5.enMD5U32(password), userType);
 		return userInfo;
 	}
 

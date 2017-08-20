@@ -49,7 +49,7 @@ public class AdminController {
 		HttpSession session = request.getSession();
 		String k = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 		if (captcha.equals(k)) {
-			UserInfo userInfo = userInfoService.login(username, password);
+			UserInfo userInfo = userInfoService.login(username, password,"1");
 			if (userInfo != null) {
 				// 保存session
 				modelMap.addAttribute("user", userInfo);

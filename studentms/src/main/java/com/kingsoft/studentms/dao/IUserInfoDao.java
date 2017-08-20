@@ -14,7 +14,7 @@ public interface IUserInfoDao extends IBasicDao {
 	 * @param password
 	 * @return users
 	 */
-	public UserInfo login(@Param("username") String username, @Param("password") String password);
+	public UserInfo login(@Param("username") String username, @Param("password") String password,@Param("userType") String userType);
 
 	/**
 	 * @批量导入用户信息
