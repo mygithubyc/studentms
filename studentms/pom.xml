@@ -210,8 +210,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<!-- 注意此处的url,修改成tomcat监听的端口即可 -->
 					<url>http://localhost:8080/manager</url>
 					<server>tomcat7</server> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->

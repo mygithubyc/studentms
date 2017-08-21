@@ -11,16 +11,14 @@ $(function(){
         title: '首页 > 课程管理 > 专业课程配置',
         iconCls: 'icon-page'
     });
-    $('#search_college').combobox({
-        url: '',
-        valueField: 'id',
-        textField: 'text'
+    
+    $('#search_do').linkbutton({
+    	
     });
-    $('#search_do').linkbutton({});
     // 分配状态可以
     $('#dg').datagrid({
         title: '分配情况',
-        height: 600,
+        height: 750,
         url: ctx+'/course/showCourseAssign',
         fitColumns: true,
         striped: true,
@@ -52,7 +50,7 @@ function statusformatter(value, row, index){
 }
 function rowformatter(value, row, index){
 	if(row.isAssign===0){
-		return "<a href=# onclick='assign_course("+index+")'>配置课程</a>";
+		return "<a href=# onclick='assign_course("+index+")' >配置课程</a>";
 	}else{
 		return "<a href=# onclick='assignment_cancle("+index+")'>取消配置</a>";
 	}

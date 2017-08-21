@@ -16,4 +16,24 @@ public class TeacherController {
 	public String add(){
 		return "admin/teacher/add";
 	}
+	//显示录入成绩界面
+	@RequestMapping(value = "/main")
+	public String main(){
+		return "home/main";
+	}
+	//显示录入成绩界面
+	@RequestMapping(value = "/mark")
+	public String mark(){
+		return "home/teacher/mark";
+	}
+	//显示布置作业界面
+	@RequestMapping(value = "/job")
+	public String job(){
+		return "home/teacher/job";
+	}
+	//显示下载教学计划界面
+	@RequestMapping(value = "/plan")
+	public String plan(){
+		return "home/teacher/plan";
+	}
 }

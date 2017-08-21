@@ -1,5 +1,6 @@
 package com.kingsoft.studentms.serviceimpl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import com.kingsoft.studentms.dao.ICourseDao;
 import com.kingsoft.studentms.model.Course;
 import com.kingsoft.studentms.model.MyAssignment;
 import com.kingsoft.studentms.model.MyCourse;
+import com.kingsoft.studentms.model.MyTeachingPlan;
 import com.kingsoft.studentms.service.ICourseService;
 @Service("courseService")
 public class CourseServiceImpl implements ICourseService{
@@ -52,6 +54,28 @@ public class CourseServiceImpl implements ICourseService{
 	public List<MyCourse> courseRows(Map<String, Object> map) {
 		// TODO 自动生成的方法存根
 		return courseDao.selectCourse(map);
+	}
+
+	@Override
+	public Map<String, Object> dCourseByDepart(Map<String, Object> selectMap) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> countMap = new HashMap<String, Object>();
+		Map<String, Object> selMap = new HashMap<String, Object>();
+		int offset = (int) selectMap.get("offset");
+		int limit = (int) selectMap.get("limit");
+		String departId = (String) selectMap.get("departId");
+		countMap.put("departId", departId);
+		int total = courseDao.dCourseByDepartSum(countMap);
+		
+		selMap.put("offset", offset);
+		selMap.put("limit", limit);
+		selMap.put("departId", departId);
+		List<MyTeachingPlan> rows = courseDao.dCourseByDepart(selMap);
+		
+		map.put("rows", rows);
+		map.put("total", total);
+		
+		return map;
 	}
 
 	

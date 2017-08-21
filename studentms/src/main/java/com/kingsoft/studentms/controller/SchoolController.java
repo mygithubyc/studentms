@@ -49,5 +49,20 @@ public class SchoolController {
 		map.put("total", total);
 		return map;
 	}
+//	添加学院
+	@RequestMapping(value = "/dAddSchool", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> dAddSchool(String schoolName){
+		Map<String, Object> map = new HashMap<String, Object>();
+		School school = new School();
+		school.setSchoolName(schoolName);
+		if (schoolService.dAddSchool(school)) {
+			map.put("success", true);
+		}else {
+			map.put("msg", "添加失败");
+		}
+		
+		
+		return map;
+	}
 	
 }

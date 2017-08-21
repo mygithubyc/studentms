@@ -14,4 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getSchoolRows" resultType="int">
 		select count(*) from school where school_status = 1
 	</select>
+	<insert id="dAddSchool">
+		insert into school(SCHOOL_NAME,SCHOOL_STATUS) VALUES(#{schoolName},1)
+	</insert>
+	<select id="dSelectSchool" resultMap = "school">
+		select * from SCHOOL where SCHOOL_NAME = #{_schoolName} and SCHOOL_STATUS = 1
+	</select>
 </mapper>

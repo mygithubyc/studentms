@@ -10,4 +10,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="class_Name" property="className" jdbcType="VARCHAR" />
 		<result column="class_Status" property="classStatus" jdbcType="VARCHAR" />
 	</resultMap>
+	<resultMap type="com.kingsoft.studentms.model.MyDTeacher" id="myDTeacher">
+		<result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="realname" property="realName" jdbcType="VARCHAR" />
+		<result column="depart_name" property="departName" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="dClassCombobox" resultMap = "class">
+		SELECT * from class where DEPART_ID = #{_departId}
+	</select>
+	<select id="dTeacherCombobox" resultMap="myDTeacher">
+		SELECT
+			T.TEACHER_ID,
+			U .REALNAME,
+			U .USERNAME,
+			D .DEPART_NAME
+		FROM
+			TEACHER T,
+			USERINFO U,
+			DEPARTMENT D
+		WHERE
+			T .USER_ID = U .USER_ID
+		AND D .DEPART_ID = T .DEPART_ID
+	</select>
+	
 </mapper>

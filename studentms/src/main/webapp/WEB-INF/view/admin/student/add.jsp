@@ -49,7 +49,7 @@
                    <ul>
                        <li><span><a href="${ctx }/school/add">添加学院</a></span></li>
                        <li><span><a href="${ctx }/department/add">添加院系</a></span></li>
-                       <li><span><a href="#">维护院系信息</a></span></li>
+                       <li><span><a href="${ctx }/school/department">维护院系信息</a></span></li>
                    </ul>
                </li>
                <li>
@@ -69,10 +69,16 @@
                    </ul>
                </li>
                <li>
+                   <span>考试管理</span>
+                   <ul>
+                       <li><span><a href="${ctx }/admin/exam">维护考试安排文件</a></span></li>
+                   </ul>
+               </li>
+               <li>
                    <span>系统管理</span>
                    <ul>
-                       <li><span><a>维护管理员信息</a></span></li>
-                       <li><span><a>修改密码</a></span></li>
+         
+                       <li><span><a href="${ctx }/admin/loginInfo">查看登录记录</a></span></li>
                    </ul>
                </li>
                <li>

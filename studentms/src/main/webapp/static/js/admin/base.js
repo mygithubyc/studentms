@@ -33,6 +33,7 @@ function logout(){
     $.messager.confirm('提示','确认要登出系统?',function(r){
         if (r) {
             // 登出操作  location.href 跳转就行
+        	
         }
     });
     

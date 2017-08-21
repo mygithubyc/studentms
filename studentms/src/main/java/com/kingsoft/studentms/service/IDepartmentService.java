@@ -9,4 +9,6 @@ public interface IDepartmentService {
 	public int addDepartment(Department department);
 	
 	public Map<String, Object> selectBySchoolDg(String schoolId); 
+	
+	public List<Department> departCombobox(String schoolId);
 }

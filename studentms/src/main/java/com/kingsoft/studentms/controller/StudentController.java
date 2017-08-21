@@ -16,4 +16,14 @@ public class StudentController {
 	public String add(){
 		return "admin/student/add";
 	}
+	//显示提交作业界面
+	@RequestMapping(value = "/job")
+	public String job(){
+		return "home/student/job";
+	}
+	//显示查看成绩界面
+	@RequestMapping(value = "/mark")
+	public String mark(){
+		return "home/student/mark";
+	}
 }

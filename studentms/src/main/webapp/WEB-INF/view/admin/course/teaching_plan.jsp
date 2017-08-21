@@ -50,7 +50,7 @@
                    <ul>
                        <li><span><a href="${ctx }/school/add">添加学院</a></span></li>
                        <li><span><a href="${ctx }/department/add">添加院系</a></span></li>
-                       <li><span><a href="#">维护院系信息</a></span></li>
+                       <li><span><a href="${ctx }/school/department">维护院系信息</a></span></li>
                    </ul>
                </li>
                <li>
@@ -70,10 +70,16 @@
                    </ul>
                </li>
                <li>
+                   <span>考试管理</span>
+                   <ul>
+                       <li><span><a href="${ctx }/admin/exam">维护考试安排文件</a></span></li>
+                   </ul>
+               </li>
+               <li>
                    <span>系统管理</span>
                    <ul>
-                       <li><span><a>维护管理员信息</a></span></li>
-                       <li><span><a>修改密码</a></span></li>
+         
+                       <li><span><a href="${ctx }/admin/loginInfo">查看登录记录</a></span></li>
                    </ul>
                </li>
                <li>
@@ -84,28 +90,29 @@
         <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px;padding: 0;">
             <table id="dg"></table>
             <div id="toolbar">
-                院:<input id="fm_college_name">系:<input  id="fm_depart_name">班级: <input id="fm_class_name">
+                	院:<input id="dCombobox">系:<input  id="departCombobox">
             </div>
-            <div id="dlg">
-                <form type="post" class="fm">
-                    <table class="mytable">
-                        <tr>
-                            <td class="title_td">所任课程</td>
-                            <td><input name="course_name" type="text" id="fm_course"></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">任课老师</td>
-                            <td><input type="text" id="fm_teacher"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a href="#" class="fm_save">保存</a>
-                                <a href="#" class="fm_clear">清空</a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                
+            <div id="dlg" class="dlg">
+            	<div class="ftitle">安排教学计划</div>
+            	<form id="fm" >
+            		<div class="fitem">
+            			<label>课程名称:</label>
+            		 	<input name="courseName" readonly="readonly"/>
+            		</div>
+            		<div class="fitem">
+            			<label>授课学期:</label>
+            		 	<input name="term" readonly="readonly"/>
+            		</div>
+            		<div class="fitem">
+            			<label>任课班级:</label>
+            		 	<input id="class_combobox"/>
+            		</div>
+            		<div class="fitem">
+            			<label>任课老师:</label>
+            		 	<input id="teacher_combobox"/>
+            		</div>
+        
+            	</form>
             </div>
         </div>
         

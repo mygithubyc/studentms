@@ -53,3 +53,4 @@
 <script src="${ctx }/static/common/js-modules/easyui/jquery.min.js"></script>
 <script src="${ctx }/static/common/js/home/index.js"></script>
 </html>
+

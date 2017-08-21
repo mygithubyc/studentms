@@ -11,9 +11,49 @@ $(function(){
         title: '首页 > 课程管理 > 安排各班教学计划',
         iconCls: 'icon-page'
     });
+    $('#dCombobox').combobox({
+        editable: false,
+        url: ctx+'/school/dCombobox',
+        valueField: 'schoolId',
+        textField: 'schoolName',
+        method: 'post',
+        onClick: function(rec){
+        	$('#departCombobox').combobox({
+        		url: ctx+'/department/departCombobox?schoolId='+rec.schoolId,
+        	})
+        }
+    });
+    $('#departCombobox').combobox({
+    	editable: false,
+    	valueField: 'departId',
+        textField: 'departName',
+        onClick: function(rec){
+        	$('#dg').datagrid('load',{
+            	departId: rec.departId
+            });
+        }
+        
+    });
+    $('#dlg').dialog({
+    	modal: true,
+    	closed: true,
+    	buttons:[{
+            text: '保存',
+            iconCls: 'icon-ok',
+            handler: function(){
+            	alert('保存');
+            }
+        },{
+            text: '取消',
+            iconCls: 'icon-cancel',
+            handler: function(){
+                $('#dlg').dialog('close');
+            }
+        }]
+    })
     // url写上 查看某个班级所属系的分配的课程  所以在没有选班级时 返回值为空即可
     $('#dg').datagrid({
-        url: '',
+        url: ctx+'/course/dCourseByDepart',
         title: '教学计划',
         height: 600,
         pagination: true,
@@ -21,58 +61,18 @@ $(function(){
         rownumbers: true,
         singleSelect: true,
         columns: [[
-            {field: 'course_name', title: '课程名称', width: 100},
-            {field: 'semester', title: '授课学期', width: 100},
-            {field: 'name', title: '分配情况', width: 100},
-            
-            {field: 'id', title: '操作', width: 100, formatter: rowformatter}
+            {field: 'courseName', title: '课程名称', width: 100},
+            {field: 'term', title: '授课学期', width: 100},
+            {field: 'schoolName', title: '开课学院', width: 100},            
+            {field: 'courseId', title: '操作', width: 100, formatter: rowformatter}
         ]],
         toolbar: '#toolbar',
-        data: [
-            {course_name: 'C语言编程', name: '张三',semester: 1, id: 1}
-        ]
+        
     });
     
     
-    // 三级联动  最后选定了班级触发表格的重新加载
-    $('#fm_college_name').combobox({
-        editable: false,
-        url: '',
-        valueField: 'id',
-        textField: 'text',
-        onSelect: function(rec){
-            $('#fm_class_name').combobox('clear');
-            $('#fm_depart_name').combobox('reload', 'xxx?id='+rec.id);
-        }
-    });
-    $('#fm_depart_name').combobox({
-        editable: false,
-        valueField: 'id',
-        textField: 'text',
-        onSelect: function(rec){
-            $('#fm_class_name').combobox('reload', 'xxx?id='+rec.id);
-        }
-    });
-    $('#fm_class_name').combobox({
-        editable: false,
-        valueField: 'id',
-        textField: 'text',
-        onSelect: function(rec){
-            $('#dg').datagrid('load',{
-                id: rec.id
-            });
-        }
-    });
-    $('#dlg').dialog({
-        closed: true,
-        width:400,
-        title: '分配教师'
-    });
-    $('#dlg #fm_course').textbox({
-        width: 180,
-        height: 24,
-        editable: false,
-    });
+    
+   
     // 最好由该学院的老师负责开课
     $('#fm_teacher').combogrid({
         required: true,
@@ -98,55 +98,36 @@ $(function(){
         }]
 
     });
-    // 定义表单提交的事件
-    $('.fm').form({
-        
-        url: 'xxx',
-        // 提交前事件定义  progress的进度条防止重复提交 + 表单中validbox的确认验证
-        onSubmit: function(){
-            $.messager.progress();
-            var isValid = $(this).form('validate');
-            if (!isValid) {
-                $.messager.progress('close');
-            }
-            return isValid;
-        },
-        // 有返回值触发success JSON.parse看情况去留
-        success: function(data){
-            var result = JSON.parse(data),
-                msg = '';
-
-            $.messager.progress('close');
-            if (result.success) {
-                // msg = '成功!';
-            }else{
-                // msg = result.msg;
-            }
-            $.messager.show({
-                title: '执行结果',
-                msg: msg
-            });
-        }
-    });
-    // 保存点击事件
-    $('.fm_save').click(function(event) {
-        $('.fm').submit();
-    });
-    // 清空点击则清空
-    $('.fm_clear').click(function(event) {
-
-        $('.fm').form('clear');
-    });    
+    
 });
 // 暂时没写取消分配的操作
 function rowformatter(value, row, index){
-    return "<a href='#' onclick='assign_teacher()'>分配老师</a>&nbsp;<a href='#' >取消分配</a>";
+    return "<a href='#' onclick='assign_teacher("+index+")'>分配老师</a>";
 }
-function assign_teacher(){
-    var row = $('#dg').datagrid('getSelected');
-    if(row){
-        $('#dlg').dialog('open');
-        $('#dlg form').form('load', row);
-
-    }
+function assign_teacher(index){
+	$('#dg').datagrid('selectRow', index);
+	var row = $('#dg').datagrid('getSelected');
+	if(row){
+		var departId = $('#departCombobox').val();
+		$('#dlg').dialog('open');
+		$('#fm').form('load', row);
+		$('#class_combobox').combobox({
+			url: ctx+'/class/dClassCombobox?departId='+departId,
+			textField: 'className',
+	        valueField: 'classId',
+	        method: 'post',
+	        editable: false,
+		});
+		$('#teacher_combobox').combogrid({
+			url:ctx+'/class/dTeacherCombobox',
+			idField:'teacherId',
+			textField:'realName',
+			fitColums: true,
+			columns:[[
+		          {field: '', title: '工号', width: 100},
+		          {field: '', title: '姓名', width: 100},
+		          {field: '', title: '所属系', width: 100},
+			]]
+		})
+	}
 }

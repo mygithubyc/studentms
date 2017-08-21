@@ -39,7 +39,16 @@ public class AdminController {
 		System.out.println("main()");
 		return "admin/main/main";
 	}
-
+	@RequestMapping(value = "/loginInfo", method = RequestMethod.GET)
+	public String loginInfo() {
+		System.out.println("loginInfo()");
+		return "admin/loginInfo/show";
+	}
+	@RequestMapping(value = "/exam", method = RequestMethod.GET)
+	public String exam() {
+		System.out.println("exam()");
+		return "admin/exam/show";
+	}
 	// 点击登录按钮操作
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
