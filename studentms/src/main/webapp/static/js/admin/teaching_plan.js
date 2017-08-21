@@ -24,6 +24,7 @@ $(function(){
         }
     });
     $('#departCombobox').combobox({
+    	editable: false,
     	valueField: 'departId',
         textField: 'departName',
         onClick: function(rec){
@@ -33,7 +34,23 @@ $(function(){
         }
         
     });
-    
+    $('#dlg').dialog({
+    	modal: true,
+    	closed: true,
+    	buttons:[{
+            text: '保存',
+            iconCls: 'icon-ok',
+            handler: function(){
+            	alert('保存');
+            }
+        },{
+            text: '取消',
+            iconCls: 'icon-cancel',
+            handler: function(){
+                $('#dlg').dialog('close');
+            }
+        }]
+    })
     // url写上 查看某个班级所属系的分配的课程  所以在没有选班级时 返回值为空即可
     $('#dg').datagrid({
         url: ctx+'/course/dCourseByDepart',
@@ -85,5 +102,32 @@ $(function(){
 });
 // 暂时没写取消分配的操作
 function rowformatter(value, row, index){
-    return "<a href='#' onclick='assign_teacher()'>分配老师</a>";
+    return "<a href='#' onclick='assign_teacher("+index+")'>分配老师</a>";
+}
+function assign_teacher(index){
+	$('#dg').datagrid('selectRow', index);
+	var row = $('#dg').datagrid('getSelected');
+	if(row){
+		var departId = $('#departCombobox').val();
+		$('#dlg').dialog('open');
+		$('#fm').form('load', row);
+		$('#class_combobox').combobox({
+			url: ctx+'/class/dClassCombobox?departId='+departId,
+			textField: 'className',
+	        valueField: 'classId',
+	        method: 'post',
+	        editable: false,
+		});
+		$('#teacher_combobox').combogrid({
+			url:ctx+'/class/dTeacherCombobox',
+			idField:'teacherId',
+			textField:'realName',
+			fitColums: true,
+			columns:[[
+		          {field: '', title: '工号', width: 100},
+		          {field: '', title: '姓名', width: 100},
+		          {field: '', title: '所属系', width: 100},
+			]]
+		})
+	}
 }

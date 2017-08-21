@@ -92,7 +92,28 @@
             <div id="toolbar">
                 	院:<input id="dCombobox">系:<input  id="departCombobox">
             </div>
-            
+            <div id="dlg" class="dlg">
+            	<div class="ftitle">安排教学计划</div>
+            	<form id="fm" >
+            		<div class="fitem">
+            			<label>课程名称:</label>
+            		 	<input name="courseName" readonly="readonly"/>
+            		</div>
+            		<div class="fitem">
+            			<label>授课学期:</label>
+            		 	<input name="term" readonly="readonly"/>
+            		</div>
+            		<div class="fitem">
+            			<label>任课班级:</label>
+            		 	<input id="class_combobox"/>
+            		</div>
+            		<div class="fitem">
+            			<label>任课老师:</label>
+            		 	<input id="teacher_combobox"/>
+            		</div>
+        
+            	</form>
+            </div>
         </div>
         
     </div>
