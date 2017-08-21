@@ -86,66 +86,19 @@
                </li>
            </ul>
         </div>
-        <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px;">
-            <div class="content_div">
-                <form class="fm" method="post">
-                    <table class="mytable">
-                        <tr>
-                            <td class="title_td">姓名:</td>
-                            <td><input  id="fm_student_name"  /></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">学号:</td>
-                            <td><input  id="fm_student_num"  /><span class="validate_span" style="color: red;font-size: 14px;"></span>
-                            <br><span style="font-size: 14px;">例:2015010120(入学年份+专业+班级+编号)</span></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">性别:</td>
-                            <td>男:<input name="gender" value="" type="radio" checked />女:<input name="gender" value="" type="radio"/></td>
-                        </tr>
-                    
-                        <tr>
-                            <td class="title_td">出生日期:</td>
-                            <td><input  id="fm_student_birth"  /></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">入学时间:</td>
-                            <td><input  id="fm_student_entrance"  /></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">身份证号:</td>
-                            <td><input  id="fm_id"  /></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">学年制:</td>
-                            <td><input  id="fm_academic_year"  /></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">学院:</td>
-                            <td><input  id="fm_college_name"  /></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">系:</td>
-                            <td><input type="text" id="fm_depart_name"></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">班级:</td>
-                            <td><input type="text" id="fm_class_name"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a href="#" class="fm_save">保存</a>
-                                <a href="#" class="fm_clear">清空</a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+        <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px;padding: 0">
+        	<table id="dg"></table>
+		        <div id="toolbar">
+				            用户名:<input type="text" id="username">
+				            登入时间: <input type="text" class="easyui-datetimebox" editable="false" id="from_time">
+				            到 <input type="text" class="easyui-datetimebox" editable="false" id="to_time" >
+		            <span class="easyui-linkbutton" iconCls="icon-ok" onclick="doSearch()">查询</span>
+		        </div>
         </div>
-        
     </div>
-</body>
-<jsp:include page="/WEB-INF/view/admin/common/include_js.jsp"></jsp:include>
-<script src="${pageContext.request.contextPath}/static/js/admin/student_add.js"></script>
-
-</html>
+    
+ </body>
+ 
+ <jsp:include page="/WEB-INF/view/admin/common/include_js.jsp"></jsp:include>
+ <script src="${pageContext.request.contextPath}/static/js/admin/logininfo_show.js"></script>
+ </html>
