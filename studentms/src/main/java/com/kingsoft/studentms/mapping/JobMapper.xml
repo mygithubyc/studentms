@@ -12,4 +12,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="PUBLISH_TIME" property="publishTime" jdbcType="DATE"/>
 		<result column="DEAD_TIME" property="deadTime" jdbcType="DATE"/>
 	</resultMap>
+	<!-- 发布作业 -->
+	<insert id="add">
+		insert into JOB(TEACH_ID,TITLE,CONTENT,PATH,PUBLISH_TIME,DEAD_TIME) 
+		VALUES(#{job.teachId,jdbcType=INTEGER},#{job.title,jdbcType=VARCHAR},
+		#{job.content,jdbcType=VARCHAR},#{job.path,jdbcType=VARCHAR},
+		#{job.publishTime,jdbcType=DATE},#{job.deadTime,jdbcType=DATE})
+	</insert>
+	<!-- 获得作业 -->
+	<select id="getJobList" resultType="com.kingsoft.studentms.model.Job">
+		select JOB.PUBLISH_ID,JOB.TEACH_ID,JOB.TITLE,JOB.CONTENT,JOB.PATH,
+		JOB.PUBLISH_TIME,JOB.DEAD_TIME from USERINFO u,JOB j,TEACHER t,
+		TEACHING_PLAN tp  WHERE  u.USER_ID=t.USER_ID and t.TEACHER_ID=tp.TEACHER_ID
+		and tp.TEACH_ID=j.TEACH_ID and u.USERNAME=#{username,jdbcType=VARCHAR} and
+		 #{date,jdbcType=DATE} between TERM_START and TERM_END ORDER BY PUBLISH_ID DESC
+	</select>
+	
+	<!-- 获得发布作业的教学计划id -->
+	<select id="getTeachId">
+		select TEACH_ID FROM USERINFO u,TEACHER t,TEACHING_PLAN tp WHETE u.USER_ID=t.USER_ID and t.TEACHER_ID=tp.TEACHER_ID
+		 and u.USERNAME=#{userName,jdbcType=VARCHAR} and #{date,jdbcType=DATE}
+		 between TERM_START and TERM_END
+	</select>
 </mapper>
