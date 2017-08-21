@@ -20,6 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="COURSE_NAME" property="courseName" jdbcType="VARCHAR" />
 		<result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
 	</resultMap>
+	<resultMap type="com.kingsoft.studentms.model.MyTeachingPlan" id="myTeachingPlan">
+		<result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+		<result column="TERM" property="term" jdbcType="INTEGER" />
+		<result column="COURSE_NAME" property="courseName" jdbcType="VARCHAR" />
+		<result column="SCHOOL_NAME" property="schoolName" jdbcType="VARCHAR" />
+	</resultMap>
 	<insert id="addCourse">
 		INSERT into COURSE(SCHOOL_ID,COURSE_NAME,COURSE_STATUS) VALUES(#{schoolId},#{courseName},#{courseStatus})
 	</insert>
@@ -91,5 +97,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					) A
 			)
 		WHERE <![CDATA[RN <=#{limit} AND RN>#{offset}]]>
+	</select>
+	<select id="dCourseByDepartSum" resultType="int">
+		SELECT
+		count(*)
+		FROM
+			COURSE_ASSIGN CA,
+			COURSE C,
+			SCHOOL S
+		WHERE
+			DEPART_ID = #{departId}
+		AND CA.COURSE_ID = C.COURSE_ID AND S.SCHOOL_ID = C.SCHOOL_ID
+	</select>
+	<select id="dCourseByDepart" resultMap="myTeachingPlan">
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					A .*, ROWNUM RN
+				FROM
+					(
+						SELECT
+							CA.DEPART_ID,
+							CA.TERM,
+							C.*,
+							S.SCHOOL_NAME
+						FROM
+							COURSE_ASSIGN CA,
+							COURSE C,
+							SCHOOL S
+						WHERE
+							DEPART_ID = #{departId}
+						AND CA.COURSE_ID = C.COURSE_ID AND S.SCHOOL_ID = C.SCHOOL_ID
+					) A
+			)
+		WHERE
+			<![CDATA[RN <= #{limit}
+		AND RN > #{offset}]]>
 	</select>
 </mapper>

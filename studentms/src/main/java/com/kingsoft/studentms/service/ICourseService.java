@@ -20,4 +20,6 @@ public interface ICourseService {
 	public int courseSum(Map<String, Object> map);
 	
 	public List<MyCourse> courseRows(Map<String, Object> map);
+	
+	public Map<String, Object> dCourseByDepart(Map<String, Object> map);
 }

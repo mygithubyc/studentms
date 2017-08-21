@@ -114,4 +114,27 @@ public class CourseController {
 		
 		return map;
 	}
+	
+	@RequestMapping(value="/dCourseByDepart", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> dCourseByDepart(HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String rows = request.getParameter("rows") != null ? (String) request.getParameter("rows") : "10";
+		String page = request.getParameter("page") != null ? (String) request.getParameter("page") : "1";
+		String departId = request.getParameter("departId") != null ? (String) request.getParameter("departId") : "0";
+		if (departId == "0") {
+			return null;
+		}
+		int offset = Integer.parseInt(rows)*(Integer.parseInt(page)-1);
+		int limit =  offset+Integer.parseInt(rows);
+		
+	
+		
+		Map<String, Object> selectMap = new HashMap<String, Object>();
+		selectMap.put("departId", departId);
+		selectMap.put("offset", offset);
+		selectMap.put("limit", limit);
+		map = courseService.dCourseByDepart(selectMap);
+
+		return map;
+	}
 }

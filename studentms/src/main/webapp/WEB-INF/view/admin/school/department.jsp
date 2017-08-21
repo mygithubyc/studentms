@@ -90,10 +90,37 @@
             <tabel id="school_dg"></tabel>
             <div id="toolbar">
             	<a id="add_school_a">添加学院</a>
-            	<a id="add_depart_a">添加专业</a>            	
+            	<a id="add_depart_a">添加专业</a>      
+            	    	
             </div>
-            <div id="school_dlg">
-            	<input class="dlg_input">
+            <div id="school_dlg" class="dlg">
+            	<form id="school_fm" class="fm">
+            		<div class="ftitle">
+            			添加学院
+            			
+            		</div>    
+            		 <div class="fitem">
+            		 	<label>学院名称</label>
+            		 	<input id="school_name"/>
+            		 </div>        		
+            	</form>            	
+            	
+            </div>
+            <div id="depart_dlg" class="dlg">
+            	<form id="depart_fm" class="fm" method="post">
+            		<div class="ftitle">
+            			添加专业
+            		</div>   
+            		<div class="fitem">
+            		 	<label>所属学院:</label>
+            		 	<input name="school_id" id="dCombobox"/>
+            		 </div> 
+            		 <div class="fitem">
+            		 	<label>专业名称:</label>
+            		 	<input name="depart_name" class="easyui-validatebox" data-options="required: true"/>
+            		 </div>        		
+            	</form>            	
+            	
             </div>
         </div>
         
@@ -102,88 +129,5 @@
 
 <jsp:include page="/WEB-INF/view/admin/common/include_js.jsp"></jsp:include>
 <script src="${pageContext.request.contextPath}/static/js-modules/easyui/datagrid-detailview.js"></script>
-<script>
-var url = '';
-$(function(){
-	$('#add_school_a').linkbutton({
-		iconCls: 'icon-add',
-		onClick: function(){
-			$('#school_dlg').dialog('open');
-		}
-	});
-	$('#add_depart_a').linkbutton({
-		iconCls: 'icon-add'
-	});
-	$('#school_dlg').dialog({
-		width: 300,
-		height: 200,
-		modal: true,
-		closed: true,
-		buttons: [{
-			text: '确定',
-			iconCls: 'icon-ok',
-			handler: function(){
-				var schoolName = $('#school_dlg').find('.dlg_input').val().trim();
-				if(schoolName !== ""){
-					$.post('xxx', {schoolName: schoolName}, function(result) {
-						
-					});
-				}
-				
-			}
-		},{
-			text: '取消',
-			iconCls: 'icon-cancel',
-			handler: function(){
-				$('#school_dlg').dialog('close');
-			}
-		}]
-	});
-	$('#school_dlg .dlg_input').textbox({
-		width: 250,
-		label: '学院名称:',
-		labelPosition: 'left',
-		buttonIcon: 'icon-search'
-	});
-	$('#school_dg').datagrid({
-	   
-	    height: 600,
-	    url: ctx+'/school/schoolDg',
-	    fitColumns: true,
-	    striped: true,
-	    singleSelect: true,
-	    toolbar: '#toolbar',
-	    columns: [[
-	        {field: 'schoolName', title: '学院名称', width: 100, align: 'left'},	        
-	    ]],
-	    view: detailview,
-	    detailFormatter:function(index,row){
-			return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
-		},
-		onExpandRow: function(index,row){
-			$('#ddv-'+index).datagrid({
-				url:ctx+'/department/showDepartmentDg?schoolId='+row.schoolId,
-				fitColumns:true,
-				singleSelect:true,
-				rownumbers:true,
-				loadMsg:'',
-				height:'auto',
-				columns:[[
-					{field:'departName',title:'所含专业',width:200,align:'center', halign: 'left'},					
-				]],
-				onResize:function(){
-					$('#school_dg').datagrid('fixDetailRowHeight',index);
-				},
-				onLoadSuccess:function(){
-					setTimeout(function(){
-						$('#school_dg').datagrid('fixDetailRowHeight',index);
-					},0);
-				}
-			});
-			$('#dg').datagrid('fixDetailRowHeight',index);
-		}
-	     
-	});
-});	
-</script>
+<script src="${pageContext.request.contextPath}/static/js/admin/department_save.js"></script>
 </html>

@@ -26,5 +26,18 @@ public class SchoolServiceImpl implements ISchoolService{
 		// TODO 自动生成的方法存根
 		return schoolDao.getSchoolRows();
 	}
+
+	@Override
+	public boolean dAddSchool(School school) {
+	
+		if (schoolDao.dSelectSchool(school.getSchoolName()).size() > 0) {
+			return false;
+		}
+		int insert = schoolDao.dAddSchool(school);
+		if (insert>0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

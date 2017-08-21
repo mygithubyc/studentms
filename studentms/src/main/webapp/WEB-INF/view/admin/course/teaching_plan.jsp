@@ -50,7 +50,7 @@
                    <ul>
                        <li><span><a href="${ctx }/school/add">添加学院</a></span></li>
                        <li><span><a href="${ctx }/department/add">添加院系</a></span></li>
-                       <li><span><a href="#">维护院系信息</a></span></li>
+                       <li><span><a href="${ctx }/school/department">维护院系信息</a></span></li>
                    </ul>
                </li>
                <li>
@@ -84,29 +84,9 @@
         <div data-options="region: 'center', title: '首页', split: true" class="layout__center" style="height: 80px;padding: 0;">
             <table id="dg"></table>
             <div id="toolbar">
-                院:<input id="fm_college_name">系:<input  id="fm_depart_name">班级: <input id="fm_class_name">
+                	院:<input id="dCombobox">系:<input  id="departCombobox">
             </div>
-            <div id="dlg">
-                <form type="post" class="fm">
-                    <table class="mytable">
-                        <tr>
-                            <td class="title_td">所任课程</td>
-                            <td><input name="course_name" type="text" id="fm_course"></td>
-                        </tr>
-                        <tr>
-                            <td class="title_td">任课老师</td>
-                            <td><input type="text" id="fm_teacher"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a href="#" class="fm_save">保存</a>
-                                <a href="#" class="fm_clear">清空</a>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                
-            </div>
+            
         </div>
         
     </div>

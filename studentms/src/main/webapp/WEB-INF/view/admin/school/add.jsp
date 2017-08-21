@@ -50,7 +50,7 @@
                    <ul>
                        <li><span><a href="${ctx }/school/add">添加学院</a></span></li>
                        <li><span><a href="${ctx }/department/add">添加院系</a></span></li>
-                       <li><span><a href="#">维护院系信息</a></span></li>
+                       <li><span><a href="${ctx }/school/department">维护院系信息</a></span></li>
                    </ul>
                </li>
                <li>

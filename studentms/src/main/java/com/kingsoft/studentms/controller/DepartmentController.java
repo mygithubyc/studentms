@@ -1,6 +1,7 @@
 package com.kingsoft.studentms.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -50,5 +51,9 @@ public class DepartmentController {
 		
 		return departmentService.selectBySchoolDg(schoolId);
 	}
-
+	@RequestMapping(value = "/departCombobox", method = RequestMethod.POST)
+	public @ResponseBody List<Department> departCombobox(String schoolId){
+		
+		return departmentService.departCombobox(schoolId);
+	}
 }

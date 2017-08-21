@@ -31,5 +31,10 @@ public class DepartmentServiceImpl implements IDepartmentService{
 
 		return map;
 	}
+	@Override
+	public List<Department> departCombobox(String schoolId) {
+		// TODO 自动生成的方法存根
+		return departmentDao.selectBySchool(schoolId);
+	}
 	
 }
