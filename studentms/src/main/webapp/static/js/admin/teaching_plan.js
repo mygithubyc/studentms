@@ -44,7 +44,7 @@ $(function(){
             iconCls: 'icon-ok',
             handler: function(){
             	$('#fm').form('submit',{
-            		url: 'xx',
+            		url: ctx+'/course/addTeachingPlan',
             		onSubmit: function(){
             			$.messager.progress();
                         var isValid = $(this).form('validate');

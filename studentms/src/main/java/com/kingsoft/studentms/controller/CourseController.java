@@ -137,4 +137,12 @@ public class CourseController {
 
 		return map;
 	}
+	
+	@RequestMapping(value="addTeachingPlan",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> addTeachingPlan(String courseId, String term,String classId,String teacherId){
+		Map<String, Object> map = new HashMap<String, Object>();
+//		System.out.println(courseId+"/"+classId+"/"+teacherId+"/"+term);
+		
+		return map;
+	}
 }

@@ -9,4 +9,6 @@ public interface IClassDao extends IBasicDao{
 	public List<Class> dClassCombobox(String departId);
 	
 	public List<MyDTeacher> dTeacherCombobox();
+	
+	public Class dGetClass(String classId);
 }

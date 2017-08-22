@@ -94,7 +94,7 @@
             </div>
             <div id="dlg" class="dlg">
             	<div class="ftitle">安排教学计划</div>
-            	<form id="fm" >
+            	<form id="fm" method="post">
             		<div class="fitem">
             			<label>课程名称:</label>
             			<input type="hidden" name="courseId" readonly="readonly"/>

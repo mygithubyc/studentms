@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="realname" property="realName" jdbcType="VARCHAR" />
 		<result column="depart_name" property="departName" jdbcType="VARCHAR" />
+		<result column="build_year" property="buildYear" jdbcType="INTEGER" />
 	</resultMap>
 	<select id="dClassCombobox" resultMap = "class">
 		SELECT * from class where DEPART_ID = #{_departId}
@@ -33,5 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			T .USER_ID = U .USER_ID
 		AND D .DEPART_ID = T .DEPART_ID
 	</select>
-	
+	<select id="dGetClass" resultMap="class">
+		SELECT * from class where CLASS_ID=#{_classId}
+	</select>
 </mapper>

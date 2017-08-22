@@ -1,6 +1,8 @@
 package com.kingsoft.studentms.serviceimpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -25,5 +27,16 @@ public class IClassServiceImpl implements IClassService{
 		// TODO 自动生成的方法存根
 		return classDao.dTeacherCombobox();
 	}
-
+	@Override
+	public Map<String, Object> addTeachingPlan(Map<String, Object> addMap) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String classId = (String) addMap.get("classId");
+		
+		Class class1 = classDao.dGetClass(classId);
+//		int buildYear = class1.get
+		
+		
+		return map;
+	}
+	
 }

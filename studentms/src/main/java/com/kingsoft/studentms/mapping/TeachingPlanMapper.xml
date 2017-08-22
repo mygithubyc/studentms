@@ -9,5 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
 		<result column="CLASS_ID" property="classId" jdbcType="INTEGER" />
 		<result column="TEACHER_ID" property="teacherId" jdbcType="INTEGER" />
+		<result column="TERM_START" property="termStart" jdbcType="DATE"/>
+		<result column="TERM_END" property="termEnd" jdbcType="DATE"/>
 	</resultMap>
 </mapper>
