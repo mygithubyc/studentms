@@ -97,11 +97,11 @@
 
 		<!-- 导入oracle数据库链接jar包 -->
 		<dependency>
-	      <groupId>com.oracle</groupId>
-	      <artifactId>ojdbc6</artifactId>
-	      <version>11.2.0.3</version>
-	    </dependency>
-
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -209,8 +209,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<!-- 注意此处的url,修改成tomcat监听的端口即可 -->
 					<url>http://localhost:8080/manager</url>
 					<server>tomcat7</server> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->

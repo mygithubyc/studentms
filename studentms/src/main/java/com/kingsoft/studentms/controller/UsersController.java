@@ -23,7 +23,6 @@ import com.kingsoft.studentms.service.IUserInfoService;
 @Controller // 注入controller
 @RequestMapping("/users") // 注入并配置controller总开关
 @SessionAttributes("user") // 注入session的键
-
 public class UsersController {
 
 	public UsersController() {
