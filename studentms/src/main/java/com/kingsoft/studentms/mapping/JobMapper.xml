@@ -4,34 +4,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kingsoft.studentms.dao.IJobDao">
 	<resultMap type="com.kingsoft.studentms.model.Job" id="job">
-		<result column="PUBLISH_ID" property="publishId" jdbcType="INTEGER"/>
-		<result column="TEACH_ID" property="teachId" jdbcType="INTEGER"/>
-		<result column="TITLE" property="title" jdbcType="VARCHAR"/>
-		<result column="CONTENT" property="content" jdbcType="VARCHAR"/>
-		<result column="PATH" property="path" jdbcType="VARCHAR"/>
-		<result column="PUBLISH_TIME" property="publishTime" jdbcType="DATE"/>
-		<result column="DEAD_TIME" property="deadTime" jdbcType="DATE"/>
+		<result column="PUBLISH_ID" property="publishId" jdbcType="INTEGER" />
+		<result column="TEACH_ID" property="teachId" jdbcType="INTEGER" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="PATH" property="path" jdbcType="VARCHAR" />
+		<result column="PUBLISH_TIME" property="publishTime" jdbcType="DATE" />
+		<result column="DEAD_TIME" property="deadTime" jdbcType="DATE" />
 	</resultMap>
+
+	<!-- 老师model -->
+	<resultMap type="com.kingsoft.studentms.model.Teacher" id="teacher">
+		<result column="TEACHER_ID" property="teacherId" jdbcType="INTEGER" />
+		<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="DEPART_ID" property="departId" jdbcType="INTEGER" />
+		<result column="ENTRY_TIME" property="entryTime" jdbcType="DATE" />
+		<result column="HEAD_TEACHER" property="headTeacher" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 用户model -->
+	<resultMap type="com.kingsoft.studentms.model.UserInfo" id="userInfo">
+		<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="REALNAME" property="realName" jdbcType="VARCHAR" />
+		<result column="HEAD_IMAGE" property="headImage" jdbcType="VARCHAR" />
+		<result column="SEX" property="sex" jdbcType="VARCHAR" />
+		<result column="BIRTHDAY" property="birthday" jdbcType="DATE" />
+		<result column="PHONE_NUM" property="phoneNum" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="USER_ADDRESS" property="userAddress" jdbcType="VARCHAR" />
+		<result column="ID_NUM" property="idNum" jdbcType="VARCHAR" />
+		<result column="USERTYPE" property="userType" jdbcType="VARCHAR" />
+		<result column="VALID" property="valid" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 教学计划 -->
+	<resultMap type="com.kingsoft.studentms.model.TeachingPlan"
+		id="teachingPlan">
+		<result column="TEACH_ID" property="teachId" jdbcType="INTEGER" />
+		<result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+		<result column="CLASS_ID" property="classId" jdbcType="INTEGER" />
+		<result column="TEACHER_ID" property="teacherId" jdbcType="INTEGER" />
+		<result column="TERM_START" property="termStart" jdbcType="DATE" />
+		<result column="TERM_END" property="termEnd" jdbcType="DATE" />
+	</resultMap>
+	
 	<!-- 发布作业 -->
 	<insert id="add">
-		insert into JOB(TEACH_ID,TITLE,CONTENT,PATH,PUBLISH_TIME,DEAD_TIME) 
+		insert into
+		JOB(TEACH_ID,TITLE,CONTENT,PATH,PUBLISH_TIME,DEAD_TIME)
 		VALUES(#{job.teachId,jdbcType=INTEGER},#{job.title,jdbcType=VARCHAR},
 		#{job.content,jdbcType=VARCHAR},#{job.path,jdbcType=VARCHAR},
 		#{job.publishTime,jdbcType=DATE},#{job.deadTime,jdbcType=DATE})
 	</insert>
 	<!-- 获得作业 -->
 	<select id="getJobList" resultType="com.kingsoft.studentms.model.Job">
-		select JOB.PUBLISH_ID,JOB.TEACH_ID,JOB.TITLE,JOB.CONTENT,JOB.PATH,
+		select
+		JOB.PUBLISH_ID,JOB.TEACH_ID,JOB.TITLE,JOB.CONTENT,JOB.PATH,
 		JOB.PUBLISH_TIME,JOB.DEAD_TIME from USERINFO u,JOB j,TEACHER t,
-		TEACHING_PLAN tp  WHERE  u.USER_ID=t.USER_ID and t.TEACHER_ID=tp.TEACHER_ID
-		and tp.TEACH_ID=j.TEACH_ID and u.USERNAME=#{username,jdbcType=VARCHAR} and
-		 #{date,jdbcType=DATE} between TERM_START and TERM_END ORDER BY PUBLISH_ID DESC
+		TEACHING_PLAN tp WHERE u.USER_ID=t.USER_ID and
+		t.TEACHER_ID=tp.TEACHER_ID
+		and tp.TEACH_ID=j.TEACH_ID and
+		u.USERNAME=#{username,jdbcType=VARCHAR} and
+		#{date,jdbcType=DATE}
+		between TERM_START and TERM_END ORDER BY PUBLISH_ID DESC
 	</select>
-	
+
 	<!-- 获得发布作业的教学计划id -->
-	<select id="getTeachId">
-		select TEACH_ID FROM USERINFO u,TEACHER t,TEACHING_PLAN tp WHETE u.USER_ID=t.USER_ID and t.TEACHER_ID=tp.TEACHER_ID
-		 and u.USERNAME=#{userName,jdbcType=VARCHAR} and #{date,jdbcType=DATE}
-		 between TERM_START and TERM_END
+	<!-- between TERM_START and TERM_END -->
+	<select id="getTeachId" parameterType="java.lang.Object" resultType="java.lang.Object">
+	 select teaching_plan.teach_id from userinfo,teacher,teaching_plan where userinfo.user_id=teacher.user_id and 
+     teacher.teacher_id=teaching_plan.teacher_id and userinfo.username=#{userName,jdbcType=VARCHAR}
+   and #{date,jdbcType=DATE} between term_start and term_end
 	</select>
 </mapper>

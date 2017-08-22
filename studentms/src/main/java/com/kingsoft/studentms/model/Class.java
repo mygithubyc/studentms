@@ -7,6 +7,7 @@ public class Class {
 	private int departId;
 	private String className;
 	private String classStatus;
+	private int buildYear;
 
 	public int getClassId() {
 		return classId;
@@ -46,6 +47,14 @@ public class Class {
 
 	public void setClassStatus(String classStatus) {
 		this.classStatus = classStatus;
+	}
+
+	public int getBuildYear() {
+		return buildYear;
+	}
+
+	public void setBuildYear(int buildYear) {
+		this.buildYear = buildYear;
 	}
 
 }

@@ -27,6 +27,53 @@ $(function(){
             iconCls: 'icon-ok',
             handler: function(){
                 // 点击新增按钮事件  
+            	alert("send() is ok");
+            	/* var file = $('input[name="file"][type="file"]').prop('files')[0]; // 获取文件 */
+            	var file = document.getElementById('filebox_file_id_1').files[0];
+            	window.alert("file  " + file);
+            	if (file == null) {
+            		window.alert("文件不能为空");
+            		return;
+            	}
+            	var fileName = file.name;
+            	window.alert("file.name  " + file.name);
+            	// 获取文件类型名称
+            	var fileType = fileName.substring(fileName.lastIndexOf('.'),
+            			fileName.length);
+
+            	if (fileType == ".zip" || fileType == ".rar") {
+
+            		// 获取form数据
+            		var formData = new FormData($("#add_fm")[0]);
+            		$.ajax({
+            			url : ctx + "/job/publishJob", // 请求到controller
+            			type : "POST",
+            			data : formData, // 正表单对象传过去
+            			async : false,
+            			cache : false,
+            			dataType : "json", // 要返回JSON数据不要忘了它，否则会报undefined
+            			contentType : false,
+            			processData : false,
+            			success : function(data) {
+            				// 上传成功后将控件内容清空，并显示上传成功信息
+            				var jsonObj = eval("(" + data + ")"); // 转换为json对象
+            				window.alert("json.success  " + jsonObj.success);
+            				if (jsonObj.success == "success") {
+            					$('#add_dlg').dialog('close');
+            					// 获得JSON数据刷新界面
+            					/*$.getJSON(ctx + "/job/refresh", function(data) {
+            						$('#dg').datagrid('loadData', eval("(" + data + ")"));
+            					});*/
+            				}
+            			},
+            			error : function() {
+            				window.alert("系统繁忙，请稍后再试");
+            			}
+            		});
+            	} else {
+            		window.alert("选择的文件必须为zip或者rar的压缩格式");
+            	}
+            	
                 alert('新增作业');
             }
         },{
@@ -58,10 +105,12 @@ $(function(){
             }
         }]
     });
+    
+    
     // data为测试数据  请删除  并修改field
     // 警告 这里idField必须设置!  就是该表的主键  因为要通过他生成 id为 ddv-id 的datagrid二级表格  有4处row.id需要替换
     $('#dg').datagrid({
-        url: '',
+        url: ctx+'/job/getCommitByPid',
         height: 750,
         fitColumns: true,
         striped: true,
@@ -69,13 +118,13 @@ $(function(){
         pagination: true,
         idField: 'id',
         columns:[[
-            {field: 'a', title: '作业名', width: 100},
-            {field: 'b', title: '说明', width: 100},
-            {field: 'c', title: '课程', width: 100},
-            {field: 'd', title: '发布日期', width: 100},
-            {field: 'e', title: '截止日期', width: 100},
-            {field: 'f', title: '文件名', width: 100},
-            {field: 'g', title: '提交情况', width: 100},
+            {field: 'title', title: '作业名', width: 100},
+            {field: 'content', title: '说明', width: 100},
+            {field: 'course', title: '课程', width: 100},
+            {field: 'publishTime', title: '发布日期', width: 100},
+            {field: 'deadTime', title: '截止日期', width: 100},
+            {field: 'path', title: '文件名', width: 100},
+           // {field: 'g', title: '提交情况', width: 100},
         ]],
         
         toolbar:'#toolbar',

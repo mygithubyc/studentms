@@ -2,8 +2,6 @@ package com.kingsoft.studentms.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +40,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		// 登录成功后不同身份的用户访问不同的资源 获得session
 
-		UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
+	/*	UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
 		if (userInfo.getUserType().equals(ConstantUtil.USERTYPE_TEACHER)) {
 			// 展示老师的静态资源
 
@@ -51,7 +49,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		} else { // 如果是管理员返回登录界面，不让访问老师或者学生的资源,回到登录界面
 			response.sendRedirect("http://localhost:8080/studentms");
-		}
+		}*/
 	}
 
 	@Override

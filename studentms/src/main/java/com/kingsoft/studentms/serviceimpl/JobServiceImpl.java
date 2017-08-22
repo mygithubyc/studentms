@@ -20,6 +20,7 @@ import com.kingsoft.studentms.service.IJobService;
 @Service("jobService")
 public class JobServiceImpl extends BasicService implements IJobService {
 
+	
 	@Resource
 	private IJobDao jobDao;
 	@Resource
@@ -31,6 +32,8 @@ public class JobServiceImpl extends BasicService implements IJobService {
 
 		// 获得session取到登录用户的账号
 		UserInfo user = (UserInfo) session.getAttribute("user");
+		System.out.println("user " + user.getUsername());
+
 		List<?> teachIdList = this.getTeachId(user.getUsername(), new Date());
 		System.out.println("teachId: " + teachIdList);
 		String filePath = null; // 文件上传的真实路径包括文件名
@@ -77,7 +80,6 @@ public class JobServiceImpl extends BasicService implements IJobService {
 		return JSON.toJSONString(jobList);
 	}
 
-	
 	/**
 	 * @得到教学计划IDList
 	 * @param userNmae
@@ -86,7 +88,9 @@ public class JobServiceImpl extends BasicService implements IJobService {
 	 */
 	@Override
 	public List<?> getTeachId(String userNmae, Date date) {
+		System.out.println("userNmae "+userNmae + " date"+date);
 		List<?> teachIdList = jobDao.getTeachId(userNmae, date);
+		System.out.println("teachIdList "+teachIdList);
 		// 判断教学计划是否在当前学期安排在当前学期有课程安排
 		if (teachIdList.size() == 0 || teachIdList.isEmpty())
 			return null;

@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="teacher_Id" property="teacherId" jdbcType="INTEGER" />
 		<result column="class_Name" property="className" jdbcType="VARCHAR" />
 		<result column="class_Status" property="classStatus" jdbcType="VARCHAR" />
+		<result column="BUILD_YEAR" property="buildYear" jdbcType="INTEGER"/>
 	</resultMap>
 	<resultMap type="com.kingsoft.studentms.model.MyDTeacher" id="myDTeacher">
 		<result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
