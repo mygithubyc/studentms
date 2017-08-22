@@ -1,5 +1,6 @@
 package com.kingsoft.studentms.controller;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kingsoft.studentms.model.Course;
 import com.kingsoft.studentms.model.MyAssignment;
 import com.kingsoft.studentms.model.MyCourse;
+import com.kingsoft.studentms.service.IClassService;
 import com.kingsoft.studentms.service.ICourseService;
 
 @Controller
@@ -26,6 +28,8 @@ public class CourseController {
 	private ModelAndView modelView; // 返回一个model视图
 	@Resource
 	private ICourseService courseService;
+	@Resource
+	private IClassService classService;
 	//显示添加课程界面
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(){
@@ -139,9 +143,16 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value="addTeachingPlan",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> addTeachingPlan(String courseId, String term,String classId,String teacherId){
+	public @ResponseBody Map<String, Object> addTeachingPlan(String courseId, String term,String classId,String teacherId) throws ParseException{
 		Map<String, Object> map = new HashMap<String, Object>();
 //		System.out.println(courseId+"/"+classId+"/"+teacherId+"/"+term);
+		
+		Map<String, Object> selectMap = new HashMap<String, Object>();
+		selectMap.put("classId", classId);
+		selectMap.put("term", term);
+		selectMap.put("courseId", courseId);
+		selectMap.put("teacherId", teacherId);
+		map = classService.addTeachingPlan(selectMap);
 		
 		return map;
 	}

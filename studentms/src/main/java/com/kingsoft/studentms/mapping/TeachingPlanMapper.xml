@@ -12,4 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="TERM_START" property="termStart" jdbcType="DATE"/>
 		<result column="TERM_END" property="termEnd" jdbcType="DATE"/>
 	</resultMap>
+	
+	<insert id="addTeachingPlan">
+		INSERT into TEACHING_PLAN(COURSE_ID,CLASS_ID,TEACHER_ID,TERM_START,TERM_END)
+		 VALUES(#{courseId},#{classId},#{teacherId},#{termStart},#{termEnd})
+	</insert>
 </mapper>

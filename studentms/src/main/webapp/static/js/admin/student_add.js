@@ -4,7 +4,7 @@
 * @Last Modified by:   anchen
 * @Last Modified time: 2017-08-17 15:51:49
 */
-
+var flag = false;
 $(function(){
 
     // 改变左上角title 用于导航
@@ -17,24 +17,40 @@ $(function(){
         width: 500
     });
     $('#fm_student_name').validatebox({
-        required: true,
+    	required: true,
+        validateOnCreate: false
+    });
+    $('#fm_student_num').validatebox({
+    	required: true,
         validateOnCreate: false
     });
     $('#fm_student_num').blur(function(event) {
-        var student_num = $(this).val(),
+        var username = $(this).val(),
             validate_span = $(this).next('span');
-        console.log(validate_span);
-        if(student_num.length !== 0){
-            if(check_student_num(student_num)){
-                validate_span.html('可用');
-            }else{
-                validate_span.html('学号已存在,请确认!');
-            }
+        validate_span.html('');        
+        if(username.length !== 0){
+        	 $.post(ctx+'/admin/dCheckUsername',{username: username},function(data){
+             	var result = JSON.parse(data);
+             	if(result.success){
+             		flag = false;
+             		validate_span.html('工号已存在!');
+             	}else{
+             		flag = true;
+             		validate_span.html('可用');
+             	}
+             });
         }
     });
     
-    $('#fm_student_birth').datebox();
-    $('#fm_student_entrance').datetimebox();
+    $('#fm_student_birth').datebox({
+    	required: true,
+    	editable: false,
+    	
+    });
+    $('#fm_student_entrance').datebox({
+    	required: true,
+    	editable: false,
+    });
     $('#fm_id').validatebox({
         required: true,
         validateOnCreate: false
@@ -46,32 +62,44 @@ $(function(){
     });
     // 三级联动   分别是学院 系 班级  注意修改 id 和 text(根据返回的json对象的key)
     $('#fm_college_name').combobox({
-        editable: false,
-        url: '',
-        valueField: 'id',
-        textField: 'text',
+    	editable: false,
+        required: true,
+        url: ctx+'/school/dCombobox',
+        valueField: 'schoolId',
+        textField: 'schoolName',
+        method: 'post',
         onSelect: function(rec){
             $('#fm_class_name').combobox('clear');
-            $('#fm_depart_name').combobox('reload', 'xxx?id='+rec.id);
+            $('#fm_depart_name').combobox({
+            	url: ctx+'/department/departCombobox?schoolId='+rec.schoolId
+            });
         }
     });
     $('#fm_depart_name').combobox({
         editable: false,
-        valueField: 'id',
-        textField: 'text',
+        required: true,
+        valueField: 'departId',
+        textField: 'departName',
+        method: 'post',
         onSelect: function(rec){
-            $('#fm_class_name').combobox('reload', 'xxx?id='+rec.id);
+            $('#fm_class_name').combobox({
+            
+        		url: ctx+'/class/dClassCombobox?departId='+rec.departId
+            	
+            });
         }
     });
     $('#fm_class_name').combobox({
+    	textField: 'className',
+        valueField: 'classId',
+        method: 'post',
         editable: false,
-        valueField: 'id',
-        textField: 'text',
+        required: true,
     });
     // 定义表单提交的事件
     $('.fm').form({
         
-        url: 'xxx',
+        url: ctx+'/student/dAddStudent',
         // 提交前事件定义  progress的进度条防止重复提交 + 表单中validbox的确认验证
         onSubmit: function(){
             $.messager.progress();
@@ -88,14 +116,15 @@ $(function(){
 
             $.messager.progress('close');
             if (result.success) {
-                // msg = '成功!';
+                msg = '成功!';
             }else{
-                // msg = result.msg;
+                msg = '失败';
             }
             $.messager.show({
                 title: '执行结果',
                 msg: msg
             });
+            flag = false;
         }
     });
     // 保存点击事件
@@ -109,20 +138,3 @@ $(function(){
         $('.fm table input[type=radio]').get(0).checked = true;
     });
 });
-// true 通过,学号可用 false则提示重复
-function check_student_num(username){
-    return false;
-    // $.ajax({
-    //     url: '',
-    //     type: 'post',
-    //     dataType: 'json',
-    //     data: {username: usernameVal},
-    //     success: function(result){
-    //         if (result.success) {
-    //             return true;
-    //         }else{
-    //             return false;
-    //         }
-    //     }
-    // });
-}

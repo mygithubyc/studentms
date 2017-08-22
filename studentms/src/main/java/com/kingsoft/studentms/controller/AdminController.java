@@ -107,4 +107,16 @@ public class AdminController {
 			return JSON.toJSONString(map);
 		}
 	}
+	@RequestMapping(value = "/dCheckUsername", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> dCheckUsername(String username){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (userInfoService.addCheack(username)) {
+			map.put("success", true);
+		}else{
+			map.put("success", false);
+		}
+		
+		return map;
+	}
 }

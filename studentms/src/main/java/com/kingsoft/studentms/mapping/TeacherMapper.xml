@@ -10,4 +10,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ENTRY_TIME" property="entryTime" jdbcType="DATE" />
 		<result column="HEAD_TEACHER" property="headTeacher" jdbcType="VARCHAR"/>
 	</resultMap>
+	
+	<insert id="dAddTeacher">
+		INSERT INTO TEACHER (
+			USER_ID,
+			DEPART_ID,
+			ENTRY_TIME,
+			HEAD_TEACHER
+		)
+		VALUES
+		(#{userId},#{departId},#{entryDate},0)
+	</insert>
+	<update id="dSetHeadTeacher">
+		UPDATE TEACHER SET HEAD_TEACHER = 1 WHERE TEACHER_ID = #{_teacherId}
+	</update>
 </mapper>

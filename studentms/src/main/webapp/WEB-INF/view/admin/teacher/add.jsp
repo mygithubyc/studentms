@@ -92,35 +92,38 @@
                     <table class="mytable">
                         <tr>
                             <td class="title_td">姓名:</td>
-                            <td><input  id="fm_name"  /></td>
+                            <td><input name="realName"  id="fm_name"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">工号:</td>
-                            <td><input  id="fm_num"  /><span class="validate_span" style="color: red;font-size: 14px;"></span>
+                            <td><input name="username" id="fm_num"  /><span class="validate_span" style="color: red;font-size: 14px;"></span>
                             <br><span style="font-size: 14px;">例:xxx111(类别+编号)</span></td>
                         </tr>
                         <tr>
                             <td class="title_td">性别:</td>
-                            <td>男:<input name="gender" value="" type="radio" checked />女:<input name="gender" value="" type="radio"/></td>
+                            <td>男:<input name="gender" value="1" type="radio" checked />女:<input name="gender" value="2" type="radio"/></td>
                         </tr>
                     
                         <tr>
                             <td class="title_td">出生日期:</td>
-                            <td><input  id="fm_birth"  /></td>
+                            <td><input name="birth" id="fm_birth"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">入职时间:</td>
-                            <td><input  id="fm_entrance"  /></td>
+                            <td><input name="entry_time" id="fm_entrance"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">身份证号:</td>
-                            <td><input  id="fm_id"  /></td>
+                            <td><input name="idNum" id="fm_id"  /></td>
                         </tr>
                         
-                        
+                        <tr>
+                            <td class="title_td">学院:</td>
+                            <td><input  id="fm_college_name"  /></td>
+                        </tr>
                         <tr>
                             <td class="title_td">系:</td>
-                            <td><input type="text" id="fm_depart_name"></td>
+                            <td><input name="departId" id="fm_depart_name"></td>
                         </tr>
                         
                         <tr>

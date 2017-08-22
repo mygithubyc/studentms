@@ -87,21 +87,21 @@
                         
                         <tr>
                             <td class="title_td">班级名称:</td>
-                            <td><input  id="fm_name"  /><br></td>
+                            <td><input name="className" id="fm_name"  /><br></td>
                         </tr>                       
                         <tr>
                             <td class="title_td">开班年份:</td>
-                            <td><input  id="fm_entrance"  /></td>
+                            <td><input name="buildYear" id="fm_entrance"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">班主任:</td>
-                            <td><input  id="fm_teacher"  /></td>
+                            <td><input name="teacherId" id="fm_teacher"  /></td>
                         </tr>
                             <td class="title_td">学院:</td>
-                            <td><input type="text" id="fm_college_name"></td>
+                            <td><input  type="text" id="fm_college_name"></td>
                         <tr>
                             <td class="title_td">系:</td>
-                            <td><input type="text" id="fm_depart_name"></td>
+                            <td><input name="departId" type="text" id="fm_depart_name"></td>
                         </tr>
                         
                         <tr>
