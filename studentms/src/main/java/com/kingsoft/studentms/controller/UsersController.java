@@ -29,9 +29,15 @@ public class UsersController {
 		System.out.println("UsersController实例化");
 	}
 
-	private ModelAndView modelView; // 返回一个model视图
+	// private ModelAndView modelView; // 返回一个model视图
 	@Resource
 	private IUserInfoService userInfoService; // 注入service
+	
+	private ModelAndView modelAndView;
+	/*
+	 * @RequestMapping(value="/goMain") public String goMain(String n){
+	 * System.out.println("n "+n); return "common/main"; }
+	 */
 
 	/**
 	 * @登录验证
@@ -43,28 +49,26 @@ public class UsersController {
 	 */
 	// 配置分路由支路
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String username, String password, String userType, ModelMap modelMap) {
+	public ModelAndView login(String username, String password, String type, ModelMap modelMap) {
 		System.out.println("login username:  " + username);
 
-		if (userType.equals("老师"))
-			userType = "2";
-		else
-			userType = "3";	//学生
-		UserInfo user = this.userInfoService.login(username, password, userType);
-		if (user != null) { // 验证通过
-			modelMap.addAttribute("user", user); // 将用户信息保存到session里面
-			// 视图配置
-			if (user.getUserType().equals("2"))
-				modelView = new ModelAndView("homework/teacher");
-			else
-				modelView = new ModelAndView("homework/student");
-			modelView.addObject("user", user);
-			return modelView;
-		} else {
-			modelView = new ModelAndView("login");
-			modelView.addObject("mesg", "账号或密码错误！");
-			return modelView;
-		}
+		System.out.println("username " + username + "  " + type);
+		UserInfo user = this.userInfoService.login(username, password, type);
+		System.out.println("user " + user);
+
+		modelMap.addAttribute("user", user);
+		Map<String, Object> map = new HashMap<>();
+		/*
+		 * if (user != null) { // 验证通过 System.out.println("user " + user);
+		 * modelMap.addAttribute("user", user); // 将用户信息保存到session里面 modelView
+		 * map.put("success", "success"); } else { map.put("success", "failed");
+		 * }
+		 * 
+		 * return JSON.toJSONString(map);
+		 */
+		modelAndView = new ModelAndView("home/main");
+		modelAndView.addObject("user", user);
+		return modelAndView;
 	}
 
 	/**
@@ -89,4 +93,5 @@ public class UsersController {
 		map.put("success", "success");
 		return JSON.toJSONString(map);
 	}
+
 }

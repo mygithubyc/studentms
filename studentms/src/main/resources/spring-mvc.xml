@@ -34,7 +34,7 @@
     		<mvc:exclude-mapping path="/admin/testJson"/>
 			<!-- 用户登录界面不拦截 -->
     		<mvc:exclude-mapping path="/users/login"/>
-    		
+    		<mvc:exclude-mapping path="index"/>
     		
     		<bean id="loginInterceptor" class="com.kingsoft.studentms.interceptor.LoginInterceptor"></bean>
     	</mvc:interceptor>

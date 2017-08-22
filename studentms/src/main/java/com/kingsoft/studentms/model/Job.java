@@ -2,6 +2,8 @@ package com.kingsoft.studentms.model;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Job {
 
 	private int publishId;
@@ -11,6 +13,7 @@ public class Job {
 	private String path;
 	private Date publishTime;
 	private Date deadTime;
+	private MultipartFile file;
 
 	public int getPublishId() {
 		return publishId;
@@ -66,6 +69,14 @@ public class Job {
 
 	public void setDeadTime(Date deadTime) {
 		this.deadTime = deadTime;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
 }

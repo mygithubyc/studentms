@@ -6,10 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/js-modules/easyui/themes/bootstrap/easyui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/js-modules/easyui/themes/icon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/js-modules/easyui/themes/IconExtension.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin/login.css">
+<link rel="stylesheet" href="${ctx}/static/js-modules/easyui/themes/bootstrap/easyui.css">
+<link rel="stylesheet" href="${ctx}/static/js-modules/easyui/themes/icon.css">
+<link rel="stylesheet" href="${ctx}/static/js-modules/easyui/themes/IconExtension.css">
+<link rel="stylesheet" href="${ctx}/static/css/admin/login.css">
 
 </head>
 <body style="margin:0; padding: 0;">

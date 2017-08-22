@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="/WEB-INF/view/admin/common/include_css.jsp"></jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin/main.css">
+<link rel="stylesheet" href="${ctx}/static/css/admin/main.css">
 
 </head>
 
@@ -128,5 +128,5 @@
     </div>
 </body>
 <jsp:include page="/WEB-INF/view/admin/common/include_js.jsp"></jsp:include>
-<script src="${pageContext.request.contextPath}/static/js/admin/main.js"></script>
+<script src="${ctx}/static/js/admin/main.js"></script>
 </html>

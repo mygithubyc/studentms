@@ -8,7 +8,7 @@ public class Class {
 	private String className;
 	private String classStatus;
 	private int buildYear;
-	
+
 	public int getClassId() {
 		return classId;
 	}
@@ -48,6 +48,7 @@ public class Class {
 	public void setClassStatus(String classStatus) {
 		this.classStatus = classStatus;
 	}
+
 	public int getBuildYear() {
 		return buildYear;
 	}
@@ -55,4 +56,5 @@ public class Class {
 	public void setBuildYear(int buildYear) {
 		this.buildYear = buildYear;
 	}
+
 }

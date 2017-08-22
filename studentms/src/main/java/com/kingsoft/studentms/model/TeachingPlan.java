@@ -10,6 +10,7 @@ public class TeachingPlan {
 	private int teacherId;
 	private Date termStart;
 	private Date termEnd;
+
 	public int getTeachId() {
 		return teachId;
 	}
@@ -41,7 +42,7 @@ public class TeachingPlan {
 	public void setTeacherId(int teacherId) {
 		this.teacherId = teacherId;
 	}
-	
+
 	public Date getTermStart() {
 		return termStart;
 	}
@@ -49,7 +50,7 @@ public class TeachingPlan {
 	public void setTermStart(Date termStart) {
 		this.termStart = termStart;
 	}
-	
+
 	public Date getTermEnd() {
 		return termEnd;
 	}
@@ -57,4 +58,5 @@ public class TeachingPlan {
 	public void setTermEnd(Date termEnd) {
 		this.termEnd = termEnd;
 	}
+
 }

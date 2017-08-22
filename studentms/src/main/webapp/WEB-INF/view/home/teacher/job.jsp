@@ -34,23 +34,23 @@
         <form id="add_fm" class="fm" method="post">
             <div class="fitem">
                 <label >标题:</label>
-                <input name="" >
+                <input id="title" name="title" class="easyui-validatebox" required="true" >
             </div>
             <div class="fitem">
                 <label >说明:</label>
-                <input name="" >
+                <input name="content" type="text" id="content" >
             </div>
             <div class="fitem">
                 <label >截止日期:</label>
-                <input name="" >
+                <input name="deadTime" class="easyui-datebox" required="true" id="deadTime" >
             </div>
             <div class="fitem">
                 <label >文件:</label>
-                <input name="" >
+                <input name="file" class="easyui-filebox" required="true" id="file">
             </div>
             <div class="fitem">
                 <label >课程:</label>
-                <input name="" >
+                <input name="course" >
             </div>
         </form>                
     </div>
@@ -81,7 +81,7 @@
     </div>
 </body>
 <jsp:include page="/WEB-INF/view/home/common/include_js.jsp"></jsp:include>
-<script src="${pageContext.request.contextPath}/static/js-modules/easyui/datagrid-detailview.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/home/teacher_job.js"></script>
+<script src="${ctx}/static/js-modules/easyui/datagrid-detailview.js"></script>
+<script src="${ctx}/static/js/home/teacher_job.js"></script>
 
 </html>

@@ -102,6 +102,7 @@
 			<version>11.2.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
