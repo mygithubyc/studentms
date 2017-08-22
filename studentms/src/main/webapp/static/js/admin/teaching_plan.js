@@ -13,6 +13,7 @@ $(function(){
     });
     $('#dCombobox').combobox({
         editable: false,
+        
         url: ctx+'/school/dCombobox',
         valueField: 'schoolId',
         textField: 'schoolName',
@@ -25,6 +26,7 @@ $(function(){
     });
     $('#departCombobox').combobox({
     	editable: false,
+    	
     	valueField: 'departId',
         textField: 'departName',
         onClick: function(rec){
@@ -41,7 +43,35 @@ $(function(){
             text: '保存',
             iconCls: 'icon-ok',
             handler: function(){
-            	alert('保存');
+            	$('#fm').form('submit',{
+            		url: 'xx',
+            		onSubmit: function(){
+            			$.messager.progress();
+                        var isValid = $(this).form('validate');
+                        if (!isValid) {
+                            $.messager.progress('close');
+                        }
+                        return isValid;
+                    },
+                    // 有返回值触发success JSON.parse看情况去留
+                    success: function(data){
+                    	var result = JSON.parse(data);
+
+                        $.messager.progress('close');
+                        if (result.success){
+                        	$.messager.show({
+                                title: '执行结果',
+                                msg: '新增成功!'
+                            });
+                        }else{
+                        	$.messager.show({
+                                title: '执行结果',
+                                msg: data.msg
+                            });
+                        }
+                        
+                    }
+            	})
             }
         },{
             text: '取消',
@@ -55,7 +85,7 @@ $(function(){
     $('#dg').datagrid({
         url: ctx+'/course/dCourseByDepart',
         title: '教学计划',
-        height: 600,
+        height: 600,        
         pagination: true,
         fitColumns: true,
         rownumbers: true,
@@ -73,31 +103,6 @@ $(function(){
     
     
    
-    // 最好由该学院的老师负责开课
-    $('#fm_teacher').combogrid({
-        required: true,
-        editable: false,
-        width: 180,
-        panelWidth:300,
-        fitColumns: true,
-        url: '',
-        idField: 'id',
-        textField: 'name',
-        columns: [[
-            {field: 'id', title: 'ID', hidden: true},
-            {field: 'username', title: '工号'},
-            {field: 'name', title: '姓名'},
-            {field: 'depart_name', title: '所属系', width: 100, align: 'center'}
-            
-        ]],
-        data: [{
-            id: 1,
-            username: 'sy110',
-            name: '张三',
-            depart_name: '计算机系',
-        }]
-
-    });
     
 });
 // 暂时没写取消分配的操作
@@ -117,16 +122,20 @@ function assign_teacher(index){
 	        valueField: 'classId',
 	        method: 'post',
 	        editable: false,
+	        required: true,
 		});
 		$('#teacher_combobox').combogrid({
 			url:ctx+'/class/dTeacherCombobox',
 			idField:'teacherId',
 			textField:'realName',
 			fitColums: true,
+			panelWidth:300,
+			required: true,
+			method: 'post',
 			columns:[[
-		          {field: '', title: '工号', width: 100},
-		          {field: '', title: '姓名', width: 100},
-		          {field: '', title: '所属系', width: 100},
+		          {field: 'username', title: '工号', width: 100},
+		          {field: 'realName', title: '姓名', width: 100},
+		          {field: 'departName', title: '所属系', width: 100},
 			]]
 		})
 	}

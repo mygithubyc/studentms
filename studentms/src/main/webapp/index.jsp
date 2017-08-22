@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-
-
-
+<%@ include file="/WEB-INF/view/home/common/taglibs.jsp"%>   
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <title>欢迎登录学生管理系统</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/home/base.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/home/index.css" />
-
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/home/base.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/static/css/home/index.css" />
+ 
 </head>
 
 <body class="index_bg">
@@ -53,6 +51,6 @@
         </div>
     </div>
 </body>
-<script src="${pageContext.request.contextPath}/static/js-modules/easyui/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/home/index.js"></script>
+<script src="${ctx}/static/js-modules/easyui/jquery.min.js"></script>
+<script src="${ctx}/static/js/home/index.js"></script>
 </html>

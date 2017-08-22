@@ -97,6 +97,7 @@
             	<form id="fm" >
             		<div class="fitem">
             			<label>课程名称:</label>
+            			<input type="hidden" name="courseId" readonly="readonly"/>
             		 	<input name="courseName" readonly="readonly"/>
             		</div>
             		<div class="fitem">
@@ -105,11 +106,11 @@
             		</div>
             		<div class="fitem">
             			<label>任课班级:</label>
-            		 	<input id="class_combobox"/>
+            		 	<input name="classId" id="class_combobox"/>
             		</div>
             		<div class="fitem">
             			<label>任课老师:</label>
-            		 	<input id="teacher_combobox"/>
+            		 	<input name="teacherId" id="teacher_combobox"/>
             		</div>
         
             	</form>
