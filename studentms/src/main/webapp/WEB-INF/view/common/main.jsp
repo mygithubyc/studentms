@@ -27,70 +27,77 @@
 
 	</div>
 
-	<!-- 选择显示控件 -->
+	<!-- 测试用户类型 -->
+	<c:set var="user" value="${sessionScope.user}" scope="session"></c:set>
+
+	<%-- 选择显示控件 --%>
 	<c:choose>
 		<c:when test="${user.userType==2}">
+			<%-- 老师菜单栏 --%>
 			<div
 				style="background: #fafafa; padding: 5px; width: 100%; border: 1px solid #ccc">
-				<!-- 教师菜单栏   其中仅有班主任才可以显示发布通知按钮 -->
 				<span id="teacher_job" url="" title="布置作业">布置作业</span> <span
 					id="teacher_marks" url="" title="录入成绩">录入成绩</span> <span
 					id="teacher_plan" url="" title="下载教学计划">下载教学计划</span> <span
 					id="teacher_message" url="" title="发布通知">发布通知</span> <span
 					id="teacher_info">个人信息</span>
-				<div id="teacher_info_mm" style="width: 100px;">
+				<div id="teacher_info_mm" style="width: 100px">
 					<div url="" title="完善个人信息">完善个人信息</div>
 					<div url="" title="修改密码" class="change_password">修改密码</div>
 				</div>
-				<!-- 教师菜单栏结束 -->
+				<%--老师菜单栏结束 --%>
 		</c:when>
 
 		<c:when test="${user.userType==3}">
-			<!-- 学生菜单栏 -->
+			<%--学生菜单栏 --%>
 			<span id="student_job" url="" title="布置作业">提交作业</span>
 			<span id="student_marks" url="" title="成绩查询">成绩查询</span>
 			<span id="student_info">个人信息</span>
-			<div id="student_info_mm" style="width: 100px;">
+			<div id="student_info_mm" style="width: 100px">
 				<div url="" title="完善个人信息">完善个人信息</div>
 				<div url="" title="修改密码" class="change_password">修改密码</div>
 			</div>
-			<!-- 学生菜单栏结束 -->
+			<%--学生菜单栏结束 --%>
 		</c:when>
 
 
-		<!-- 右边通知提示 学生:考试安排 老师布置作业情况 班主任消息列表 教师:考试安排 作业提交情况-->
-		<span id="exam_menu">考试安排</span>
-		<span id="message_menu">班主任通知</span>
+		<%--右边通知提示 学生:考试安排 老师布置作业情况 班主任消息列表 教师:考试安排 作业提交情况 --%>
+		<c:when test="${user.userType==2}">
+			<span id="exam_menu">考试安排</span>
+		</c:when>
+		<c:when test="${user.userType==3}">
+			<span id="message_menu">班主任通知</span>
+		</c:when>
 
 		<c:when test="${user.userType==2}">
 			<span id="job_menu">作业情况</span>
 		</c:when>
 
-		<!-- 考试通知 -->
-		<div id="exam_menu_div" class="menu-content my_menu_content">
-			<img src="${ctx }/static/common/img/exam.png">
-			<p>
-				<a href="#">2017-2018 上学期 期末考试安排表</a>
-			</p>
-			<hr>
-		</div>
+		<%-- 考试通知--%>
+		<c:when test="${user.userType==2||user.userType==3}">
+			<div id="exam_menu_div" class="menu-content my_menu_content">
+				<img src="${ctx }/static/common/img/exam.png">
+				<p>
+					<a href="#">2017-2018 上学期 期末考试安排表</a>
+				</p>
+				<hr>
+			</div>
+		</c:when>
 
 		<c:when test="${user.userType==3}">
-			<!-- 班主任通知   红色 紧急通知  橙色 一般通知  黑色 普通通知 -->
+			<%-- 班主任通知   红色 紧急通知  橙色 一般通知  黑色 普通通知 --%>
 			<div id="message_menu_div" class="menu-content my_menu_content">
 				<img src="${ctx }/static/common/img/message.png">
-				<p class="important_message">最近骗子很多,同学们小心!xxxxxxxxxxxxxxxxxxxx</p>
+				<p class="important_message">最近骗子很多,同学们小心!</p>
 				<hr>
 				<p class="common_message">快考试了,好好复习!</p>
 				<hr>
 				<p>大家中秋快乐!</p>
 				<hr>
 			</div>
-
-
 			<div id="job_menu_div" class="menu-content my_menu_content">
 				<img src="${ctx }/static/common/img/job.png">
-				<p>C语言xxx老师在 2017-08-01 发布了作业 快去看看asddddddd</p>
+				<p>C语言xxx老师在 2017-08-01 发布了作业 快去看看</p>
 				<hr>
 				<p>D语言xxx老师在 2017-08-01 发布了作业 快去看看</p>
 				<hr>
@@ -98,8 +105,9 @@
 				<hr>
 			</div>
 		</c:when>
-
+		<c:otherwise>?</c:otherwise>
 	</c:choose>
+
 	<!-- easyui tabs -->
 	<div id="tt" class="easyui-tabs" style="width: 100%; height: 820px;">
 		<div title="Home">
@@ -109,8 +117,6 @@
 		</div>
 	</div>
 	</div>
-	<!-- 测试用户类型 -->
-	<c:set var="user" value="${sessionScope.user}" scope="session"></c:set>
 
 	<!-- 密码修改表单 -->
 	<div id="password_dlg">
