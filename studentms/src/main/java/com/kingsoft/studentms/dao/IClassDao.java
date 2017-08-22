@@ -10,5 +10,9 @@ public interface IClassDao extends IBasicDao{
 	
 	public List<MyDTeacher> dTeacherCombobox();
 	
+	public List<MyDTeacher> dNotTeacherCombobox();
+	
 	public Class dGetClass(String classId);
+	
+	public int dAddClass(Class class1);
 }

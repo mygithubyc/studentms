@@ -1,13 +1,17 @@
 package com.kingsoft.studentms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.kingsoft.studentms.model.UserInfo;
 
 public interface IUserInfoDao extends IBasicDao {
+	
+	public int dAddUser(Map<String, Object> map);
 
+	public UserInfo dGetUser(String username);
 	/**
 	 * @登录
 	 * @param username

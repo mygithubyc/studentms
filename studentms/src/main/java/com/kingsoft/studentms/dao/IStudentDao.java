@@ -1,5 +1,7 @@
 package com.kingsoft.studentms.dao;
 
-public interface IStudentDao extends IBasicDao{
+import java.util.Map;
 
+public interface IStudentDao extends IBasicDao{
+	public int dAddStudent(Map<String, Object> map); 
 }

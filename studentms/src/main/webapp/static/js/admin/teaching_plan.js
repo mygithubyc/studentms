@@ -59,6 +59,7 @@ $(function(){
 
                         $.messager.progress('close');
                         if (result.success){
+                        	$('#dlg').dialog('close');
                         	$.messager.show({
                                 title: '执行结果',
                                 msg: '新增成功!'
@@ -129,13 +130,13 @@ function assign_teacher(index){
 			idField:'teacherId',
 			textField:'realName',
 			fitColums: true,
-			panelWidth:300,
+			panelWidth:400,
 			required: true,
 			method: 'post',
 			columns:[[
 		          {field: 'username', title: '工号', width: 100},
 		          {field: 'realName', title: '姓名', width: 100},
-		          {field: 'departName', title: '所属系', width: 100},
+		          {field: 'departName', title: '所属系', width: 200},
 			]]
 		})
 	}

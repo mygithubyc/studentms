@@ -5,17 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.kingsoft.studentms.dao.IClassDao">
 	<resultMap type="com.kingsoft.studentms.model.Class" id="class">
 		<result column="class_Id" property="classId" jdbcType="INTEGER" />
-		<result column="grade_Id" property="gradeId" jdbcType="INTEGER" />
 		<result column="teacher_Id" property="teacherId" jdbcType="INTEGER" />
+		<result column="depart_id" property="departId" jdbcType="INTEGER" />
 		<result column="class_Name" property="className" jdbcType="VARCHAR" />
 		<result column="class_Status" property="classStatus" jdbcType="VARCHAR" />
+		<result column="bulid_year" property="buildYear" jdbcType="INTEGER" />
 	</resultMap>
 	<resultMap type="com.kingsoft.studentms.model.MyDTeacher" id="myDTeacher">
 		<result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
 		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="realname" property="realName" jdbcType="VARCHAR" />
 		<result column="depart_name" property="departName" jdbcType="VARCHAR" />
-		<result column="build_year" property="buildYear" jdbcType="INTEGER" />
+		
 	</resultMap>
 	<select id="dClassCombobox" resultMap = "class">
 		SELECT * from class where DEPART_ID = #{_departId}
@@ -34,7 +35,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			T .USER_ID = U .USER_ID
 		AND D .DEPART_ID = T .DEPART_ID
 	</select>
+	<select id="dNotTeacherCombobox" resultMap="myDTeacher">
+		SELECT
+			T.TEACHER_ID,
+			U .REALNAME,
+			U .USERNAME,
+			D .DEPART_NAME
+		FROM
+			TEACHER T,
+			USERINFO U,
+			DEPARTMENT D
+		WHERE
+			T .USER_ID = U .USER_ID
+		AND D .DEPART_ID = T .DEPART_ID AND T.HEAD_TEACHER = 0
+	</select>
 	<select id="dGetClass" resultMap="class">
 		SELECT * from class where CLASS_ID=#{_classId}
 	</select>
+	<insert id="dAddClass">
+		INSERT INTO CLASS (
+			TEACHER_ID,
+			DEPART_ID,
+			CLASS_NAME,
+			CLASS_STATUS,
+			BULID_YEAR
+		)
+		VALUES
+			(#{teacherId},#{departId},#{className},#{classStatus},#{buildYear})
+	</insert>
 </mapper>

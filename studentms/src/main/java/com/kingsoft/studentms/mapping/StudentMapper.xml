@@ -11,4 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ENTRANCE_TIME" property="entranceTime" jdbcType="DATE" />
 		<result column="SCHOOL_YEAR" property="schoolYear" jdbcType="INTEGER" />
 	</resultMap>
+	
+	<insert id="dAddStudent">
+		INSERT INTO STUDENT (
+			USER_ID,
+			DEPART_ID,
+			CLASS_ID,
+			ENTRANCE_TIME,
+			SCHOOL_YEAR
+		)
+		VALUES
+			(#{userId},#{departId},#{classId},#{entranceTime},#{schoolYear})
+	</insert>
 </mapper>

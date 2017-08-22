@@ -1,5 +1,7 @@
 package com.kingsoft.studentms.dao;
 
-public interface ITeachingPlanDao extends IBasicDao{
+import com.kingsoft.studentms.model.TeachingPlan;
 
+public interface ITeachingPlanDao extends IBasicDao{
+	public int addTeachingPlan(TeachingPlan teachingPlan);
 }

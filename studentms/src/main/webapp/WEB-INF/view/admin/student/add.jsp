@@ -92,33 +92,33 @@
                     <table class="mytable">
                         <tr>
                             <td class="title_td">姓名:</td>
-                            <td><input  id="fm_student_name"  /></td>
+                            <td><input name="realName" id="fm_student_name"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">学号:</td>
-                            <td><input  id="fm_student_num"  /><span class="validate_span" style="color: red;font-size: 14px;"></span>
+                            <td><input name="username" id="fm_student_num"  /><span class="validate_span" style="color: red;font-size: 14px;"></span>
                             <br><span style="font-size: 14px;">例:2015010120(入学年份+专业+班级+编号)</span></td>
                         </tr>
                         <tr>
                             <td class="title_td">性别:</td>
-                            <td>男:<input name="gender" value="" type="radio" checked />女:<input name="gender" value="" type="radio"/></td>
+                            <td>男:<input name="gender" value="1" type="radio" checked />女:<input name="gender" value="2" type="radio"/></td>
                         </tr>
                     
                         <tr>
                             <td class="title_td">出生日期:</td>
-                            <td><input  id="fm_student_birth"  /></td>
+                            <td><input name="birth" id="fm_student_birth"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">入学时间:</td>
-                            <td><input  id="fm_student_entrance"  /></td>
+                            <td><input name="entranceTime" id="fm_student_entrance"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">身份证号:</td>
-                            <td><input  id="fm_id"  /></td>
+                            <td><input name="idNum" id="fm_id"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">学年制:</td>
-                            <td><input  id="fm_academic_year"  /></td>
+                            <td><input name="schoolYear" id="fm_academic_year"  /></td>
                         </tr>
                         <tr>
                             <td class="title_td">学院:</td>
@@ -126,11 +126,11 @@
                         </tr>
                         <tr>
                             <td class="title_td">系:</td>
-                            <td><input type="text" id="fm_depart_name"></td>
+                            <td><input name="departId" type="text" id="fm_depart_name"></td>
                         </tr>
                         <tr>
                             <td class="title_td">班级:</td>
-                            <td><input type="text" id="fm_class_name"></td>
+                            <td><input name="classId" type="text" id="fm_class_name"></td>
                         </tr>
                         <tr>
                             <td colspan="2">

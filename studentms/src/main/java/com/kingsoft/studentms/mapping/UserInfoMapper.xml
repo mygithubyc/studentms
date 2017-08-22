@@ -81,4 +81,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		where USERNAME=#{userInfo.username,jdbcType=VARCHAR}
 	</update>
+	
+	<insert id="dAddUser">
+		INSERT INTO USERINFO (
+			USERNAME,
+			PASSWORD,
+			REALNAME,
+			SEX,
+			BIRTHDAY,
+			ID_NUM,
+			USERTYPE,
+			VALID
+		)
+		VALUES
+			(#{username,jdbcType=VARCHAR},
+			#{password,jdbcType=VARCHAR},
+			#{realName,jdbcType=VARCHAR},
+			#{sex,jdbcType=VARCHAR},
+			#{birth,jdbcType=DATE},
+			#{idNum,jdbcType=VARCHAR},#{userType,jdbcType=VARCHAR},1)
+	</insert>
+	
+	<select id="dGetUser" resultMap="userInfo">
+		SELECT * from USERINFO WHERE USERNAME = #{_username}
+	</select>
 </mapper>

@@ -1,5 +1,9 @@
 package com.kingsoft.studentms.dao;
 
-public interface ITeacherDao extends IBasicDao{
+import java.util.Map;
 
+public interface ITeacherDao extends IBasicDao{
+	public int dAddTeacher(Map<String, Object> map);
+	
+	public int dSetHeadTeacher(int teacherId);
 }

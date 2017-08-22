@@ -37,9 +37,32 @@ public class ClassController {
 		
 	}
 	
+	@RequestMapping(value="/dNotTeacherCombobox",method = RequestMethod.POST)
+	public @ResponseBody List<MyDTeacher>  dNotTeacherCombobox(){
+		return classService.dNotTeacherCombobox();
+		
+	}
 	@RequestMapping(value="/dTeacherCombobox",method = RequestMethod.POST)
 	public @ResponseBody List<MyDTeacher>  dTeacherCombobox(){
 		return classService.dTeacherCombobox();
+		
+	}
+	@RequestMapping(value="/dAddClass",method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object>  dAddClass(String className,String buildYear,String teacherId,String departId){
+		Map<String, Object> map = new HashMap<String,Object>();
+		Class class1 = new Class();
+		class1.setBuildYear(Integer.parseInt(buildYear));
+		class1.setTeacherId(Integer.parseInt(teacherId));
+		class1.setDepartId(Integer.parseInt(departId));
+		class1.setClassName(className);
+		class1.setClassStatus("1");
+		boolean b =  classService.dAddClass(class1);
+		if (b) {
+			map.put("success", true);
+		}else{
+			map.put("success", false);
+		}
+		return map;
 		
 	}
 }

@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kingsoft.studentms.model.UserInfo;
 
 public interface IUserInfoService {
-
+	
+	public boolean addCheack(String username);
+	
 	/**
 	 * @登录检查
 	 * @param username

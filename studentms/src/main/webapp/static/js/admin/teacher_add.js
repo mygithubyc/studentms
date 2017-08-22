@@ -4,6 +4,7 @@
 * @Last Modified by:   anchen
 * @Last Modified time: 2017-08-17 15:55:37
 */
+var flag = false;
 $(function(){
     // 改变左上角title 用于导航
     $('.easyui-layout').layout('panel','center').panel({
@@ -19,36 +20,58 @@ $(function(){
         required: true
     });
     $('#fm_num').blur(function(event) {
-        var num = $(this).val(),
+        var username = $(this).val(),
             validate_span = $(this).next('span');
-        console.log(validate_span);
-        if(num.length !== 0){
-            if(check_num(num)){
-                validate_span.html('可用');
-            }else{
-                validate_span.html('工号已存在,请确认!');
-            }
+        validate_span.html('');  
+        if(username.length !== 0){
+            $.post(ctx+'/admin/dCheckUsername',{username: username},function(data){
+            	var result = JSON.parse(data);
+            	if(result.success){
+            		flag = false;
+            		validate_span.html('工号已存在!');
+            	}else{
+            		flag = true;
+            		validate_span.html('可用');
+            	}
+            });
         }
     });
     $('#fm_birth').datebox();
-    $('#fm_entrance').datetimebox({});
+    $('#fm_entrance').datebox({});
     $('#fm_id').validatebox({
         validateOnCreate: false,
         required: true
 
     });
+    $('#fm_college_name').combobox({
+    	editable: false,
+        required: true,
+        url: ctx+'/school/dCombobox',
+        valueField: 'schoolId',
+        textField: 'schoolName',
+        method: 'post',
+        onSelect: function(rec){     
+            $('#fm_depart_name').combobox({
+            	url: ctx+'/department/departCombobox?schoolId='+rec.schoolId
+            });
+        }
+    });
     $('#fm_depart_name').combobox({
         editable: false,
-        url: '',
-        valueField: 'id',
-        textField: 'text',
+        required: true,
+        valueField: 'departId',
+        textField: 'departName',
+        method: 'post',
+        
     });
     // 定义表单提交的事件
-    $('.fm').form({
-        
-        url: 'xxx',
+    $('.fm').form({        
+        url: ctx+'/teacher/dAddTeacher',
         // 提交前事件定义  progress的进度条防止重复提交 + 表单中validbox的确认验证
         onSubmit: function(){
+        	if(!flag){
+        		return false;
+        	}
             $.messager.progress();
             var isValid = $(this).form('validate');
             if (!isValid) {
@@ -63,14 +86,15 @@ $(function(){
 
             $.messager.progress('close');
             if (result.success) {
-                // msg = '成功!';
+                msg = '成功!';
             }else{
-                // msg = result.msg;
+                msg = '失败!';
             }
             $.messager.show({
                 title: '执行结果',
                 msg: msg
             });
+            flag = false;
         }
     });
     // 保存点击事件
@@ -84,20 +108,3 @@ $(function(){
         $('.fm table input[type=radio]').get(0).checked = true;
     });
 });
-// true 通过,工号可用 false则提示重复
-function check_num(username){
-    return false;
-    // $.ajax({
-    //     url: '',
-    //     type: 'post',
-    //     dataType: 'json',
-    //     data: {username: usernameVal},
-    //     success: function(result){
-    //         if (result.success) {
-    //             return true;
-    //         }else{
-    //             return false;
-    //         }
-    //     }
-    // });
-}

@@ -19,59 +19,66 @@ $(function(){
         required: true
     });
     
-    $('#fm_entrance').numberbox({
+    $('#fm_entrance').combobox({
         validateOnCreate: false,
-        required: true
-    });
-    $('#fm_id').validatebox({
-        validateOnCreate: false,
-        required: true
-    });
-    // 二级联动
-   
-    $('#fm_college_name').combobox({
-
-        url: '',
-        editable: false,
+        required: true,
         valueField: 'id',
         textField: 'text',
-        onSelect: function(rec){
-            $('#fm_depart_name').combobox('reload','xxx?id='+rec.id);
-        }                
-    });
-    // 设定上搜索出不是班主任的老师   返回的格式如下data  发送的值最好调试下看看
-    $('#fm_teacher').combogrid({
         editable: false,
-        panelWidth:300,
-        fitColumns: true,
-        url: '',
-        idField: 'id',
-        textField: 'name',
-        columns: [[
-            {field: 'id', title: 'ID', hidden: true},
-            {field: 'username', title: '工号'},
-            {field: 'name', title: '姓名'},
-            {field: 'depart_name', title: '所属系', width: 100, align: 'center'}
-            
-        ]],
-        // data: [{
-        //     id: 1,
-        //     username: 'sy110',
-        //     name: '张三',
-        //     depart_name: '计算机系',
-        // }]
-
+        data:[
+           {id: 2010, text: 2010},
+           {id: 2011, text: 2011},
+           {id: 2012, text: 2012},
+           {id: 2013, text: 2013},
+           {id: 2014, text: 2014},
+           {id: 2015, text: 2015},
+           {id: 2016, text: 2016},
+           {id: 2017, text: 2017},
+           {id: 2018, text: 2018},
+        ]
+    });
+    $('#fm_college_name').combobox({
+    	editable: false,
+        required: true,
+        url: ctx+'/school/dCombobox',
+        valueField: 'schoolId',
+        textField: 'schoolName',
+        method: 'post',
+        onSelect: function(rec){     
+            $('#fm_depart_name').combobox({
+            	url: ctx+'/department/departCombobox?schoolId='+rec.schoolId
+            });
+        }
     });
     $('#fm_depart_name').combobox({
-        
         editable: false,
-        valueField: 'id',
-        textField: 'text',                
+        required: true,
+        valueField: 'departId',
+        textField: 'departName',
+        
+        
     });
+    
+    $('#fm_teacher').combogrid({
+		url:ctx+'/class/dNotTeacherCombobox',
+		idField:'teacherId',
+		textField:'realName',
+		editable: false,
+		fitColums: true,
+		panelWidth:400,
+		required: true,
+		method: 'post',
+		columns:[[
+	          {field: 'username', title: '工号', width: 100},
+	          {field: 'realName', title: '姓名', width: 100},
+	          {field: 'departName', title: '所属系', width: 200},
+		]]
+	});
+   
     // 定义表单提交的事件
     $('.fm').form({
         
-        url: 'xxx',
+        url: ctx+'/class/dAddClass',
         // 提交前事件定义  progress的进度条防止重复提交 + 表单中validbox的确认验证
         onSubmit: function(){
             $.messager.progress();
@@ -85,16 +92,21 @@ $(function(){
         success: function(data){
             var result = JSON.parse(data),
                 msg = '';
-
+            
             $.messager.progress('close');
+            
             if (result.success) {
-                // msg = '成功!';
+            	
+                msg = '成功!';
             }else{
-                // msg = result.msg;
+                msg = '失败!';
             }
             $.messager.show({
                 title: '执行结果',
                 msg: msg
+            });
+            $('#fm_teacher').combogrid({
+            	url:ctx+'/class/dNotTeacherCombobox',
             });
         }
     });
